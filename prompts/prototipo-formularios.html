@@ -284,6 +284,7 @@ button{cursor:pointer}
     m2: { valores: escala([[20, 150, 5], [160, 400, 10]]), inicial: 60,
       fmt: function (x) { return x === 'mas' ? 'Más de 400 m²' : miles(x) + ' m²'; }, corto: ['20 m²', '+ 400 m²'] }
   };
+  ESCALAS.diez = { valores: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], inicial: 5, fmt: function (x) { return String(x); }, corto: ['1', '10'] };
   function idxInicial(e) { return ESCALAS[e].valores.indexOf(ESCALAS[e].inicial); }
 
   /* barrios destacados (en el orden de Cris) + todos los demás para el buscador */
@@ -308,9 +309,11 @@ button{cursor:pointer}
   function soloLocal(r) { var t = tipos(r); return t.length > 0 && t.every(function (x) { return x === 'Local comercial'; }); }
   function conLocal(r) { return tipos(r).indexOf('Local comercial') > -1; }
 
-  /* pregunta para romper el hielo: no suma puntos, le da a Cris con qué arrancar el WhatsApp */
-  var ROMPEHIELOS = { id: 'rompehielos', tipo: 'unica', opcional: true, titulo: '¿Mate o café?', ayuda: 'Una última, y no suma ni resta.', opciones: ['Mate', 'Café', 'Los dos', 'Té, la verdad'], etiqueta: 'Para romper el hielo',
-    notas: { 'Mate': 'Anotado. Si nos juntamos, el mate lo pongo yo.', 'Café': 'Anotado. Si nos juntamos, el café corre por mi cuenta.', 'Los dos': 'Me caés bien. Anotado.', 'Té, la verdad': 'Respeto. Anotado.' } };
+  /* pregunta para romper el hielo, del 1 al 10: no suma puntos, le da a Cris con qué arrancar el WhatsApp */
+  function rompehielos(pregunta, extremos, bajo, medio, alto) {
+    return { id: 'rompehielos', tipo: 'deslizador', escala: 'diez', opcional: true, titulo: 'Del 1 al 10, ' + pregunta, ayuda: 'Una última, y no suma ni resta.',
+      extremos: extremos, notasRango: [[1, 3, bajo], [4, 7, medio], [8, 10, alto]], etiqueta: 'Para romper el hielo' };
+  }
 
   function eje(n, p, por) { return { n: n, p: p, por: por || 'Sin responder' }; }
   function de(tabla, v) { return tabla[v] || 0; }
@@ -342,7 +345,7 @@ button{cursor:pointer}
         { id: 'compra_despues', tipo: 'unica', titulo: 'Después de vender, ¿vas a comprar otra?', opciones: ['Sí', 'Tal vez', 'No'], etiqueta: 'Compra después',
           notas: { 'Sí': 'Bien. Podemos coordinar las dos operaciones para que no quedes en el medio.' } },
         { id: 'como_continuar', tipo: 'unica', titulo: '¿Cómo te gustaría seguir?', opciones: ['Quiero coordinar una reunión', 'Quiero coordinar una visita a la propiedad', 'Quiero conocer primero cómo trabajás', 'Quiero recibir orientación sobre el valor de mi propiedad', 'Por ahora solamente estoy averiguando'], etiqueta: 'Cómo seguir' },
-        ROMPEHIELOS,
+        rompehielos('¿cuánto vas a extrañar tu casa?', ['Nada', 'Muchísimo'], 'Listo para lo que sigue. Me caés bien.', 'Normal, las mudanzas tienen eso.', 'Te entiendo. La vamos a cuidar.'),
         { id: 'contacto', tipo: 'contacto', marco: 'Listo. Con esto ya puedo preparar nuestra primera charla.' }
       ],
       puntaje: function (r) {
@@ -376,7 +379,7 @@ button{cursor:pointer}
         { id: 'titularidad', tipo: 'unica', titulo: '¿Sos el dueño?', opciones: TITULAR, etiqueta: 'Titularidad' },
         { id: 'ya_tasada', tipo: 'unica', titulo: '¿Ya te dieron un valor de tu propiedad?', opciones: ['No', 'Sí, de una inmobiliaria/agente', 'Sí, más de una', 'Hice mi propia estimación comparando publicaciones'], etiqueta: 'Valores previos',
           notas: { 'Sí, más de una': 'Si te dieron números distintos, te ayudo a entender por qué.' } },
-        ROMPEHIELOS,
+        rompehielos('¿qué tan paciente sos con los trámites?', ['Cero', 'Infinita'], 'Tranqui, los papeles los persigo yo.', 'Bien, con eso alcanza.', 'Me caés bien. Igual los papeles los persigo yo.'),
         { id: 'contacto', tipo: 'contacto', marco: 'Listo. Con esto ya puedo analizar tu propiedad.' }
       ],
       puntaje: function (r) {
@@ -404,7 +407,7 @@ button{cursor:pointer}
         { id: 'valor_alquiler', tipo: 'deslizador', escala: 'ars', titulo: '¿Cuánto esperás cobrar por mes?', ayuda: 'Sin expensas. Es solo una referencia.', alt: 'Quiero que me ayudes a definirlo', notaAlt: 'Lo definimos con alquileres parecidos de la zona.', etiqueta: 'Valor que espera' },
         { id: 'que_es_importante', tipo: 'multiple', titulo: '¿Qué es lo más importante para vos?', ayuda: 'Podés marcar varias.', opciones: ['Encontrar buen inquilino', 'Alquilarla lo antes posible', 'Conseguir un buen valor', 'Tener asesoramiento con documentación y contrato', 'Alguien que gestione todo el proceso', 'Otro'], etiqueta: 'Lo más importante' },
         { id: 'como_continuar', tipo: 'unica', titulo: '¿Cómo te gustaría seguir?', opciones: ['Quiero coordinar una reunión', 'Quiero que vengas a ver la propiedad', 'Quiero saber cuánto podría cobrar', 'Por ahora solamente estoy averiguando'], etiqueta: 'Cómo seguir' },
-        ROMPEHIELOS,
+        rompehielos('¿cuánto te gusta el barrio de tu propiedad?', ['Nada', 'Lo amo'], 'Entendido. Destacamos otras cosas.', 'Bien, algo bueno tiene.', 'Eso alquila. Lo vamos a contar.'),
         { id: 'contacto', tipo: 'contacto', marco: 'Listo. Con esto ya puedo pensar cómo alquilarla.' }
       ],
       puntaje: function (r) {
@@ -448,7 +451,7 @@ button{cursor:pointer}
             return o;
           }, etiqueta: 'Indispensable',
           texto: { id: 'algo_mas', placeholder: '¿Algo más que debería saber? (opcional)', etiqueta: 'Algo más' } },
-        ROMPEHIELOS,
+        rompehielos('¿cuántas veces dijiste "este año compro"?', ['Ninguna', 'Todos los años'], 'Primera vez, entonces. Bien.', 'Esta vez lo hacemos.', 'Bueno, esta es la vencida.'),
         { id: 'contacto', tipo: 'contacto', marco: 'Listo. Con esto ya puedo empezar a buscar.' }
       ],
       puntaje: function (r) {
@@ -488,7 +491,7 @@ button{cursor:pointer}
           notas: { 'Todavía necesito asesoramiento sobre esto': 'Tranqui, te explico qué opciones hay y cuál te conviene.' } },
         { id: 'mascotas', tipo: 'unica', titulo: '¿Tenés mascotas?', opciones: ['No', 'Sí, perro', 'Sí, gato', 'Sí, otra'], etiqueta: 'Mascotas',
           si: function (r) { return !soloLocal(r); } },
-        ROMPEHIELOS,
+        rompehielos('¿qué tan importante es que entre tu sillón?', ['Nada', 'Innegociable'], 'Práctico. Me caés bien.', 'Llevo cinta métrica, por las dudas.', 'Anotado: el sillón manda.'),
         { id: 'contacto', tipo: 'contacto', marco: 'Listo. Con esto ya puedo empezar a buscar.' }
       ],
       puntaje: function (r) {
@@ -532,7 +535,7 @@ button{cursor:pointer}
   function mostrarDeslizador(p, val) {
     if (!val) return '';
     if (val.alt) return p.alt;
-    return ESCALAS[p.escala].fmt(ESCALAS[p.escala].valores[val.idx]);
+    return ESCALAS[p.escala].fmt(ESCALAS[p.escala].valores[val.idx]) + (p.escala === 'diez' ? ' de 10' : '');
   }
   function opcionesDe(p) { return typeof p.opciones === 'function' ? p.opciones(st.r) : p.opciones; }
   function tituloDe(p) { return typeof p.titulo === 'function' ? p.titulo(st.r) : p.titulo; }
@@ -567,11 +570,12 @@ button{cursor:pointer}
   function chipHtml(v, accion, elegido, extraClase) {
     return '<button type="button" class="chip' + (extraClase ? ' ' + extraClase : '') + '" data-accion="' + accion + '" data-v="' + esc(v) + '" aria-pressed="' + (elegido ? 'true' : 'false') + '">' + esc(v) + '</button>';
   }
-  function deslizadorHtml(escalaId, idx, deshabilitado, etiqueta) {
+  function deslizadorHtml(escalaId, idx, deshabilitado, etiqueta, extremos) {
     var e = ESCALAS[escalaId], max = e.valores.length - 1;
+    var ext = extremos ? [e.corto[0] + ' · ' + extremos[0], e.corto[1] + ' · ' + extremos[1]] : e.corto;
     return '<output class="cifra" id="cifra" aria-live="polite">' + esc(e.fmt(e.valores[idx])) + '</output>' +
       '<input class="rango" type="range" id="rango" min="0" max="' + max + '" step="1" value="' + idx + '" aria-label="' + esc(etiqueta) + '" aria-valuetext="' + esc(e.fmt(e.valores[idx])) + '" style="--pct:' + (idx / max * 100) + '%"' + (deshabilitado ? ' disabled' : '') + '>' +
-      '<div class="extremos" aria-hidden="true"><span>' + e.corto[0] + '</span><span>' + e.corto[1] + '</span></div>';
+      '<div class="extremos" aria-hidden="true"><span>' + esc(ext[0]) + '</span><span>' + esc(ext[1]) + '</span></div>';
   }
 
   function render(animar) {
@@ -678,9 +682,10 @@ button{cursor:pointer}
     if (p.tipo === 'deslizador') {
       var d = r[p.id];
       var idx = d && !d.alt ? d.idx : idxInicial(p.escala);
-      h += deslizadorHtml(p.escala, idx, false, p.titulo);
+      h += deslizadorHtml(p.escala, idx, false, titulo, p.extremos);
       if (p.extra) h += '<p class="sub">' + esc(p.extra.titulo) + '</p><div class="chips" role="group" aria-label="' + esc(p.extra.titulo) + '">' + p.extra.opciones.map(function (x) { return chipHtml(x, 'extra', r[p.extra.id] === x); }).join('') + '</div>';
-      der = (p.alt ? '<button type="button" class="boton boton--suave" data-accion="alt">' + esc(p.alt) + '</button>' : '') +
+      der = (p.opcional ? '<button type="button" class="enlace" data-accion="saltar">Saltar</button>' : '') +
+        (p.alt ? '<button type="button" class="boton boton--suave" data-accion="alt">' + esc(p.alt) + '</button>' : '') +
         '<button type="button" class="boton" data-accion="continuar">Continuar</button>';
     }
 
@@ -771,6 +776,13 @@ button{cursor:pointer}
     }
   }
   function notaDe(p) {
+    if (p.notasRango) {
+      var d = st.r[p.id];
+      if (!d || d.alt) return null;
+      var n = ESCALAS[p.escala].valores[d.idx];
+      for (var k = 0; k < p.notasRango.length; k++) if (n >= p.notasRango[k][0] && n <= p.notasRango[k][1]) return p.notasRango[k][2];
+      return null;
+    }
     if (!p.notas) return null;
     var v = st.r[p.id];
     if (Array.isArray(v)) { for (var i = 0; i < v.length; i++) if (p.notas[v[i]]) return p.notas[v[i]]; return null; }

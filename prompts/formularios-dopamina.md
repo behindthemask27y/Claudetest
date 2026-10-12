@@ -4,6 +4,15 @@ Trabajamos en la web csrealestate.com.ar, en la carpeta `G:\Workshop Claude\#2 C
 
 Antes de tocar nada, leé el `CLAUDE.md` de la carpeta (sobre todo "Formularios propios", "Protocolo reforzado: avisar ANTES de tocar tracking o una landing de Ads", "No tocar sin autorización" y "Reglas para nuevos botones") y el `MANUAL-DE-DISENO.md`. Los 5 formularios son las landings de las campañas de Google Ads #Search_1 a #Search_5.
 
+## Regla número 1: no se rompe nada de Google ni de Meta
+
+Todo mi esquema de publicidad depende de estos formularios. Ningún cambio puede tocar ni alterar:
+- GTM `GTM-5JDWTPXN`, GA4 `G-4LDVRLTWFC`, Google Ads `AW-18445706531` / `GT-WPT9PPBN`, ni el dataset de Meta `1586039593247372`.
+- Los eventos: `generate_lead` (la conversión principal de Google Ads) y `Lead` en Meta tienen que dispararse **una sola vez por consulta enviada, igual que hoy**. `click_whatsapp`, `click_form`, `PageView` y `Contact` no pueden aparecer de más.
+- `lead_type`, `form_name`, los `boton_id` y las direcciones de los 5 formularios.
+
+No se suma una segunda copia de GTM, GA4 ni del Pixel. Si algo puede alterar esto, o no estás seguro, **frená, explicame el riesgo y esperá mi OK**. Cada formulario se prueba en GTM Preview, GA4 DebugView y Meta Test Events antes de darlo por terminado.
+
 Forma de trabajo:
 1. Primero mostrame un plan corto y qué se puede romper.
 2. Armá el motor compartido y hacé **un solo formulario de prueba (el de "cuánto vale mi propiedad")**.
@@ -20,7 +29,10 @@ Los nombres internos (`lead_type: 'tasacion'`, `motivo_tasacion`, `ya_tasada`) s
 ## Cómo tienen que funcionar (igual que el prototipo)
 
 - **Una pregunta por pantalla.** En las preguntas de una sola opción, al tocar una opción se marca y pasa sola a la siguiente (unos 260 ms), sin botón "Continuar". Si la persona vuelve atrás, ve su respuesta marcada y puede seguir con "Continuar".
-- **El botón "atrás" del celular** (el gesto de Android o la flecha del navegador) vuelve a la pregunta anterior, no saca a la persona del formulario. Cada pantalla es un paso del historial.
+- **El botón "atrás" del celular** (el gesto de Android o la flecha del navegador) vuelve a la pregunta anterior, no saca a la persona del formulario.
+  - Cada pantalla es un paso del historial **sin cambiar la dirección de la página**.
+  - **Cuidado:** GA4 y el Pixel de Meta pueden contar cada paso del historial como una visita nueva. Probalo en GA4 DebugView y Meta Test Events: mientras se responde, no puede aparecer ningún `page_view` ni `PageView` extra.
+  - Si aparece y no se puede evitar sin tocar GTM, **no implementes esta parte** y avisame.
 - **Si cierra y vuelve** dentro de las 24 horas, sigue donde estaba. Guardalo solo en su navegador y borralo al enviar.
 - **Tarjetas grandes para tocar**, con una marca a la derecha (círculo para una opción, cuadrado para varias) que se rellena en bronce con un pequeño "pop".
   - Llevan **ícono de línea** solo los tipos de propiedad (depto, casa, PH, local, otro, flipping), vivir/invertir/mi negocio y tradicional/temporario. Son los mismos íconos del prototipo, de la misma familia que WhatsApp y Email de la home.
@@ -58,6 +70,9 @@ Los nombres internos (`lead_type: 'tasacion'`, `motivo_tasacion`, `ya_tasada`) s
   - "¡Gracias, [nombre]!" y "Ya tengo todo. Te escribo por WhatsApp lo antes posible."
   - un resumen con 2 o 3 datos de la consulta
   - un botón "Escribirme ahora por WhatsApp" que abre `https://wa.me/5491166951945` con el texto "Hola Cris, soy [nombre]. Recién completé el formulario de [formulario]."
+  - **Cuidado con ese botón:** en Meta, los clics a WhatsApp de 4 `boton_id` (`whatsapp`, `whatsapp-icono`, `consulta-propiedad`, `consulta-desarrollo`) cuentan como `Contact`, y en Google, `click_whatsapp` es una conversión secundaria. Si este botón dispara alguno de esos, una misma consulta se cuenta dos veces.
+  - Usá un `boton_id` nuevo (proponemelo; por ejemplo `whatsapp-gracias`). Verificá en GTM Preview y Meta Test Events que **no** dispara `click_whatsapp` ni `Contact`, ni siquiera por tener un link a wa.me.
+  - Si los dispara, avisame antes de seguir.
 - **Detalles:**
   - Una vibración cortita al tocar en Android (si el teléfono la permite).
   - Sin animaciones con "reducir movimiento" activado.
@@ -68,10 +83,12 @@ Los nombres internos (`lead_type: 'tasacion'`, `motivo_tasacion`, `ya_tasada`) s
 
 Regla de oro: **los nombres de campo y los valores de las preguntas que ya existen no cambian** (los usan el mail, el historial de consultas y la medición). Lo marcado **NUEVO** se agrega. Lo que hoy es texto libre y pasa a chips se sigue mandando como texto en el mismo campo.
 
-**Antes del contacto, en los 5:** pantalla opcional para romper el hielo, campo **NUEVO** `rompehielos`.
-- Título "¿Mate o café?" y debajo "Una última, y no suma ni resta."
-- Opciones: Mate / Café / Los dos / Té, la verdad.
-- No suma puntos. En el mail aparece como "Para romper el hielo: Mate".
+**Antes del contacto, en los 5: pregunta para romper el hielo. TODAVÍA NO ESTÁ DECIDIDA.** Preguntame si va y cuál antes de hacerla. Si va:
+- Campo **NUEVO** `rompehielos`, opcional (con "Saltar").
+- Barrita del 1 al 10 con el número grande. Título "Del 1 al 10, [pregunta]" y debajo "Una última, y no suma ni resta."
+- Debajo de la barra, las puntas con su palabra (por ejemplo "1 · Nada" y "10 · Muchísimo").
+- Según el número, aparece una frase mía en la pantalla de contacto: una para 1 a 3, otra para 4 a 7 y otra para 8 a 10. Te las paso con la pregunta elegida.
+- No suma puntos. En el mail aparece como "Para romper el hielo: 8 de 10".
 
 **Características según el tipo** (campo **NUEVO** `destacados`, opcional):
 
@@ -177,10 +194,6 @@ Regla de oro: **los nombres de campo y los valores de las preguntas que ya exist
 | Comprar | Necesito vender otra propiedad primero | "Te puedo ayudar con las dos: vender la tuya y encontrar la próxima." |
 | Comprar | Todavía no lo empecé | "Conviene arrancarlo pronto: saber cuánto te prestan ordena toda la búsqueda." |
 | Buscar alquiler | Todavía necesito asesoramiento sobre esto | "Tranqui, te explico qué opciones hay y cuál te conviene." |
-| Todos | Mate | "Anotado. Si nos juntamos, el mate lo pongo yo." |
-| Todos | Café | "Anotado. Si nos juntamos, el café corre por mi cuenta." |
-| Todos | Los dos | "Me caés bien. Anotado." |
-| Todos | Té, la verdad | "Respeto. Anotado." |
 
 **Frase antes del contacto:**
 - Vender: "Listo. Con esto ya puedo preparar nuestra primera charla."
@@ -226,8 +239,8 @@ Lo que no figura, o una pregunta sin responder, vale 0.
 - La atribución (gclid, gbraid, wbraid, utm_*).
 - La trampa anti-robots (`sitio_web`) y `_ts`. **Revisá que el tiempo mínimo de `_ts` no rechace a alguien que completa todo tocando rápido.**
 - La ventana de Política de Privacidad y la nota de aceptación antes de "Enviar".
-- **El teléfono:** ahora va en formato internacional. Fijate que nada en GTM espere el formato viejo.
-- **El botón de WhatsApp del final** es un botón comercial nuevo. Proponeme su `boton_id` antes de crearlo.
+- **El teléfono:** ahora va en formato internacional. Fijate que nada en GTM espere el formato viejo (por ejemplo, los datos que Google y Meta usan para cruzar conversiones).
+- **El botón de WhatsApp del final:** `boton_id` nuevo que no dispare `click_whatsapp` ni `Contact` (ver arriba).
 - **No mandes la temperatura a Google Ads todavía.** Dejame por escrito cómo sería (valor por consulta: Caliente 100, Tibia 30, Fría 5) y lo decidimos aparte.
 - **Las direcciones de los 5 formularios no cambian**: son las URL finales de los anuncios.
 

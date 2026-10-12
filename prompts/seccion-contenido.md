@@ -2,11 +2,22 @@ Trabajamos en la web csrealestate.com.ar, en la carpeta `G:\Workshop Claude\#2 C
 
 Quiero sumar una sección **"Contenido"**: videos cortos míos (yo hablando a cámara, explicando temas inmobiliarios, recorridos de propiedades), los mismos que subo a redes.
 
+## Regla número 1: no se rompe nada de Google ni de Meta
+
+Ningún cambio puede tocar ni alterar:
+- GTM `GTM-5JDWTPXN`, GA4 `G-4LDVRLTWFC`, Google Ads `AW-18445706531` / `GT-WPT9PPBN`, ni el dataset de Meta `1586039593247372`.
+- Los eventos que ya existen (`generate_lead`, `click_boton`, `click_whatsapp`, `click_form`, `PageView`, `Contact`, `Lead`, etc.).
+- Los `boton_id` actuales y las direcciones de las páginas que reciben anuncios.
+
+Los botones nuevos de esta sección llevan identificadores nuevos que **no disparen** ninguna conversión existente: ni `click_whatsapp`/`click_form` en Google ni `Contact`/`Lead` en Meta. El reproductor de YouTube no puede sumar visitas ni eventos a GA4 ni a Meta. Si algo puede alterar la medición, o no estás seguro, frená, explicame el riesgo y esperá mi OK. Probá en GTM Preview, GA4 DebugView y Meta Test Events que los eventos que ya existían siguen exactamente igual.
+
+**No enlaces ni nombres mi Instagram** en ninguna parte: todavía no es público.
+
 La home recibe tráfico de Google Ads: mostrame cada cambio antes de aplicarlo y esperá mi OK. Respuestas cortas, sin jerga técnica.
 
 ## Antes de programar, preguntame
 
-1. **Dónde están alojados los videos.** Mi idea es subir cada reel también a **YouTube Shorts** y mostrarlo en la web desde ahí: no carga el servidor, suma presencia en YouTube y Google los encuentra. Alternativas: subir el archivo a Hostinger (control total del diseño, pero pesa en el servidor), o solo enlazar a Instagram (lo más simple, pero se llevan al visitante fuera de la web). Explicame en pocas líneas y que yo elija.
+1. **Dónde están alojados los videos.** Mi idea es subir cada reel también a **YouTube Shorts** y mostrarlo en la web desde ahí: no carga el servidor, suma presencia en YouTube y Google los encuentra. Alternativas: subir el archivo a Hostinger (control total del diseño, pero pesa en el servidor), o solo enlazar a las redes (lo más simple, pero se llevan al visitante fuera de la web; y mi Instagram todavía no es público). Explicame en pocas líneas y que yo elija.
 2. Los primeros videos: pedime los links y, de cada uno, el tema y una frase de resumen.
 
 ## Cómo tiene que ser
