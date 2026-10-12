@@ -83,12 +83,27 @@ Los nombres internos (`lead_type: 'tasacion'`, `motivo_tasacion`, `ya_tasada`) s
 
 Regla de oro: **los nombres de campo y los valores de las preguntas que ya existen no cambian** (los usan el mail, el historial de consultas y la medición). Lo marcado **NUEVO** se agrega. Lo que hoy es texto libre y pasa a chips se sigue mandando como texto en el mismo campo.
 
-**Antes del contacto, en los 5: pregunta para romper el hielo. TODAVÍA NO ESTÁ DECIDIDA.** Preguntame si va y cuál antes de hacerla. Si va:
-- Campo **NUEVO** `rompehielos`, opcional (con "Saltar").
-- Barrita del 1 al 10 con el número grande. Título "Del 1 al 10, [pregunta]" y debajo "Una última, y no suma ni resta."
-- Debajo de la barra, las puntas con su palabra (por ejemplo "1 · Nada" y "10 · Muchísimo").
-- Según el número, aparece una frase mía en la pantalla de contacto: una para 1 a 3, otra para 4 a 7 y otra para 8 a 10. Te las paso con la pregunta elegida.
-- No suma puntos. En el mail aparece como "Para romper el hielo: 8 de 10".
+**Al empezar, en los 5:** arriba de la primera pregunta aparece una frase mía con mi foto, propia de cada formulario:
+
+| Formulario | Frase |
+|---|---|
+| Vender | "Cuanto más me cuentes de tu propiedad, más concreto puedo ser en nuestra primera charla." |
+| Cuánto vale | "Cuantos más datos me des, más cerca voy a estar del valor real de tu propiedad." |
+| Alquilar mi propiedad | "Cuanto más me cuentes, mejor te puedo orientar sobre cuánto pedir y cómo mostrarla." |
+| Comprar | "Cuanto más me cuentes de lo que buscás, menos tiempo vas a perder viendo propiedades que no van." |
+| Buscar alquiler | "Cuanto más me cuentes, menos tiempo vas a perder visitando lo que no te sirve." |
+
+Además, las preguntas opcionales que no tienen una ayuda propia llevan debajo del título: "Es opcional, pero me ayuda a asesorarte mejor."
+
+**Antes del contacto, en los 5: pregunta para romper el hielo.** Campo **NUEVO** `rompehielos`, opcional (con "Saltar"):
+- Título: "Del 1 al 10, ¿cuánto necesitás unas vacaciones?". Debajo: "Una última, y no suma ni resta."
+- Barrita del 1 al 10 con el número grande. Arranca en 5.
+- Debajo de la barra, las puntas: "1 · Estoy bien así" (a la izquierda) y "10 · Ya debería estar haciendo la valija" (a la derecha, puede ir en dos líneas).
+- Según el número, en la pantalla de contacto aparece una frase mía con mi foto:
+  - 1 a 3: "Qué envidia. Me caés bien."
+  - 4 a 7: "Un fin de semana largo no te vendría mal."
+  - 8 a 10: "Te entiendo. Mientras armás la valija, yo me ocupo de esto."
+- No suma puntos. En el mail aparece como "Vacaciones: 9 de 10".
 
 **Características según el tipo** (campo **NUEVO** `destacados`, opcional):
 
@@ -226,7 +241,7 @@ Lo que no figura, o una pregunta sin responder, vale 0.
 
 **En el mail:**
 - Asunto: "🔥 Caliente · Vender · Juan Pérez" (🌡️ Tibia, ❄️ Fría).
-- Arriba del cuerpo, los 3 puntos con la respuesta que los dio, los avisos y el rompehielos.
+- Arriba del cuerpo, los 3 puntos con la respuesta que los dio, los avisos y la respuesta de las vacaciones (te sirve para arrancar el WhatsApp).
 - Guardá también `temperatura` y `puntaje` en el registro de consultas.
 
 **Regla para el servidor:** los campos NUEVOS se suman a la lista de cada formulario y a las etiquetas del mail, pero **el servidor no los exige**. Así no se pierde una consulta que llegue desde una versión vieja del formulario, como ya explica el `CLAUDE.md`.
