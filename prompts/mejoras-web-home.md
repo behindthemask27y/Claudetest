@@ -2,7 +2,7 @@ Trabajamos en la web csrealestate.com.ar, en la carpeta `G:\Workshop Claude\#2 C
 
 La home recibe tráfico de Google Ads (#Search_6_marca, #Search_9_desarrollos, #Search_10_inversion). Así que, antes de implementar cada tarea, mostrame qué vas a cambiar y qué se puede romper, y esperá mi OK. Respuestas cortas, sin jerga técnica.
 
-Son 3 tareas, en este orden:
+Son 4 tareas, en este orden:
 
 ## 1. Íconos en lugar de emojis (home, `index.html`)
 
@@ -45,6 +45,29 @@ Qué hacer:
 - **El zip:** `armar-zip.ps1` usa una lista fija de archivos (`$archivos`). Sumá `robots.txt` y `sitemap.xml`, si no, no se suben.
 - **Propuesta, no implementar:** hoy solo la home aparece en Google; `/propiedades/`, `/desarrollos/` y las fichas tienen "no indexar". Explicame en pocas líneas qué ganaría habilitándolas (aparecer cuando buscan "comprar departamento en [barrio]" o "departamentos en pozo") y qué riesgos tiene (contenido repetido del portal y de sumadesarrollos, páginas que se arman al cargar, fichas con `?o=`). Que yo decida. Los 5 formularios se quedan como están.
 - Validá la ficha con la Prueba de resultados enriquecidos de Google y con validator.schema.org. Mostrame que no tiene errores.
+
+## 4. Texto nuevo de "Mi método" (home)
+
+Reemplazá el texto del desplegable "Mi método" por este, con la misma estructura (dos bloques con título) y los mismos estilos. No toques el botón ni su registro de clics (`data-evento="metodo"`), ni el link directo `/#more-info`. Mostrámelo antes de publicarlo.
+
+**Un plan antes de publicar**
+
+Vender una propiedad se parece bastante a lanzar un producto. Puede ser muy buena, pero hay otras parecidas en la zona, compradores que comparan y decisiones que conviene tomar antes de salir.
+
+Por eso, antes de publicar, nos sentamos a definir:
+- el precio que tiene sentido defender,
+- qué tiene tu propiedad que vale la pena mostrar,
+- a quién le queremos llegar,
+- dónde y cómo la vamos a mostrar,
+- qué hacemos si en las primeras semanas no pasa lo que esperábamos.
+
+Con eso claro, elegimos las herramientas: fotos, video, planos, portales, redes o publicidad. Usamos las que le sirvan a tu propiedad.
+
+**Lo que me importa**
+
+Mi trabajo crece con las recomendaciones. Si mañana un amigo o alguien de tu familia necesita vender, comprar o alquilar, quiero que te acuerdes de mí.
+
+Por eso te voy a mantener al tanto de cada consulta y cada visita, y te voy a decir lo que pienso aunque no sea lo que esperabas escuchar. Si el precio está alto, te lo digo. Si hay algo para mejorar antes de publicar, también.
 
 ## Al terminar
 
