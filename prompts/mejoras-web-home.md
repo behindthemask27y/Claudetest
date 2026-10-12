@@ -35,12 +35,13 @@ Qué hacer:
   - `RealEstateAgent` + `Person`: Cristian Stedtfeld, agente inmobiliario en Red Suma. URL, foto, WhatsApp +54 9 11 6695-1945 y email cstedtfeld@redsuma.com.ar.
   - Oficina: General Justo José de Urquiza 405, Vicente López.
   - Zona que atiendo: preguntame cuál poner.
-  - Servicios (`hasOfferCatalog`): tasación, venta, alquiler para propietarios, compra, búsqueda de alquiler y desarrollos en pozo.
+  - Servicios (`hasOfferCatalog`): cuánto vale tu propiedad (orientación de valor), venta, alquiler para propietarios, compra, búsqueda de alquiler y desarrollos en pozo.
   - Perfiles (`sameAs`): Instagram @csrealestate.ba más los links de portales que te pase.
   - También `WebSite`.
   - **No** pongas matrícula a mi nombre (no soy corredor; el corredor responsable es VL REALTOR, ver `CLAUDE.md`).
   - **No** pongas reseñas ni puntajes que no estén visibles en la página.
-- **Título y descripción de la home:** proponé una versión que diga naturalmente lo que hago y dónde (agente inmobiliario, tasación, venta, compra y alquiler de departamentos y casas, zona). Es landing de Ads: mostrámela antes de cambiarla.
+- **Título y descripción de la home:** proponé una versión que diga naturalmente lo que hago y dónde (agente inmobiliario; valor de tu propiedad, venta, compra y alquiler de departamentos y casas; zona). Es landing de Ads: mostrámela antes de cambiarla.
+- **Palabra prohibida: "tasación".** No soy corredor matriculado, así que en nada visible ni en los datos para Google puede decir "tasación", "tasar" ni "tasador". Hoy la descripción de la home dice "Tasación, venta, alquiler y compra…": cambiala. Usá "cuánto vale tu propiedad" o "valor de tu propiedad".
 - **`robots.txt` y `sitemap.xml`:** hoy no existen (dan 404). Crealos. El `robots.txt` apunta al sitemap y no nombra carpetas privadas.
 - **El zip:** `armar-zip.ps1` usa una lista fija de archivos (`$archivos`). Sumá `robots.txt` y `sitemap.xml`, si no, no se suben.
 - **Propuesta, no implementar:** hoy solo la home aparece en Google; `/propiedades/`, `/desarrollos/` y las fichas tienen "no indexar". Explicame en pocas líneas qué ganaría habilitándolas (aparecer cuando buscan "comprar departamento en [barrio]" o "departamentos en pozo") y qué riesgos tiene (contenido repetido del portal y de sumadesarrollos, páginas que se arman al cargar, fichas con `?o=`). Que yo decida. Los 5 formularios se quedan como están.

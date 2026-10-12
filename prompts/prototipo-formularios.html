@@ -123,8 +123,15 @@ button{cursor:pointer}
 .etiqueta{display:block;margin:2px 0 -6px;font-size:13.5px;font-weight:600}
 .tel{display:flex;align-items:stretch;border:1px solid var(--linea);border-radius:12px;background:rgba(255,255,255,.03)}
 .tel:focus-within{outline:2px solid var(--bronce);outline-offset:1px}
-.tel span{display:flex;align-items:center;padding:0 4px 0 14px;color:var(--suave);font-size:16px;white-space:nowrap}
+.tel__pais{position:relative;display:flex;align-items:center;gap:2px;padding:0 8px 0 14px;color:var(--texto);font-size:16px;white-space:nowrap;border-right:1px solid var(--linea)}
+.tel__pais svg{width:16px;height:16px;color:var(--suave)}
+.tel__pais select{position:absolute;inset:0;width:100%;opacity:0;cursor:pointer;font-size:16px}
+.tel__pais:focus-within{outline:2px solid var(--bronce);outline-offset:-2px;border-radius:12px 0 0 12px}
 .tel .campo{border:0;background:transparent;outline:none;min-width:0}
+.ayuda-campo{margin:-6px 0 0;font-size:12.5px;color:var(--tenue)}
+.buscar{position:relative}
+.buscar svg{position:absolute;left:14px;top:50%;width:18px;height:18px;transform:translateY(-50%);color:var(--suave);pointer-events:none}
+.buscar .campo{padding-left:42px}
 .error{margin:0;min-height:0;font-size:13px;color:var(--error)}
 .privacidad{margin:0;font-size:12px;color:var(--tenue)}
 .privacidad u{text-decoration-color:rgba(255,255,255,.3)}
@@ -216,7 +223,7 @@ button{cursor:pointer}
     <p class="desc">Probalos como si fueras un cliente: una pregunta por pantalla y casi todo con toques. En "Lo que te llega a vos" ves cómo se arma el mail y la temperatura de cada consulta.</p>
     <div class="selector" id="selector" role="group" aria-label="Formulario">
       <button type="button" data-form="vender" aria-pressed="true">Vender</button>
-      <button type="button" data-form="tasacion" aria-pressed="false">Tasación</button>
+      <button type="button" data-form="tasacion" aria-pressed="false">Cuánto vale</button>
       <button type="button" data-form="alquilar" aria-pressed="false">Alquilar mi propiedad</button>
       <button type="button" data-form="comprar" aria-pressed="false">Comprar</button>
       <button type="button" data-form="buscar" aria-pressed="false">Buscar alquiler</button>
@@ -279,11 +286,31 @@ button{cursor:pointer}
   };
   function idxInicial(e) { return ESCALAS[e].valores.indexOf(ESCALAS[e].inicial); }
 
-  var ZONAS = ['Belgrano', 'Núñez', 'Saavedra', 'Villa Urquiza', 'Coghlan', 'Villa Pueyrredón', 'Villa Devoto', 'Villa del Parque', 'Vicente López', 'Olivos', 'Florida', 'Martínez', 'San Isidro'];
+  /* barrios destacados (en el orden de Cris) + todos los demás para el buscador */
+  var ZONAS_CABA = ['Villa Urquiza', 'Villa Devoto', 'Villa del Parque', 'Saavedra', 'Núñez', 'Belgrano', 'Coghlan', 'Villa Pueyrredón'];
+  var ZONAS_NORTE = ['Vicente López', 'Olivos', 'Florida', 'Martínez', 'San Isidro'];
+  var TODOS_BARRIOS = ['Agronomía', 'Almagro', 'Balvanera', 'Barracas', 'Belgrano', 'Boedo', 'Caballito', 'Chacarita', 'Coghlan', 'Colegiales', 'Constitución', 'Flores', 'Floresta', 'La Boca', 'La Paternal', 'Liniers', 'Mataderos', 'Monte Castro', 'Monserrat', 'Nueva Pompeya', 'Núñez', 'Palermo', 'Parque Avellaneda', 'Parque Chacabuco', 'Parque Chas', 'Parque Patricios', 'Puerto Madero', 'Recoleta', 'Retiro', 'Saavedra', 'San Cristóbal', 'San Nicolás', 'San Telmo', 'Vélez Sarsfield', 'Versalles', 'Villa Crespo', 'Villa del Parque', 'Villa Devoto', 'Villa General Mitre', 'Villa Lugano', 'Villa Luro', 'Villa Ortúzar', 'Villa Pueyrredón', 'Villa Real', 'Villa Riachuelo', 'Villa Santa Rita', 'Villa Soldati', 'Villa Urquiza',
+    'Vicente López', 'Olivos', 'La Lucila', 'Florida', 'Florida Oeste', 'Munro', 'Carapachay', 'Villa Martelli', 'Villa Adelina', 'Martínez', 'San Isidro', 'Acassuso', 'Beccar', 'Boulogne', 'San Fernando', 'Victoria', 'Tigre', 'Nordelta', 'Don Torcuato', 'General Pacheco', 'Benavídez', 'Pilar', 'Escobar', 'San Martín'];
   var TIPOS = [{ v: 'Departamento', i: 'depto' }, { v: 'Casa', i: 'casa' }, { v: 'PH', i: 'ph' }, { v: 'Local comercial', i: 'local' }, { v: 'Otro', i: 'otro' }];
   var TITULAR = ['Soy el único dueño', 'Somos varios dueños', 'Es una sucesión', 'Consulto por un familiar o conocido'];
   var AMBIENTES = ['Monoambiente', '2', '3', '4', '5 o más'];
   var EXCLUSIVAS = ['Nada en especial'];
+  var PAISES = [['+54 9', 'Argentina'], ['+598', 'Uruguay'], ['+56', 'Chile'], ['+595', 'Paraguay'], ['+55', 'Brasil'], ['+591', 'Bolivia'], ['+51', 'Perú'], ['+57', 'Colombia'], ['+58', 'Venezuela'], ['+52', 'México'], ['+34', 'España'], ['+39', 'Italia'], ['+1', 'Estados Unidos'], ['otro', 'Otro país']];
+
+  /* lo que se puede destacar depende del tipo de propiedad: a un local no se le pregunta por balcón */
+  var LOCAL_DEST = ['Vidriera a la calle', 'En esquina', 'Baño', 'Depósito o sótano', 'Entrepiso o planta alta', 'Salida de humos', 'Apto gastronomía'];
+  var DEST = {
+    valor: { 'Departamento': ['Balcón', 'Cochera', 'Patio o terraza', 'Amenities', 'A estrenar', 'Apto crédito'], 'Casa': ['Jardín', 'Pileta', 'Cochera', 'Parrilla o quincho', 'A estrenar', 'Apto crédito'], 'PH': ['Patio', 'Terraza propia', 'Parrilla', 'Cochera', 'Sin expensas', 'Apto crédito'], 'Local comercial': LOCAL_DEST },
+    alquilar: { 'Departamento': ['Amoblado', 'Balcón', 'Cochera', 'Patio o terraza', 'Amenities', 'Acepta mascotas'], 'Casa': ['Amoblado', 'Jardín', 'Pileta', 'Cochera', 'Parrilla o quincho', 'Acepta mascotas'], 'PH': ['Amoblado', 'Patio', 'Terraza propia', 'Parrilla', 'Cochera', 'Acepta mascotas'], 'Local comercial': LOCAL_DEST }
+  };
+  function destacadosPara(tabla) { return function (r) { return DEST[tabla][r.tipo_propiedad] || DEST[tabla]['Departamento']; }; }
+  function tipos(r) { var t = r.tipo_propiedad; return Array.isArray(t) ? t : (t ? [t] : []); }
+  function soloLocal(r) { var t = tipos(r); return t.length > 0 && t.every(function (x) { return x === 'Local comercial'; }); }
+  function conLocal(r) { return tipos(r).indexOf('Local comercial') > -1; }
+
+  /* pregunta para romper el hielo: no suma puntos, le da a Cris con qué arrancar el WhatsApp */
+  var ROMPEHIELOS = { id: 'rompehielos', tipo: 'unica', opcional: true, titulo: '¿Mate o café?', ayuda: 'Una última, y no suma ni resta.', opciones: ['Mate', 'Café', 'Los dos', 'Té, la verdad'], etiqueta: 'Para romper el hielo',
+    notas: { 'Mate': 'Anotado. Si nos juntamos, el mate lo pongo yo.', 'Café': 'Anotado. Si nos juntamos, el café corre por mi cuenta.', 'Los dos': 'Me caés bien. Anotado.', 'Té, la verdad': 'Respeto. Anotado.' } };
 
   function eje(n, p, por) { return { n: n, p: p, por: por || 'Sin responder' }; }
   function de(tabla, v) { return tabla[v] || 0; }
@@ -295,7 +322,7 @@ button{cursor:pointer}
       corto: 'Vender', titulo: 'Quiero vender mi propiedad',
       pantallas: [
         { id: 'tipo_propiedad', tipo: 'unica', titulo: '¿Qué tipo de propiedad querés vender?', opciones: TIPOS, etiqueta: 'Tipo' },
-        { id: 'localidad', tipo: 'zona', calle: true, titulo: '¿Dónde está?', ayuda: 'Tocá el barrio o escribilo. La calle es opcional.', etiqueta: 'Ubicación' },
+        { id: 'localidad', tipo: 'zona', calle: true, titulo: '¿Dónde está?', ayuda: 'Tocá el barrio o buscalo. La calle es opcional.', etiqueta: 'Ubicación' },
         { id: 'tamano', tipo: 'tamano', titulo: '¿Qué tamaño tiene?', etiqueta: 'Tamaño' },
         { id: 'estado_general', tipo: 'unica', dos: true, titulo: '¿En qué estado está?', opciones: ['Excelente', 'Muy buen estado', 'Buen estado', 'Requiere mejoras', 'A refaccionar', 'No sabría decirte'], etiqueta: 'Estado' },
         { id: 'situacion_actual', tipo: 'unica', titulo: 'Hoy la propiedad está…', opciones: ['Vacía', 'Habitada', 'Otra situación'], etiqueta: 'Situación' },
@@ -315,6 +342,7 @@ button{cursor:pointer}
         { id: 'compra_despues', tipo: 'unica', titulo: 'Después de vender, ¿vas a comprar otra?', opciones: ['Sí', 'Tal vez', 'No'], etiqueta: 'Compra después',
           notas: { 'Sí': 'Bien. Podemos coordinar las dos operaciones para que no quedes en el medio.' } },
         { id: 'como_continuar', tipo: 'unica', titulo: '¿Cómo te gustaría seguir?', opciones: ['Quiero coordinar una reunión', 'Quiero coordinar una visita a la propiedad', 'Quiero conocer primero cómo trabajás', 'Quiero recibir orientación sobre el valor de mi propiedad', 'Por ahora solamente estoy averiguando'], etiqueta: 'Cómo seguir' },
+        ROMPEHIELOS,
         { id: 'contacto', tipo: 'contacto', marco: 'Listo. Con esto ya puedo preparar nuestra primera charla.' }
       ],
       puntaje: function (r) {
@@ -336,23 +364,24 @@ button{cursor:pointer}
     },
 
     tasacion: {
-      corto: 'Tasación', titulo: 'Quiero saber cuánto vale mi propiedad',
+      corto: 'Cuánto vale', titulo: 'Quiero saber cuánto vale mi propiedad',
       pantallas: [
         { id: 'tipo_propiedad', tipo: 'unica', titulo: '¿Qué tipo de propiedad es?', opciones: TIPOS, etiqueta: 'Tipo' },
-        { id: 'ubicacion', tipo: 'zona', calle: true, titulo: '¿Dónde está?', ayuda: 'Tocá el barrio o escribilo. La calle es opcional.', etiqueta: 'Ubicación' },
+        { id: 'ubicacion', tipo: 'zona', calle: true, titulo: '¿Dónde está?', ayuda: 'Tocá el barrio o buscalo. La calle es opcional.', etiqueta: 'Ubicación' },
         { id: 'tamano', tipo: 'tamano', titulo: '¿Qué tamaño tiene?', etiqueta: 'Tamaño' },
-        { id: 'destacados', tipo: 'multiple', chips: true, opcional: true, titulo: '¿Tiene alguno de estos?', ayuda: 'Suman valor. Marcá los que tenga.', opciones: ['Balcón', 'Cochera', 'Patio o terraza', 'Amenities', 'A estrenar', 'Apto crédito'], etiqueta: 'Destacados' },
+        { id: 'destacados', tipo: 'multiple', chips: true, opcional: true, titulo: '¿Tiene alguno de estos?', ayuda: 'Suman valor. Marcá los que tenga.', opciones: destacadosPara('valor'), etiqueta: 'Destacados' },
         { id: 'motivo_tasacion', tipo: 'unica', titulo: '¿Para qué querés saber el valor?', opciones: ['Para vender', 'Para alquilar', 'Por una sucesión o división', 'Para tener una referencia', 'Otro motivo'], etiqueta: 'Para qué',
           notas: { 'Para vender': 'Bien. Con el valor claro, después es más fácil decidir cuándo salir.' } },
         { id: 'plazo_venta', tipo: 'unica', titulo: '¿Cuándo pensás vender?', opciones: ['En los próximos 3 meses', 'Entre 3 y 12 meses', 'Más adelante', 'No pienso vender'], etiqueta: 'Cuándo vendería' },
         { id: 'titularidad', tipo: 'unica', titulo: '¿Sos el dueño?', opciones: TITULAR, etiqueta: 'Titularidad' },
-        { id: 'ya_tasada', tipo: 'unica', titulo: '¿Ya recibiste alguna tasación?', opciones: ['No', 'Sí, de una inmobiliaria/agente', 'Sí, más de una', 'Hice mi propia estimación comparando publicaciones'], etiqueta: 'Tasaciones previas',
+        { id: 'ya_tasada', tipo: 'unica', titulo: '¿Ya te dieron un valor de tu propiedad?', opciones: ['No', 'Sí, de una inmobiliaria/agente', 'Sí, más de una', 'Hice mi propia estimación comparando publicaciones'], etiqueta: 'Valores previos',
           notas: { 'Sí, más de una': 'Si te dieron números distintos, te ayudo a entender por qué.' } },
+        ROMPEHIELOS,
         { id: 'contacto', tipo: 'contacto', marco: 'Listo. Con esto ya puedo analizar tu propiedad.' }
       ],
       puntaje: function (r) {
         var b = [];
-        if (r.ya_tasada === 'Sí, más de una') b.push('Comparando tasaciones');
+        if (r.ya_tasada === 'Sí, más de una') b.push('Comparando valores');
         if (r.titularidad === 'Es una sucesión' || r.motivo_tasacion === 'Por una sucesión o división') b.push('Sucesión');
         return { ejes: [
           eje('¿Cuándo?', de({ 'En los próximos 3 meses': 2, 'Entre 3 y 12 meses': 1 }, r.plazo_venta), r.plazo_venta),
@@ -366,25 +395,26 @@ button{cursor:pointer}
       corto: 'Alquilar mi propiedad', titulo: 'Quiero alquilar mi propiedad',
       pantallas: [
         { id: 'tipo_propiedad', tipo: 'unica', titulo: '¿Qué tipo de propiedad querés alquilar?', opciones: TIPOS, etiqueta: 'Tipo' },
-        { id: 'ubicacion', tipo: 'zona', calle: true, titulo: '¿Dónde está?', ayuda: 'Tocá el barrio o escribilo. La calle es opcional.', etiqueta: 'Ubicación' },
+        { id: 'ubicacion', tipo: 'zona', calle: true, titulo: '¿Dónde está?', ayuda: 'Tocá el barrio o buscalo. La calle es opcional.', etiqueta: 'Ubicación' },
         { id: 'tamano', tipo: 'tamano', titulo: '¿Qué tamaño tiene?', etiqueta: 'Tamaño' },
-        { id: 'destacados', tipo: 'multiple', chips: true, opcional: true, titulo: '¿Tiene alguno de estos?', ayuda: 'Marcá los que tenga.', opciones: ['Amoblado', 'Balcón', 'Cochera', 'Patio o terraza', 'Amenities', 'Acepta mascotas'], etiqueta: 'Destacados' },
+        { id: 'destacados', tipo: 'multiple', chips: true, opcional: true, titulo: '¿Tiene alguno de estos?', ayuda: 'Marcá los que tenga.', opciones: destacadosPara('alquilar'), etiqueta: 'Destacados' },
         { id: 'situacion_actual', tipo: 'unica', titulo: '¿Cuál es la situación actual?', opciones: ['Vacía y disponible', 'Habitada', 'Próximamente va a quedar disponible', 'Otra situación'], etiqueta: 'Situación',
           notas: { 'Vacía y disponible': 'Ideal: así se puede mostrar sin coordinar con nadie.' } },
         { id: 'disponibilidad', tipo: 'unica', opcional: true, titulo: '¿Cuándo estaría disponible para alquilar?', opciones: ['Ahora', 'Dentro de los próximos 30 días', 'Dentro de los 3 meses', 'Todavía estoy evaluando'], etiqueta: 'Disponible' },
         { id: 'valor_alquiler', tipo: 'deslizador', escala: 'ars', titulo: '¿Cuánto esperás cobrar por mes?', ayuda: 'Sin expensas. Es solo una referencia.', alt: 'Quiero que me ayudes a definirlo', notaAlt: 'Lo definimos con alquileres parecidos de la zona.', etiqueta: 'Valor que espera' },
         { id: 'que_es_importante', tipo: 'multiple', titulo: '¿Qué es lo más importante para vos?', ayuda: 'Podés marcar varias.', opciones: ['Encontrar buen inquilino', 'Alquilarla lo antes posible', 'Conseguir un buen valor', 'Tener asesoramiento con documentación y contrato', 'Alguien que gestione todo el proceso', 'Otro'], etiqueta: 'Lo más importante' },
+        { id: 'como_continuar', tipo: 'unica', titulo: '¿Cómo te gustaría seguir?', opciones: ['Quiero coordinar una reunión', 'Quiero que vengas a ver la propiedad', 'Quiero saber cuánto podría cobrar', 'Por ahora solamente estoy averiguando'], etiqueta: 'Cómo seguir' },
+        ROMPEHIELOS,
         { id: 'contacto', tipo: 'contacto', marco: 'Listo. Con esto ya puedo pensar cómo alquilarla.' }
       ],
       puntaje: function (r) {
         var imp = r.que_es_importante || [];
-        var pro = imp.indexOf('Alguien que gestione todo el proceso') > -1 || imp.indexOf('Tener asesoramiento con documentación y contrato') > -1;
         var b = [];
         if (imp.indexOf('Alguien que gestione todo el proceso') > -1) b.push('Quiere que gestiones todo');
         return { ejes: [
           eje('¿Cuándo?', de({ 'Ahora': 2, 'Dentro de los próximos 30 días': 2, 'Dentro de los 3 meses': 1 }, r.disponibilidad), r.disponibilidad),
           eje('¿Puede?', de({ 'Vacía y disponible': 2, 'Próximamente va a quedar disponible': 1 }, r.situacion_actual), r.situacion_actual),
-          eje('¿Quiere avanzar?', pro ? 2 : (imp.length ? 1 : 0), imp.join(', '))
+          eje('¿Quiere avanzar?', de({ 'Quiero coordinar una reunión': 2, 'Quiero que vengas a ver la propiedad': 2, 'Quiero saber cuánto podría cobrar': 1 }, r.como_continuar), r.como_continuar)
         ], banderas: b };
       }
     },
@@ -393,10 +423,14 @@ button{cursor:pointer}
       corto: 'Comprar', titulo: 'Quiero comprar una propiedad',
       pantallas: [
         { id: 'tipo_propiedad', tipo: 'multiple', titulo: '¿Qué tipo de propiedad buscás?', ayuda: 'Podés marcar varias.', opciones: [TIPOS[0], TIPOS[1], TIPOS[2], TIPOS[3], { v: 'Flipping', i: 'flip', d: 'Para reciclar y vender' }, TIPOS[4]], etiqueta: 'Tipo' },
-        { id: 'destino_compra', tipo: 'unica', titulo: '¿Es para vivir o para invertir?', opciones: [{ v: 'Para vivir', i: 'vivir' }, { v: 'Para invertir', i: 'invertir' }], etiqueta: 'Destino',
+        { id: 'destino_compra', tipo: 'unica',
+          titulo: function (r) { return soloLocal(r) ? '¿Es para tu negocio o para invertir?' : '¿Es para vivir o para invertir?'; },
+          opciones: function (r) { return soloLocal(r) ? [{ v: 'Para mi negocio', i: 'local' }, { v: 'Para invertir', i: 'invertir' }] : [{ v: 'Para vivir', i: 'vivir' }, { v: 'Para invertir', i: 'invertir' }]; },
+          etiqueta: 'Destino',
           notas: { 'Para invertir': 'Mirá también los desarrollos en pozo: se pagan en cuotas en dólares.' } },
-        { id: 'zona', tipo: 'zona', multiple: true, titulo: '¿En qué zonas buscás?', ayuda: 'Podés marcar varias.', etiqueta: 'Zonas' },
-        { id: 'ambientes', tipo: 'multiple', chips: true, opcional: true, titulo: '¿Cuántos ambientes necesitás?', ayuda: 'Podés marcar varios.', opciones: AMBIENTES, etiqueta: 'Ambientes' },
+        { id: 'zona', tipo: 'zona', multiple: true, titulo: '¿En qué zonas buscás?', ayuda: 'Podés marcar varias o buscar otra.', etiqueta: 'Zonas' },
+        { id: 'ambientes', tipo: 'multiple', chips: true, opcional: true, titulo: '¿Cuántos ambientes necesitás?', ayuda: 'Podés marcar varios.', opciones: AMBIENTES, etiqueta: 'Ambientes',
+          si: function (r) { return !soloLocal(r); } },
         { id: 'presupuesto', tipo: 'deslizador', escala: 'usd', titulo: '¿Cuál es tu presupuesto?', ayuda: 'Mové la barra hasta tu tope.', alt: 'Prefiero hablarlo', etiqueta: 'Presupuesto' },
         { id: 'forma_compra', tipo: 'unica', titulo: '¿Cómo pensás pagarla?', opciones: ['Fondos propios', 'Necesito vender otra propiedad primero', 'Con crédito hipotecario', 'Combinación de las anteriores', 'Todavía lo estoy definiendo'], etiqueta: 'Cómo paga',
           notas: { 'Necesito vender otra propiedad primero': 'Te puedo ayudar con las dos: vender la tuya y encontrar la próxima.' } },
@@ -405,8 +439,16 @@ button{cursor:pointer}
           notas: { 'Todavía no lo empecé': 'Conviene arrancarlo pronto: saber cuánto te prestan ordena toda la búsqueda.' } },
         { id: 'plazo_compra', tipo: 'unica', titulo: '¿Para cuándo te gustaría comprar?', opciones: ['Lo antes posible', 'Dentro de 3 meses', 'Dentro de 6 meses', 'Dentro de 12 meses', 'Solo estoy mirando'], etiqueta: 'Plazo' },
         { id: 'visitando', tipo: 'unica', titulo: '¿Ya estuviste visitando propiedades?', opciones: ['Sí, ya visité varias', 'Visité alguna', 'Todavía no, recién empiezo'], etiqueta: 'Visitas' },
-        { id: 'caracteristicas_indispensables', tipo: 'multiple', chips: true, opcional: true, titulo: '¿Qué no puede faltar?', opciones: ['Balcón', 'Cochera', 'Patio o terraza', 'Amenities', 'Apto crédito', 'Luminoso', 'A estrenar'], etiqueta: 'Indispensable',
+        { id: 'caracteristicas_indispensables', tipo: 'multiple', chips: true, opcional: true, titulo: '¿Qué no puede faltar?',
+          opciones: function (r) {
+            if (soloLocal(r)) return LOCAL_DEST;
+            var o = ['Balcón', 'Cochera', 'Patio o terraza', 'Amenities', 'Apto crédito', 'Luminoso', 'A estrenar'];
+            if (tipos(r).indexOf('Casa') > -1) o = o.concat(['Jardín', 'Pileta']);
+            if (conLocal(r)) o = o.concat(['Vidriera a la calle']);
+            return o;
+          }, etiqueta: 'Indispensable',
           texto: { id: 'algo_mas', placeholder: '¿Algo más que debería saber? (opcional)', etiqueta: 'Algo más' } },
+        ROMPEHIELOS,
         { id: 'contacto', tipo: 'contacto', marco: 'Listo. Con esto ya puedo empezar a buscar.' }
       ],
       puntaje: function (r) {
@@ -430,14 +472,23 @@ button{cursor:pointer}
       pantallas: [
         { id: 'modalidad', tipo: 'unica', titulo: '¿Qué tipo de alquiler buscás?', opciones: [{ v: 'Tradicional', i: 'llave', d: 'Contrato por años' }, { v: 'Temporario', i: 'valija', d: 'Por días o meses' }], etiqueta: 'Modalidad' },
         { id: 'tipo_propiedad', tipo: 'multiple', titulo: '¿Qué tipo de propiedad?', ayuda: 'Podés marcar varias.', opciones: TIPOS, etiqueta: 'Tipo' },
-        { id: 'zona', tipo: 'zona', multiple: true, titulo: '¿En qué zonas buscás?', ayuda: 'Podés marcar varias.', etiqueta: 'Zonas' },
-        { id: 'que_necesita', tipo: 'multiple', chips: true, titulo: '¿Qué necesitás sí o sí?', ayuda: 'Marcá todo lo que no puede faltar.', opciones: ['1 ambiente', '2 ambientes', '3 ambientes o más', 'Balcón', 'Cochera', 'Amoblado', 'Patio o terraza', 'Lavadero', 'Nada en especial'], etiqueta: 'Necesita',
+        { id: 'zona', tipo: 'zona', multiple: true, titulo: '¿En qué zonas buscás?', ayuda: 'Podés marcar varias o buscar otra.', etiqueta: 'Zonas' },
+        { id: 'que_necesita', tipo: 'multiple', chips: true, titulo: '¿Qué necesitás sí o sí?', ayuda: 'Marcá todo lo que no puede faltar.',
+          opciones: function (r) {
+            if (soloLocal(r)) return ['Vidriera a la calle', 'En esquina', 'Baño', 'Depósito o sótano', 'Apto gastronomía', 'Nada en especial'];
+            var o = ['1 ambiente', '2 ambientes', '3 ambientes o más', 'Balcón', 'Cochera', 'Amoblado', 'Patio o terraza', 'Lavadero'];
+            if (conLocal(r)) o.push('Vidriera a la calle');
+            o.push('Nada en especial');
+            return o;
+          }, etiqueta: 'Necesita',
           texto: { id: 'que_necesita_otro', placeholder: 'Otra cosa (opcional)', etiqueta: 'Otra cosa' } },
         { id: 'presupuesto_mensual', tipo: 'deslizador', escala: 'ars', titulo: '¿Hasta cuánto podés pagar por mes?', ayuda: 'Alquiler, sin expensas.', alt: 'Prefiero hablarlo', etiqueta: 'Presupuesto' },
         { id: 'para_cuando', tipo: 'unica', titulo: '¿Para cuándo necesitás mudarte?', opciones: ['Ya, este mes', 'En 1 a 2 meses', 'En 3 meses o más', 'Todavía no tengo fecha'], etiqueta: 'Mudanza' },
         { id: 'como_respalda', tipo: 'multiple', titulo: '¿Cómo respaldarías el alquiler?', ayuda: 'Podés marcar varias.', opciones: ['Garantía propietaria', 'Seguro de caución', 'Recibos de sueldo / ingresos demostrables', 'Monotributo / Autónomo', 'Otro', 'Todavía necesito asesoramiento sobre esto'], etiqueta: 'Garantía',
           notas: { 'Todavía necesito asesoramiento sobre esto': 'Tranqui, te explico qué opciones hay y cuál te conviene.' } },
-        { id: 'mascotas', tipo: 'unica', titulo: '¿Tenés mascotas?', opciones: ['No', 'Sí, perro', 'Sí, gato', 'Sí, otra'], etiqueta: 'Mascotas' },
+        { id: 'mascotas', tipo: 'unica', titulo: '¿Tenés mascotas?', opciones: ['No', 'Sí, perro', 'Sí, gato', 'Sí, otra'], etiqueta: 'Mascotas',
+          si: function (r) { return !soloLocal(r); } },
+        ROMPEHIELOS,
         { id: 'contacto', tipo: 'contacto', marco: 'Listo. Con esto ya puedo empezar a buscar.' }
       ],
       puntaje: function (r) {
@@ -458,7 +509,7 @@ button{cursor:pointer}
   /* ---------- estado ---------- */
   var st;
   function nuevo(form) {
-    st = { form: form, r: {}, actual: FORMS[form].pantallas[0].id, nota: null, enviado: false, contacto: { nombre: '', tel: '', email: '' } };
+    st = { form: form, r: {}, actual: FORMS[form].pantallas[0].id, nota: null, enviado: false, contacto: { nombre: '', pais: '+54 9', tel: '', email: '' } };
   }
   function F() { return FORMS[st.form]; }
   function visibles() { return F().pantallas.filter(function (p) { return !p.si || p.si(st.r); }); }
@@ -483,17 +534,22 @@ button{cursor:pointer}
     if (val.alt) return p.alt;
     return ESCALAS[p.escala].fmt(ESCALAS[p.escala].valores[val.idx]);
   }
+  function opcionesDe(p) { return typeof p.opciones === 'function' ? p.opciones(st.r) : p.opciones; }
+  function tituloDe(p) { return typeof p.titulo === 'function' ? p.titulo(st.r) : p.titulo; }
+  function valorDe(o) { return typeof o === 'string' ? o : o.v; }
+
   function mostrar(p) {
     var v = st.r[p.id];
     if (p.tipo === 'zona') {
-      if (!v) return '';
-      var zonas = v.sel.slice(); if (v.otra.trim()) zonas.push(v.otra.trim());
-      return zonas.join(', ') + (v.calle && v.calle.trim() ? ' · ' + v.calle.trim() : '');
+      if (!v || !v.sel.length) return '';
+      return v.sel.join(', ') + (v.calle && v.calle.trim() ? ' · ' + v.calle.trim() : '');
     }
     if (p.tipo === 'tamano') {
-      if (!v || !v.amb) return '';
-      var amb = v.amb === 'Monoambiente' ? 'Monoambiente' : v.amb + ' ambientes';
-      return amb + ' · ' + (v.nose ? 'm² sin dato' : ESCALAS.m2.fmt(ESCALAS.m2.valores[v.m2]));
+      if (!v) return '';
+      var m2 = v.nose ? 'm² sin dato' : ESCALAS.m2.fmt(ESCALAS.m2.valores[v.m2]);
+      if (soloLocal(st.r)) return m2;
+      if (!v.amb) return '';
+      return (v.amb === 'Monoambiente' ? 'Monoambiente' : v.amb + ' ambientes') + ' · ' + m2;
     }
     if (p.tipo === 'deslizador') return mostrarDeslizador(p, v);
     if (Array.isArray(v)) return v.join(', ');
@@ -547,12 +603,28 @@ button{cursor:pointer}
     renderCris();
   }
 
+  function ayudaTel(pais) {
+    if (pais === '+54 9') return { ayuda: 'Código de área y número, sin 0 ni 15. Ej.: 11 6695 1945 o 351 555 1234.', ph: '11 6695 1945', prefijo: '+54 9' };
+    if (pais === 'otro') return { ayuda: 'Escribí el número completo, con el código de tu país.', ph: '+34 600 123 456', prefijo: '+' };
+    return { ayuda: 'Tu número, sin el código de país.', ph: 'Número', prefijo: pais };
+  }
+  function telefonoCompleto(k) {
+    var d = k.tel.replace(/\D/g, '');
+    if (!d) return '';
+    return k.pais === 'otro' ? '+' + d : k.pais + ' ' + k.tel.trim();
+  }
+
   function htmlPantalla(p, pos) {
     var r = st.r, h = '';
     if (p.tipo === 'contacto') {
+      var at = ayudaTel(st.contacto.pais);
       h += '<p class="marco">' + esc(p.marco) + '</p><h2 class="pregunta" tabindex="-1">¿A dónde te escribo?</h2>' +
         '<label class="etiqueta" for="c-nombre">Nombre</label><input class="campo" id="c-nombre" data-contacto="nombre" autocomplete="name" placeholder="Nombre y apellido" value="' + esc(st.contacto.nombre) + '">' +
-        '<label class="etiqueta" for="c-tel">WhatsApp</label><div class="tel"><span>+54 9</span><input class="campo" id="c-tel" data-contacto="tel" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="11 6695 1945" value="' + esc(st.contacto.tel) + '"></div>' +
+        '<label class="etiqueta" for="c-tel">WhatsApp</label><div class="tel">' +
+          '<span class="tel__pais"><span id="c-prefijo">' + esc(at.prefijo) + '</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>' +
+          '<select id="c-pais" data-contacto="pais" aria-label="País del WhatsApp">' + PAISES.map(function (x) { return '<option value="' + esc(x[0]) + '"' + (x[0] === st.contacto.pais ? ' selected' : '') + '>' + esc(x[1]) + (x[0] === 'otro' ? '' : ' (' + x[0] + ')') + '</option>'; }).join('') + '</select></span>' +
+          '<input class="campo" id="c-tel" data-contacto="tel" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="' + esc(at.ph) + '" value="' + esc(st.contacto.tel) + '" aria-describedby="c-tel-ayuda"></div>' +
+        '<p class="ayuda-campo" id="c-tel-ayuda">' + esc(at.ayuda) + '</p>' +
         '<label class="etiqueta" for="c-email">Email</label><input class="campo" id="c-email" data-contacto="email" type="email" autocomplete="email" placeholder="tu@email.com" value="' + esc(st.contacto.email) + '">' +
         '<p class="error" id="c-error" role="alert"></p>' +
         '<p class="privacidad">Al enviar aceptás que use estos datos para responder tu consulta. Ver <u>Política de Privacidad</u>.</p>' +
@@ -560,37 +632,45 @@ button{cursor:pointer}
       return h;
     }
 
-    h += '<h2 class="pregunta" tabindex="-1">' + esc(p.titulo) + '</h2>';
+    var titulo = tituloDe(p), ops = p.opciones ? opcionesDe(p) : [];
+    if (p.tipo === 'tamano' && soloLocal(r)) titulo = '¿Qué superficie tiene?';
+    h += '<h2 class="pregunta" tabindex="-1">' + esc(titulo) + '</h2>';
     if (p.ayuda) h += '<p class="ayuda">' + esc(p.ayuda) + '</p>';
     var der = '';
 
     if (p.tipo === 'unica') {
-      h += '<div class="opciones' + (p.dos ? ' opciones--dos' : '') + '" role="group" aria-label="' + esc(p.titulo) + '">' +
-        p.opciones.map(function (o) { var v = typeof o === 'string' ? o : o.v; return opcionHtml(o, false, r[p.id] === v); }).join('') + '</div>';
+      h += '<div class="opciones' + (p.dos ? ' opciones--dos' : '') + '" role="group" aria-label="' + esc(titulo) + '">' +
+        ops.map(function (o) { return opcionHtml(o, false, r[p.id] === valorDe(o)); }).join('') + '</div>';
       der = (p.opcional ? '<button type="button" class="enlace" data-accion="saltar">Saltar</button>' : '') +
         (r[p.id] ? '<button type="button" class="boton boton--suave" data-accion="continuar">Continuar</button>' : '');
     }
 
     if (p.tipo === 'multiple') {
-      var sel = r[p.id] || [];
-      if (p.chips) h += '<div class="chips" role="group" aria-label="' + esc(p.titulo) + '">' + p.opciones.map(function (o) { return chipHtml(o, 'multi', sel.indexOf(o) > -1); }).join('') + '</div>';
-      else h += '<div class="opciones" role="group" aria-label="' + esc(p.titulo) + '">' + p.opciones.map(function (o) { var v = typeof o === 'string' ? o : o.v; return opcionHtml(o, true, sel.indexOf(v) > -1); }).join('') + '</div>';
+      // si cambió el tipo de propiedad, se descartan las marcas que ya no corresponden (ej. "Balcón" en un local)
+      var validos = ops.map(valorDe);
+      var sel = (r[p.id] || []).filter(function (x) { return validos.indexOf(x) > -1; });
+      if (r[p.id]) r[p.id] = sel;
+      if (p.chips) h += '<div class="chips" role="group" aria-label="' + esc(titulo) + '">' + ops.map(function (o) { return chipHtml(o, 'multi', sel.indexOf(o) > -1); }).join('') + '</div>';
+      else h += '<div class="opciones" role="group" aria-label="' + esc(titulo) + '">' + ops.map(function (o) { return opcionHtml(o, true, sel.indexOf(valorDe(o)) > -1); }).join('') + '</div>';
       if (p.texto) h += '<input class="campo" id="t-' + p.texto.id + '" data-texto="' + p.texto.id + '" placeholder="' + esc(p.texto.placeholder) + '" value="' + esc(r[p.texto.id] || '') + '">';
       der = '<button type="button" class="boton" data-accion="continuar" id="btn-continuar"' + (listo(p) ? '' : ' disabled') + '>' + (p.opcional && !sel.length ? 'Saltar' : 'Continuar') + '</button>';
     }
 
     if (p.tipo === 'zona') {
-      var z = r[p.id] || { sel: [], otra: '', calle: '' };
-      h += '<div class="chips" role="group" aria-label="Zonas">' + ZONAS.map(function (x) { return chipHtml(x, 'zona', z.sel.indexOf(x) > -1); }).join('') + '</div>' +
-        '<input class="campo" id="z-otra" data-zona="otra" placeholder="' + (p.multiple ? 'Otra zona' : 'Otro barrio o localidad') + '" value="' + esc(z.otra) + '">';
-      if (p.calle) h += '<input class="campo" id="z-calle" data-zona="calle" autocomplete="street-address" placeholder="Calle y altura (opcional)" value="' + esc(z.calle) + '">';
+      var z = r[p.id] || { sel: [], calle: '' };
+      var extras = z.sel.filter(function (x) { return ZONAS_CABA.indexOf(x) < 0 && ZONAS_NORTE.indexOf(x) < 0; });
+      var grupo = function (nombre, lista) { return '<p class="sub">' + nombre + '</p><div class="chips" role="group" aria-label="' + nombre + '">' + lista.map(function (x) { return chipHtml(x, 'zona', z.sel.indexOf(x) > -1); }).join('') + '</div>'; };
+      h += grupo('CABA', ZONAS_CABA) + grupo('Zona Norte', ZONAS_NORTE) + (extras.length ? grupo(p.multiple ? 'Otras que elegiste' : 'Elegido', extras) : '');
+      h += '<div class="buscar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>' +
+        '<input class="campo" id="z-buscar" data-zona-buscar list="lista-barrios" autocomplete="off" enterkeyhint="done" placeholder="Buscá otro barrio o localidad"></div>';
+      if (p.calle) h += '<input class="campo" id="z-calle" data-zona="calle" autocomplete="street-address" placeholder="Calle y altura aproximada" value="' + esc(z.calle || '') + '">';
       der = '<button type="button" class="boton" data-accion="continuar" id="btn-continuar"' + (listo(p) ? '' : ' disabled') + '>Continuar</button>';
     }
 
     if (p.tipo === 'tamano') {
       var t = r.tamano || { amb: '', m2: idxInicial('m2'), nose: false };
-      h += '<p class="sub">Ambientes</p><div class="chips" role="group" aria-label="Ambientes">' + AMBIENTES.map(function (x) { return chipHtml(x, 'amb', t.amb === x); }).join('') + '</div>' +
-        '<p class="sub">Superficie aproximada</p>' + deslizadorHtml('m2', t.m2, t.nose, 'Superficie aproximada') +
+      if (!soloLocal(r)) h += '<p class="sub">Ambientes</p><div class="chips" role="group" aria-label="Ambientes">' + AMBIENTES.map(function (x) { return chipHtml(x, 'amb', t.amb === x); }).join('') + '</div>';
+      h += '<p class="sub">Superficie aproximada</p>' + deslizadorHtml('m2', t.m2, t.nose, 'Superficie aproximada') +
         '<div class="chips">' + chipHtml('No sé los metros', 'nose', t.nose, 'chip--suave') + '</div>';
       der = '<button type="button" class="boton" data-accion="continuar" id="btn-continuar"' + (listo(p) ? '' : ' disabled') + '>Continuar</button>';
     }
@@ -614,8 +694,8 @@ button{cursor:pointer}
       if (p.opcional) return true;
       return (r[p.id] || []).length > 0 || (p.texto && (r[p.texto.id] || '').trim().length > 0);
     }
-    if (p.tipo === 'zona') { var z = r[p.id]; return !!z && (z.sel.length > 0 || z.otra.trim().length > 0); }
-    if (p.tipo === 'tamano') return !!(r.tamano && r.tamano.amb);
+    if (p.tipo === 'zona') { var z = r[p.id]; return !!z && z.sel.length > 0; }
+    if (p.tipo === 'tamano') return soloLocal(r) || !!(r.tamano && r.tamano.amb);
     return true;
   }
   function refrescarContinuar(p) {
@@ -632,7 +712,7 @@ button{cursor:pointer}
     return '<div class="exito">' +
       '<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29"/><path d="M20 33l8 8 16-17"/></svg>' +
       '<h2 class="pregunta" tabindex="-1">¡Gracias' + (nombre ? ', ' + esc(nombre) : '') + '!</h2>' +
-      '<p>Ya tengo todo. Te escribo por WhatsApp en el día.</p>' +
+      '<p>Ya tengo todo. Te escribo por WhatsApp lo antes posible.</p>' +
       (resumen.length ? '<div class="resumen">' + resumen.map(function (x) { return '<span>' + esc(x) + '</span>'; }).join('') + '</div>' : '') +
       '<button type="button" class="boton boton--ancho" data-accion="whatsapp">Escribirme ahora por WhatsApp</button>' +
       '<p class="proto" id="proto-wa">En la web real abre WhatsApp con este mensaje ya escrito: "' + esc(msj) + '"</p>' +
@@ -658,7 +738,7 @@ button{cursor:pointer}
     });
     var k = st.contacto;
     if (k.nombre.trim()) filas.push(['Nombre', k.nombre.trim()]);
-    if (k.tel.trim()) filas.push(['WhatsApp', '+54 9 ' + k.tel.trim()]);
+    if (telefonoCompleto(k)) filas.push(['WhatsApp', telefonoCompleto(k)]);
     if (k.email.trim()) filas.push(['Email', k.email.trim()]);
 
     var hay = filas.length > 0;
@@ -748,7 +828,10 @@ button{cursor:pointer}
     if (acc === 'alt') { st.r[p.id] = { alt: true }; vibrar(); avanzar(p.notaAlt || null); return; }
     if (acc === 'continuar') {
       if (p.tipo === 'deslizador') { var rgo = document.getElementById('rango'); st.r[p.id] = { idx: +rgo.value }; }
-      if (p.tipo === 'tamano' && !st.r.tamano) return;
+      if (p.tipo === 'tamano' && !st.r.tamano) {
+        if (!soloLocal(st.r)) return;
+        st.r.tamano = { amb: '', m2: +document.getElementById('rango').value, nose: false };
+      }
       avanzar(notaDe(p));
       return;
     }
@@ -779,16 +862,44 @@ button{cursor:pointer}
       refrescarContinuar(p); renderCris(); return;
     }
     if (el.hasAttribute('data-texto')) { st.r[el.getAttribute('data-texto')] = el.value; refrescarContinuar(p); renderCris(); return; }
-    if (el.hasAttribute('data-contacto')) {
-      st.contacto[el.getAttribute('data-contacto')] = el.value;
-      el.removeAttribute('aria-invalid');
-      renderCris();
+    if (el.hasAttribute('data-contacto')) cambioContacto(el);
+  });
+
+  function cambioContacto(el) {
+    var campo = el.getAttribute('data-contacto');
+    st.contacto[campo] = el.value;
+    if (campo === 'pais') {
+      var at = ayudaTel(el.value);
+      document.getElementById('c-prefijo').textContent = at.prefijo;
+      document.getElementById('c-tel-ayuda').textContent = at.ayuda;
+      document.getElementById('c-tel').placeholder = at.ph;
     }
+    el.removeAttribute('aria-invalid');
+    renderCris();
+  }
+
+  /* buscador de barrios: lo que se elige (o se escribe) aparece como chip marcado */
+  function agregarZona(input) {
+    var p = actual(), texto = input.value.trim();
+    if (!texto) return;
+    var conocido = TODOS_BARRIOS.filter(function (b) { return b.toLowerCase() === texto.toLowerCase(); })[0];
+    var v = conocido || texto.charAt(0).toUpperCase() + texto.slice(1);
+    var z = st.r[p.id] || { sel: [], calle: '' };
+    if (p.multiple) { if (z.sel.indexOf(v) < 0) z.sel.push(v); } else z.sel = [v];
+    st.r[p.id] = z;
+    vibrar(); render(false);
+  }
+
+  $pantalla.addEventListener('change', function (ev) {
+    var el = ev.target;
+    if (el.id === 'z-buscar') agregarZona(el);
+    else if (el.id === 'c-pais') cambioContacto(el);
   });
 
   $pantalla.addEventListener('keydown', function (ev) {
     if (ev.key !== 'Enter' || ev.target.tagName !== 'INPUT') return;
     ev.preventDefault();
+    if (ev.target.id === 'z-buscar') { agregarZona(ev.target); return; }
     var b = $pantalla.querySelector('[data-accion="continuar"], [data-accion="enviar"]');
     if (b && !b.disabled) b.click();
   });
@@ -797,8 +908,9 @@ button{cursor:pointer}
     var k = st.contacto, err = [];
     var campos = { nombre: document.getElementById('c-nombre'), tel: document.getElementById('c-tel'), email: document.getElementById('c-email') };
     var digitos = k.tel.replace(/\D/g, '');
+    var telOk = k.pais === '+54 9' ? (digitos.length >= 8 && digitos.length <= 11) : (k.pais === 'otro' ? (digitos.length >= 8 && digitos.length <= 15) : (digitos.length >= 6 && digitos.length <= 13));
     if (k.nombre.trim().length < 2) err.push(['nombre', 'Escribí tu nombre.']);
-    if (digitos.length < 8 || digitos.length > 13) err.push(['tel', 'Revisá el WhatsApp: código de área y número, sin 0 ni 15.']);
+    if (!telOk) err.push(['tel', k.pais === '+54 9' ? 'Revisá el WhatsApp: código de área y número, sin 0 ni 15.' : 'Revisá el número de WhatsApp.']);
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(k.email.trim())) err.push(['email', 'Revisá el email.']);
     Object.keys(campos).forEach(function (c) { campos[c].removeAttribute('aria-invalid'); });
     if (err.length) {
@@ -815,6 +927,11 @@ button{cursor:pointer}
     document.querySelectorAll('#selector [data-form]').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
     nuevo(b.getAttribute('data-form')); render(true);
   });
+
+  var lista = document.createElement('datalist');
+  lista.id = 'lista-barrios';
+  lista.innerHTML = TODOS_BARRIOS.map(function (b) { return '<option value="' + esc(b) + '">'; }).join('');
+  document.body.appendChild(lista);
 
   nuevo('vender');
   render(false);
