@@ -78,15 +78,36 @@ Si no ves "Duplicar": **Nueva → Google Analytics: evento de GA4**, ID de medic
 **Cómo sabés que salió bien:** en la lista de Etiquetas aparecen `GA4 - hot_lead` y `Meta Pixel - hot_lead`, y en
 Activadores aparece `Custom Event - hot_lead`. Todavía no están publicadas.
 
+### Cómo debe quedar cada pieza (para comparar)
+Las dos piezas originales (`generate_lead` y `Meta Pixel - Lead`) **no se tocan**. Solo se agregan las 3 nuevas.
+
+| Pieza | Tipo | Configuración |
+|---|---|---|
+| Activador `Custom Event - generate_lead` (original) | Evento personalizado | Nombre del evento: `generate_lead` · Se activa en: *Todos los eventos personalizados* |
+| Activador `Custom Event - hot_lead` (nuevo) | Evento personalizado | Nombre del evento: `hot_lead` · Se activa en: *Todos los eventos personalizados* |
+| Etiqueta `GA4 - generate_lead` (original) | Evento de GA4 | Nombre del evento: `generate_lead` · Parámetros: `lead_type` = `{{DLV - lead_type}}`, `form_name` = `{{DLV - form_name}}`, `page_location` = `{{Page URL}}` · Activación: **`Custom Event - generate_lead`** |
+| Etiqueta `GA4 - hot_lead` (nueva) | Evento de GA4 | Nombre del evento: `hot_lead` · mismos parámetros · Activación: **`Custom Event - hot_lead`** |
+| Etiqueta `Meta Pixel - Lead` (original) | HTML personalizado | `fbq('track','Lead', …)` · Activación: **`Custom Event - generate_lead`** |
+| Etiqueta `Meta Pixel - hot_lead` (nueva) | HTML personalizado | `fbq('trackCustom','hot_lead', …)` · Activación: **`Custom Event - hot_lead`** |
+
+**Error típico al duplicar:** modificar la etiqueta *original* en vez de la copia. Revisá en GTM, en *Espacio de trabajo →
+Cambios del espacio de trabajo*: tienen que figurar **3 elementos agregados** (el activador y las 2 etiquetas nuevas) y
+**ninguno modificado**. Si `GA4 - generate_lead` figura como modificada, revertila a como está en la tabla de arriba.
+Nada de esto afecta tu sitio hasta que apretás *Publicar* (Paso 4): la versión activa sigue siendo la 6.
+
 ## PASO 3 — Probar (antes de publicar)
 **Qué es:** comprobar que `hot_lead` se dispara solo con las CALIENTES.
 1. En GTM, arriba a la derecha, botón **Vista previa**. Escribí `https://csrealestate.com.ar/form/vender/` y **Conectar**.
    Se abre tu sitio con un panel de depuración (Tag Assistant).
 2. Completá la consulta **CALIENTE** (abajo) en esa ventana y enviala.
-3. En el panel de Tag Assistant, en la columna izquierda, buscá el evento **hot_lead** y hacele clic. En **Tags Fired**
-   tienen que figurar `GA4 - generate_lead`, `GA4 - hot_lead`, `Meta Pixel - Lead` y `Meta Pixel - hot_lead`.
-4. Repetí con la consulta **TIBIA** en `https://csrealestate.com.ar/form/valor-prop/`. Acá tiene que figurar `GA4 - generate_lead`
-   y `Meta Pixel - Lead`, pero **no** `hot_lead`.
+3. En el panel de Tag Assistant, columna izquierda, vas a ver **dos eventos seguidos**: primero `generate_lead` y
+   justo después `hot_lead`. **Cada evento muestra sus propias etiquetas** (hacele clic y mirá *Tags Fired*):
+   - evento `generate_lead` → `GA4 - generate_lead` y `Meta Pixel - Lead`
+   - evento `hot_lead` → `GA4 - hot_lead` y `Meta Pixel - hot_lead`
+
+   Es normal que no aparezcan las 4 juntas en el mismo evento.
+4. Repetí con la consulta **TIBIA** en `https://csrealestate.com.ar/form/valor-prop/`. Acá solo aparece el evento
+   `generate_lead` (con sus 2 etiquetas). El evento `hot_lead` **no** aparece.
 
 | Prueba | Formulario | Respuestas | Mail que te llega |
 |---|---|---|---|
