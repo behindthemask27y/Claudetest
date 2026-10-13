@@ -31,6 +31,7 @@ Documento resumen para Cris (Claude Docs, con el mapa y las tablas): https://cla
 - 13/10: paquete `hot_lead/` (carpeta del repo) armado y validado (sintaxis y lógica del puntaje); **subido al sitio por Cris** (`motor.js?v=36269df0` en vivo).
 - 13/10 (según Cris): etiquetas y activador de `hot_lead` en GTM probados en Tag Assistant; evento clave `hot_lead` creado en GA4 ("crear con código", una vez por evento, sin valor); importado en Google Ads como secundaria (Contacto).
 - 13/10: documento resumen en Claude Docs; contextos en `contexto/`; paquete `lote1_google_ads/`.
+- **13/10 (según Cris): Lote 1 de Google Ads importado y publicado** (campaña 1 a 3.000 por día, negativas, 16 amplias pausadas, títulos y URL nuevos). **No tocar Google hasta la revisión del 3/11/2026.**
 
 ## Esperando confirmación
 - Que la versión de GTM con `hot_lead` esté **publicada** (Cris dijo que iba a publicar). Que la consulta TIBIA de prueba **no** haya disparado `hot_lead`.
@@ -39,7 +40,7 @@ Documento resumen para Cris (Claude Docs, con el mapa y las tablas): https://cla
 ## Pendiente — de Cris
 0. Decirle a Claude cuánto puede gastar por mes en total (Google + Meta) y mirar las columnas de cuota de impresiones perdida de la campaña 1.
 0b. Después de publicar el Lote 1: pasarle a Claude el nivel de "Eficacia del anuncio" que muestra cada uno de los 5 anuncios.
-1. **Lote 1 de Google Ads**: seguir `lote1_google_ads/LEEME-lote1-google-ads.md` (importar `LOTE1-importar-en-Editor.csv`, borrar el borrador, revisar y publicar). Después, 3 semanas sin tocar.
+1. **Lote 1 de Google Ads (publicado el 13/10):** el 14/10 hacer el chequeo del Paso 5 de `lote1_google_ads/LEEME-lote1-google-ads.md` y pasarle a Claude el nivel de "Eficacia del anuncio" de los 5 anuncios. Después, sin tocar hasta el 3/11.
 2. Contestar cada consulta en minutos y anotarla en el CRM (`crm/CRM_Inmobiliario.xlsx`) con origen, temperatura y etapa. En Meta, no borrar: marcar la etapa.
 3. Meta: buscar el origen de los 219 eventos de servidor (Events Manager → *Historial* y *Configuración*) y revisar el checklist de `contexto/meta-ads.md`.
 4. Pasarle a Claude, más adelante, las consultas con puntaje.
@@ -49,7 +50,7 @@ Documento resumen para Cris (Claude Docs, con el mapa y las tablas): https://cla
 - **Eficacia del anuncio:** hecho el 13/10, dentro del archivo del Lote 1 (títulos nuevos en los 5 anuncios activos; se sacó "tasar/tasación" de un anuncio). Falta que Cris lo importe y pase el nivel que muestre Google Ads; si alguno no llega a "Excelente", ajustar. No garantiza más consultas.
 - **Presupuesto:** Cris pidió el mejor rendimiento posible "con un presupuesto acorde a lo que puedo gastar". **Falta saber cuánto puede gastar por mes en total.** Con ese número se reparte entre Google y Meta (Google no tiene demanda para mucho más; el extra va a Meta Propietarios).
 - **Cartel "Limitada por el volumen de búsquedas" (campaña 1, 1.000 por día):** explicado a Cris; falta que mire las columnas "Cuota de impresiones perdida (presupuesto)" y "(clasificación)" de los últimos 14 días para confirmar si es presupuesto o volumen. Regla: si pierde mucho por presupuesto, pasar a la campaña 1 parte de lo liberado por las campañas 11 y 4; si no, ignorar el cartel.
-- Cuando Cris publique el Lote 1: anotar la fecha acá y recordar la revisión a las 3 semanas.
+- **3/11/2026: revisión del Lote 1** (costo por consulta y por `hot_lead` por campaña, eficacia de los anuncios, lectura del cartel de volumen). **~23/10: primera revisión de Meta** (2 semanas desde el 9/10).
 - Con las primeras consultas puntuadas: validar la regla (¿las calientes contestan?) y, si hace falta, ajustar `$PUNTOS`.
 - A las 3 semanas del lote: costo por `hot_lead` por campaña → decidir entre optimizar por valor o `hot_lead` principal.
 - Revisión de Meta a las 2 o 3 semanas por costo por consulta respondida.

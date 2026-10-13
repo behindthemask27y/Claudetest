@@ -51,7 +51,7 @@ registro del sitio 13 consultas reales en ese período: coherente.
 5. **Campaña 11:** su objetivo es un clic de WhatsApp que los formularios nuevos no cuentan a propósito → 0 conversiones.
 6. Los costos de las 4 campañas activas no permiten concluir cuál es "mejor" (5 y 11 conversiones, ninguna con cliente).
 
-## Lote 1 (preparado el 13/10, pendiente de importar y publicar)
+## Lote 1 (publicado el 13/10 según Cris; revisión el 3/11/2026, a las 3 semanas)
 Carpeta `lote1_google_ads/`: `LEEME-lote1-google-ads.md` (paso a paso) y **un solo archivo** `LOTE1-importar-en-Editor.csv` (60 filas).
 1. **Campaña 1: presupuesto de 1.000 a 3.000 por día** (aprobado por Cris el 13/10; cuando tuvo más presupuesto gastó ~3.200 por día y dio sus 5 consultas del mes).
 2. 10 negativas de frase en las 4 campañas activas (38 en total; la 11 ya tenía 2): alquiler, alquilar, terreno, terrenos, sin inmobiliaria, en cuotas,

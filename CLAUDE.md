@@ -6,7 +6,8 @@ No le vuelvas a preguntar a Cris lo que ya figura ahí. Última actualización d
 ## Quién y qué
 Cris (Cristian Stedtfeld) es agente inmobiliario en Red Suma (corredor responsable: VL REALTOR S.R.L.), CABA y Zona Norte.
 Sitio: https://csrealestate.com.ar. **Objetivo:** consultas de propietarios (captación) de calidad; meta inmediata de 1 consulta por día (a futuro 2 a 3)
-(hoy ~0,6 por día y 0 clientes). Presupuesto activo: Google 6.500 por día y Meta 10.000 por día (pesos).
+(hoy ~0,6 por día y 0 clientes). Presupuesto activo: Google 8.500 por día (desde el Lote 1 del 13/10) y Meta 10.000 por día (pesos).
+**Lote 1 de Google Ads publicado el 13/10: no tocar las campañas de Google hasta la revisión del 3/11/2026.**
 
 ## Cómo trabajar con Cris
 - Español rioplatense (vos), sin jerga. No es técnico y se abruma con muchas plataformas: **instrucciones paso a paso, definiendo cada
