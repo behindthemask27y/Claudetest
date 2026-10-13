@@ -1,95 +1,121 @@
-# hot_lead — paso a paso
+# hot_lead — guía paso a paso
 
-**Qué hace:** cuando una consulta sale **CALIENTE** en el mail (5 o 6 puntos, la regla que ya tenés), el sitio avisa
-un evento nuevo llamado `hot_lead`. Llega a GA4 y de ahí a Google Ads como conversión **secundaria**, y también al
-píxel de Meta. `generate_lead` sigue igual y sigue siendo la principal. No viaja ningún dato personal ni el puntaje.
+## Qué es y cuándo se dispara
+`hot_lead` es un evento nuevo que se dispara **solo cuando el mail de la consulta dice CALIENTE**, o sea, cuando el
+formulario suma **5 o 6 puntos de 6**. Con TIBIA (3 o 4) o FRÍA (0 a 2) no se dispara.
 
-**Qué NO hace:** no cambia tus campañas, presupuestos ni objetivos. Solo mide.
+Sigue exactamente cómo ya está armado tu sistema: el formulario avisa a GTM, GTM lo manda a GA4, y GA4 lo
+comparte con Google Ads. Además se envía al píxel de Meta. **No cambia `generate_lead` ni `Lead`**: esos siguen
+disparándose una sola vez por consulta, igual que hoy. No viaja ningún dato personal ni el puntaje.
 
-Son 5 pasos. Los pasos 1 a 4 se hacen hoy (unos 30 minutos). El paso 5 es mañana.
+## Los 5 pasos de un vistazo
+
+| # | Paso | Dónde | Cuándo | Cómo sabés que salió bien |
+|---|---|---|---|---|
+| 1 | Subir 7 archivos | Tu hosting (Hostinger) | Hoy, 10 min | Aparece `hot_lead` dentro de `motor.js` en vivo |
+| 2 | Crear 3 piezas | GTM | Hoy, 10 min | Quedan guardadas en el espacio de trabajo |
+| 3 | Probar con 2 consultas | GTM (Vista previa) + tu sitio | Hoy, 10 min | La CALIENTE dispara `hot_lead` y la TIBIA no |
+| 4 | Publicar | GTM | Hoy, 2 min | Aparece la versión "Tracking 1.5 - hot_lead" |
+| 5 | Marcar y conectar | GA4 y Google Ads | **Mañana**, 5 min | `hot_lead` figura en GA4 y en Google Ads como secundaria |
+
+**Orden:** primero el 1 (no rompe nada porque GTM todavía no escucha `hot_lead`), después 2, 3, 4 y mañana el 5.
 
 ---
 
-## Paso 1 — Subir 7 archivos al sitio
+## PASO 1 — Subir 7 archivos al sitio
+**Qué es:** el sitio tiene que avisar cuándo una consulta sale CALIENTE.
+**Dónde:** el administrador de archivos de tu hosting, carpeta `public_html`.
+**Qué hacés:**
+1. Subí `hot_lead-subir.zip` a `public_html` como lo hiciste el 8/10 con `formularios-solamente.zip`.
+2. Extraelo ahí mismo (reemplaza los archivos que ya existen) y borrá el zip.
 
-Están en la carpeta `public_html/` de este paquete. Subilos a las mismas rutas del hosting (pisan a los actuales):
-
-| Archivo | Qué cambia |
-|---|---|
-| `enviar-lead.php` | Devuelve también `hot: true/false` y se actualizó el comentario que decía "NO se manda a Google ni Meta". |
-| `form/motor.js` | Dispara `hot_lead` justo después de `generate_lead`, solo si el servidor dijo `hot: true`. |
-| `form/vender/index.html` | Solo cambia `?v=eb6afe4d` por `?v=36269df0` (para que los navegadores bajen el `motor.js` nuevo). |
-| `form/valor-prop/index.html` | Igual. |
-| `form/comprar/index.html` | Igual. |
-| `form/alquilar-mi-propiedad/index.html` | Igual. |
-| `form/buscar-alquiler/index.html` | Igual. |
-
-Todos los cambios exactos están en `cambios.diff`.
-
-**Ojo con el deploy:** tu CLAUDE.md cuenta que los archivos dentro de carpetas ya fallaron una vez al subirse. Subilos
-como te funcionó el 8/10 (zip con las carpetas explícitas) y **verificá en vivo**:
+Los 7 archivos que cambian: `enviar-lead.php`, `form/motor.js` y los 5 `form/*/index.html` (en estos solo cambia
+`?v=eb6afe4d` por `?v=36269df0`).
+**Cómo sabés que salió bien** (tu CLAUDE.md avisa que los archivos de carpetas ya fallaron una vez al subirse):
 - Abrí `https://csrealestate.com.ar/form/motor.js?v=36269df0` y buscá la palabra `hot_lead`. Tiene que aparecer.
-- Abrí el código fuente de `https://csrealestate.com.ar/form/vender/` y buscá `motor.js?v=36269df0`.
+- Abrí `https://csrealestate.com.ar/form/vender/`, ver código fuente, y buscá `motor.js?v=36269df0`.
 
-Si el PHP y el JS no se suben juntos, no pasa nada grave. Sin el PHP nuevo, `motor.js` simplemente no dispara
-`hot_lead`. Pero subí los dos antes de probar.
+## PASO 2 — GTM: crear 3 piezas
+Entrá a tagmanager.google.com → contenedor **CS | Real Estate 21/09 GTM** (`GTM-5JDWTPXN`) → **Espacio de trabajo**.
 
-## Paso 2 — GTM (contenedor `GTM-5JDWTPXN`, versión actual 6)
+**2A. El activador (el "cuándo")**
+1. Menú izquierdo → **Activadores** → botón **Nuevo**.
+2. Arriba a la izquierda poné el nombre: `Custom Event - hot_lead`.
+3. **Configuración del activador** → elegí **Evento personalizado**.
+4. **Nombre del evento:** `hot_lead` (todo en minúscula, con guion bajo).
+5. **Este activador se activa en:** *Todos los eventos personalizados*.
+6. **Guardar.**
 
-1. **Activador nuevo:** *Activadores → Nuevo → Evento personalizado*.
-   - Nombre: `Custom Event - hot_lead`
-   - Nombre del evento: `hot_lead`
-   - Se activa en: Todos los eventos personalizados.
-2. **Etiqueta de GA4:** abrí la etiqueta `GA4 - generate_lead` → menú ⋮ → **Duplicar**.
-   - Nombre: `GA4 - hot_lead`
-   - Nombre del evento: `hot_lead` (los parámetros `lead_type`, `form_name` y `page_location` se quedan).
-   - Activación: sacá `Custom Event - generate_lead` y poné `Custom Event - hot_lead`.
-3. **Etiqueta de Meta:** *Etiquetas → Nueva → HTML personalizado*.
-   - Nombre: `Meta Pixel - hot_lead`
-   - HTML:
-     ```html
-     <script>
-       if (typeof fbq === 'function') {
-         fbq('trackCustom', 'hot_lead', {
-           lead_type: '{{DLV - lead_type}}',
-           form_name: '{{DLV - form_name}}'
-         });
-       }
-     </script>
-     ```
-   - Activación: `Custom Event - hot_lead`.
+**2B. La etiqueta de GA4 (la que cuenta en Google)**
+1. Menú izquierdo → **Etiquetas** → abrí **GA4 - generate_lead**.
+2. Arriba a la derecha, los tres puntitos **⋮** → **Duplicar**. Se abre la copia.
+3. Cambiá el nombre a `GA4 - hot_lead`.
+4. En **Configuración de la etiqueta**, en **Nombre del evento**, reemplazá `generate_lead` por `hot_lead`.
+   Dejá los parámetros como están (`lead_type`, `form_name`, `page_location`).
+5. En **Activación**, sacá el activador viejo con la X y elegí `Custom Event - hot_lead`.
+6. **Guardar.**
 
-## Paso 3 — Probar (con *Vista previa* de GTM activada)
+Si no ves "Duplicar": **Nueva → Google Analytics: evento de GA4**, ID de medición `G-4LDVRLTWFC`, nombre del evento
+`hot_lead`, parámetros `lead_type` = `{{DLV - lead_type}}` y `form_name` = `{{DLV - form_name}}`, activador
+`Custom Event - hot_lead`.
 
-Hacé dos consultas de prueba **sin entrar desde un anuncio** y avisá que son pruebas (te va a llegar el mail con la etiqueta):
+**2C. La etiqueta de Meta (opcional, para tener el dato en el píxel)**
+1. **Etiquetas → Nueva**, nombre `Meta Pixel - hot_lead`.
+2. **Configuración de la etiqueta → HTML personalizado**, y pegá:
+   ```html
+   <script>
+     if (typeof fbq === 'function') {
+       fbq('trackCustom', 'hot_lead', {
+         lead_type: '{{DLV - lead_type}}',
+         form_name: '{{DLV - form_name}}'
+       });
+     }
+   </script>
+   ```
+3. **Activación:** `Custom Event - hot_lead`.
+4. **Guardar.**
 
-| Prueba | Formulario | Respuestas | Tiene que pasar |
+**Cómo sabés que salió bien:** en la lista de Etiquetas aparecen `GA4 - hot_lead` y `Meta Pixel - hot_lead`, y en
+Activadores aparece `Custom Event - hot_lead`. Todavía no están publicadas.
+
+## PASO 3 — Probar (antes de publicar)
+**Qué es:** comprobar que `hot_lead` se dispara solo con las CALIENTES.
+1. En GTM, arriba a la derecha, botón **Vista previa**. Escribí `https://csrealestate.com.ar/form/vender/` y **Conectar**.
+   Se abre tu sitio con un panel de depuración (Tag Assistant).
+2. Completá la consulta **CALIENTE** (abajo) en esa ventana y enviala.
+3. En el panel de Tag Assistant, en la columna izquierda, buscá el evento **hot_lead** y hacele clic. En **Tags Fired**
+   tienen que figurar `GA4 - generate_lead`, `GA4 - hot_lead`, `Meta Pixel - Lead` y `Meta Pixel - hot_lead`.
+4. Repetí con la consulta **TIBIA** en `https://csrealestate.com.ar/form/valor-prop/`. Acá tiene que figurar `GA4 - generate_lead`
+   y `Meta Pixel - Lead`, pero **no** `hot_lead`.
+
+| Prueba | Formulario | Respuestas | Mail que te llega |
 |---|---|---|---|
-| **CALIENTE** | `/form/vender/` | Para cuándo: *Lo antes posible* · Dueño: *Soy el único dueño* · Papeles: *Escritura* · Cómo seguir: *Quiero coordinar una reunión* | Mail **CALIENTE 6 de 6**. En la Vista previa se disparan **`GA4 - generate_lead` y `GA4 - hot_lead`** y también `Meta Pixel - Lead` y `Meta Pixel - hot_lead`. |
-| **TIBIA** | `/form/valor-prop/` | Cuándo: *No pienso vender* · Dueño: *Soy el único dueño* · Para qué: *Para vender* | Mail **TIBIA 4 de 6** (como tu ejemplo). Se dispara `generate_lead` pero **NO** `hot_lead`. |
+| **CALIENTE** | `/form/vender/` | ¿Para cuándo?: *Lo antes posible* · ¿Sos el dueño?: *Soy el único dueño* · Papeles: *Escritura* · ¿Cómo seguir?: *Quiero coordinar una reunión* | **CALIENTE · 6 de 6** |
+| **TIBIA** | `/form/valor-prop/` | ¿Cuándo pensás vender?: *No pienso vender* · ¿Sos el dueño?: *Soy el único dueño* · ¿Para qué?: *Para vender* | **TIBIA · 4 de 6** |
 
-Si las dos salen como dice la tabla, está bien. Después marcá esas dos filas como prueba en tu registro.
+Las pruebas te llegan por mail y quedan en el registro: marcalas como prueba (también en el CRM). Hacelas sin entrar
+desde un anuncio, así no cuentan como conversión de una campaña.
 
-## Paso 4 — Publicar en GTM
+## PASO 4 — Publicar en GTM
+Arriba a la derecha → **Enviar** → en *Nombre de la versión* escribí `Tracking 1.5 - hot_lead` → **Publicar**.
+**Cómo sabés que salió bien:** en *Versiones* aparece la 7 como "Activa".
 
-*Enviar → Publicar* con el nombre de versión: `Tracking 1.5 - hot_lead`.
-
-## Paso 5 — Mañana: GA4 y Google Ads
-
+## PASO 5 — Mañana: GA4 y Google Ads
 1. **GA4:** *Administrar → Eventos*. Cuando aparezca `hot_lead` (puede tardar hasta un día), activá **Marcar como evento clave**.
-2. **Google Ads:** *Objetivos → Conversiones → Nueva acción de conversión → Importar → Propiedades de Google Analytics 4 → Web* → elegí `hot_lead` → Importar.
-   - Dejala como **Secundaria** (no principal) y recuento **Una**, igual que tus otras importaciones de GA4.
+2. **Google Ads:** *Objetivos → Conversiones → Nueva acción de conversión → Importar → Propiedades de Google Analytics 4 → Web*,
+   elegí `hot_lead` → **Importar**.
+3. Dejala como **Secundaria** (no principal) y con recuento **Una**, igual que tus otras importaciones de GA4.
 
-**Meta Ads: no hace falta tocar nada.** El evento `hot_lead` queda guardado en el píxel por si más adelante querés armar un público de calientes.
+**Meta Ads:** no hace falta tocar nada.
 
 ---
 
 ## Cómo volver atrás
-- Sitio: volvé a subir los 7 archivos originales (están en tu zip).
-- GTM: *Versiones → versión 6 → Publicar*.
+- **Sitio:** volvé a subir los 7 archivos originales (están en tu zip actual).
+- **GTM:** *Versiones → versión 6 → Publicar*.
 
 ## Una advertencia sobre la regla
-En el formulario de tasación, una consulta ya sale CALIENTE con plazo *"Entre 3 y 12 meses"* (dueño 2 + "para vender" 2 + plazo 1 = 5).
-Es un caso límite y está bien para empezar: `hot_lead` va como conversión **secundaria**, que no influye en las pujas.
-Cuando haya consultas reales con puntaje, mirá cuántas "calientes" contestaron y, si hace falta, ajustá la tabla de puntos
-en `enviar-lead.php`. El evento se adapta solo porque usa la misma etiqueta que el mail.
+En el formulario de valor, una consulta ya sale CALIENTE con plazo *"Entre 3 y 12 meses"* (dueño 2 + "para vender" 2 + plazo 1 = 5).
+Está bien para empezar, porque `hot_lead` va como conversión **secundaria** y no influye en las pujas. Cuando haya
+consultas reales con puntaje, mirá cuántas calientes contestaron y, si hace falta, ajustá la tabla de puntos en
+`enviar-lead.php`: el evento usa la misma etiqueta que el mail, así que se adapta solo.
