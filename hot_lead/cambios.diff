@@ -1,0 +1,55 @@
+--- ANTES/enviar-lead.php
++++ DESPUES/enviar-lead.php
+@@ -264,8 +264,9 @@
+ // 5 o 6 = Caliente · 3 o 4 = Tibia · 0 a 2 = Fría. Lo que no figura en estas tablas, o una pregunta sin
+ // responder, vale 0. '*' = cualquier otra respuesta. Si un eje mira varias preguntas, se suman (tope 2); en una
+ // pregunta de varias respuestas cuenta la que más puntos da. Ajustar en uno o dos meses mirando qué consultas
+-// avanzaron de verdad (ver CLAUDE.md, "Temperatura"). NO se manda a Google Ads ni a Meta: sólo queda en el mail
+-// y en el registro de consultas.
++// avanzaron de verdad (ver CLAUDE.md, "Temperatura"). A Google Ads y a Meta NO se manda el puntaje ni ningún dato
++// personal: sólo una bandera sí/no ("hot") cuando la consulta sale Caliente. El sitio la usa para disparar el
++// evento hot_lead (ver form/motor.js). El puntaje completo sigue quedando sólo en el mail y en el registro.
+ $PUNTOS = [
+   'vender' => [
+     'cuando' => ['plazo' => ['Lo antes posible' => 2, 'Dentro de 1 a 3 meses' => 2, 'Dentro de 3 a 6 meses' => 1, 'Durante los próximos 6 a 12 meses' => 1]],
+@@ -553,4 +554,5 @@
+   @file_put_contents($carpetaLeads . '/mail-errores.log', date('c') . " mail() devolvio false (lead {$tipo}, {$email})\n", FILE_APPEND | LOCK_EX);
+ }
+ 
+-responder(200, ['ok' => true]);
++// hot = la consulta salió Caliente (5 o 6 puntos): form/motor.js dispara hot_lead sólo si esto es true.
++responder(200, ['ok' => true, 'hot' => $temp['temperatura'] === 'Caliente']);
+--- ANTES/form/motor.js
++++ DESPUES/form/motor.js
+@@ -5,6 +5,8 @@
+ 
+    MEDICIÓN (no tocar sin avisar; ver CLAUDE.md, "Formularios propios"):
+    - generate_lead (lead_type + form_name) se empuja UNA vez, sólo después del {ok:true} del servidor.
++   - hot_lead (lead_type + form_name) se empuja justo después de generate_lead, y SÓLO si el servidor responde
++     {ok:true, hot:true} (la consulta salió Caliente: 5 o 6 puntos, ver enviar-lead.php). Sin datos personales.
+    - El WhatsApp de la pantalla final usa boton_id 'whatsapp-gracias': probado, no dispara click_whatsapp (GA4) ni
+      Contact (Meta), así una consulta no se cuenta dos veces.
+    - El "atrás" del celular agrega pasos al historial con la MISMA dirección: con un # en la dirección, Meta contaría
+@@ -884,6 +886,10 @@
+         // generate_lead: SÓLO acá, después de la confirmación del servidor, una vez por consulta (igual que antes)
+         window.dataLayer = window.dataLayer || [];
+         window.dataLayer.push({ event: 'generate_lead', lead_type: LEAD, form_name: LEAD });
++        // hot_lead: sólo si el servidor dijo que la consulta salió Caliente (misma regla del mail). Una vez por consulta.
++        if (res.datos.hot === true) {
++          window.dataLayer.push({ event: 'hot_lead', lead_type: LEAD, form_name: LEAD });
++        }
+       })
+       .catch(function () {
+         st.enviando = false;
+--- ANTES/form/vender/index.html
++++ DESPUES/form/vender/index.html
+@@ -53,7 +53,7 @@
+        así aparece con el formulario ya armado y no salta al cargar. -->
+   <section class="fx" id="cs-form" data-form="vender" aria-label="Formulario"></section>
+   <noscript><p class="fx-sinjs">Para completar el formulario necesitás tener JavaScript activado. También podés escribirme por <a href="https://wa.me/5491166951945">WhatsApp</a>.</p></noscript>
+-  <script src="../motor.js?v=eb6afe4d"></script>
++  <script src="../motor.js?v=36269df0"></script>
+ 
+   <dialog class="aviso" id="privacy-policy" aria-labelledby="privacidad-titulo">
+     <div class="aviso__caja">
+(los otros 4 formularios cambian igual: solo el ?v= de motor.js)
