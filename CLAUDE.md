@@ -24,6 +24,8 @@ Sitio: https://csrealestate.com.ar. **Objetivo:** consultas de propietarios (cap
 - Sin la palabra "tasación", "tasar" ni "tasador" en lo que ve el cliente (sí como palabra clave de búsqueda). Se dice "cuánto vale" o
   "análisis de mercado". CABA, no "Capital". Sin Instagram (no es público). Sin matrícula a nombre de Cris. No inventar datos, números ni reseñas.
 - En Meta: sin categoría "Vivienda"; el clic final de "Publicar" lo hace Cris.
+- **No se eliminan campañas ni grupos** en Google Ads ni en Meta: se **pausan** (eliminar es permanente y deja la etiqueta "quitada").
+  Excepción: borradores del Editor que nunca se publicaron.
 
 ## Identificadores
 GTM `GTM-5JDWTPXN` · GA4 `G-4LDVRLTWFC` · Google Ads cuenta 921-755-2199 (`AW-18445706531`, `GT-WPT9PPBN`) ·

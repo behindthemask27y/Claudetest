@@ -55,12 +55,14 @@ registro del sitio 13 consultas reales en ese período: coherente.
 Carpeta `lote1_google_ads/` del repo: `LEEME-lote1-google-ads.md` (paso a paso), `A-lote1-sin-dudas.csv`, `B-lote1-decisiones.csv`.
 1. Pausar campaña 11. 2. Borrar el borrador "Campaign #1" de Búsqueda (a mano). 3. Agregar 10 negativas de frase a las campañas 1 y 2:
 alquiler, alquilar, terreno, terrenos, sin inmobiliaria, en cuotas, abandonadas, empresas que compran, mercado libre, buscainmuebles
-(validadas: no bloquean ninguna de las 148 palabras activas tras el lote). 4. URL final: campaña 1 → `/form/vender/`,
-campaña 2 → `/form/valor-prop/` (a mano). 5. Reactivar el Grupo 1 y pausar las 16 palabras amplias de la campaña 1.
+(validadas: no bloquean ninguna de las 50 palabras activas tras el lote). 4. URL final: campaña 1 → `/form/vender/`,
+campaña 2 → `/form/valor-prop/` (a mano). 5. Pausar las 16 palabras amplias de la campaña 1. **El Grupo 1 NO se reactiva** (decisión de Cris el 13/10: "no sirve para nada"; queda pausado).
 6. Pausar la campaña 4 (si Cris confirma que el foco son propietarios).
-Los ítems 5 y 6 eran recomendaciones que Cris debía confirmar; Cris pidió avanzar con el lote.
+Cris pidió avanzar con el lote.
 
 ## Qué NO se hace por ahora (decidido)
+- **No se reactiva el Grupo 1** de la campaña 1 (Cris, 13/10). Queda pausado.
+- **No se eliminan campañas ni grupos de la cuenta: se pausan.** Eliminar es permanente (queda como "quitada" y no se puede reactivar). Única excepción: el borrador del Editor que nunca se publicó.
 - No subir presupuesto hasta conocer el costo por consulta caliente.
 - No concordancia amplia (muy pocas conversiones para que funcione).
 - No Target CPA.

@@ -15,6 +15,7 @@ Documento resumen para Cris (Claude Docs, con el mapa y las tablas): https://cla
 - **Evento `hot_lead`** (no valores por consulta 100/30/5 por ahora): se dispara cuando el mail dice CALIENTE (5 o 6 puntos), en los 5 formularios, una vez por consulta, después de `generate_lead`.
 - En Google Ads `hot_lead` es **secundaria** (categoría Contacto, sin valor, recuento "una", 90 días, basada en datos). `generate_lead` sigue siendo la única principal. No se ponen las dos como principales (contaría doble).
 - Ruta de medición: GTM → GA4 → Google Ads. La etiqueta directa de Google Ads en GTM sigue pausada.
+- **Grupo 1** de la campaña 1: queda **pausado** (Cris, 13/10: "no sirve para nada"). **Nunca se eliminan** campañas ni grupos de la cuenta: se pausan (eliminar es permanente y deja la etiqueta "quitada").
 - Terrenos: no por ahora (las negativas "terreno" y "terrenos" quedan). Concordancia amplia: no por ahora. Presupuesto: no subirlo hasta conocer el costo por consulta caliente.
 - Los cambios de Google Ads se hacen con CSV para el Editor que importa Cris; se publican recién cuando él aprueba.
 - Textos: sin "tasación" en lo que ve el cliente (como palabra clave de búsqueda sí); sin Instagram; CABA y no "Capital"; sin matrícula a nombre de Cris (corredor responsable: VL REALTOR).
@@ -37,7 +38,7 @@ Documento resumen para Cris (Claude Docs, con el mapa y las tablas): https://cla
 1. **Lote 1 de Google Ads**: seguir `lote1_google_ads/LEEME-lote1-google-ads.md` (importar A y B, borrar el borrador, cambiar URL de los anuncios, revisar y publicar). Después, 3 semanas sin tocar.
 2. Contestar cada consulta en minutos y anotarla en el CRM (`crm/CRM_Inmobiliario.xlsx`) con origen, temperatura y etapa. En Meta, no borrar: marcar la etapa.
 3. Meta: buscar el origen de los 219 eventos de servidor (Events Manager → *Historial* y *Configuración*) y revisar el checklist de `contexto/meta-ads.md`.
-4. Pasarle a Claude: costo y conversiones del Grupo 1 antes de pausarlo, y (más adelante) las consultas con puntaje.
+4. Pasarle a Claude, más adelante, las consultas con puntaje.
 5. Anotar en el `CLAUDE.md` **del sitio** lo de `hot_lead` (ver `contexto/medicion-y-sitio.md`, sección de historia).
 
 ## Pendiente — de Claude
