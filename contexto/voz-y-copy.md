@@ -1,6 +1,6 @@
 # Voz y copy — reglas de texto de Cris
 
-> **Copia para el repo.** El original vive en la compu de Cris (`NEGOCIO/Comunicacion/Voz-y-copy.md`). Versión de esta copia: 2026-10-13. Si en una sesión de la nube se cambia algo acá, avisale a Cris qué archivo cambió para que lo pase al original; si no, la próxima vez que suba la copia se pisa.
+> **Copia para el repo.** El original vive en la compu de Cris (`NEGOCIO/Comunicacion/Voz-y-copy.md`). Versión de esta copia: 2026-10-13 (rev. 2). Si en una sesión de la nube se cambia algo acá, avisale a Cris qué archivo cambió para que lo pase al original; si no, la próxima vez que suba la copia se pisa.
 
 
 **Qué es:** las reglas de texto que valen para todo lo que lleve palabras para clientes. Un solo lugar, sin repetirlas en cada contexto.
@@ -20,7 +20,7 @@
 - Matrícula: Cris no es corredor; nunca su matrícula pegada a su nombre. Las piezas para clientes llevan el pie del corredor responsable (ver el manual de marca de la compu de Cris). En WhatsApp, sin firma ni matrícula.
 
 ## Mensajes (WhatsApp y formularios de portales)
-- Nunca "¿cómo estás?": "espero que andes bien", "¡éxito en tu día!" o "bendiciones" (variando).
+- Nunca "¿cómo estás?": "espero que andes bien", "¡éxito en tu día!" o "bendiciones" y otras variantes similares (variando).
 - Pulidos y listos para copiar y mandar, sin que Cris los arregle. Nunca envío automático: los manda él. Lo que depende de una decisión suya va en el chat, nunca dentro del mensaje.
 - Una sola pregunta por mensaje; 30 a 90 palabras. Primer mensaje a un dueño directo: sin honorarios, sin exclusividad y sin "sin cargo".
 - Reglas completas de mensajes y la base de conversación y persuasión (Ninja Selling y Carnegie adaptados): están en la compu de Cris (`Comunication-Strategy WPP/`) y en el material anterior de `Workshop Claude.zip`. También sirven para pensar copys de anuncios.
