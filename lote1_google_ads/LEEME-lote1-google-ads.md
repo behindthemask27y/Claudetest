@@ -1,30 +1,27 @@
-# Lote 1 de Google Ads — paso a paso
+# Lote 1 de Google Ads — un solo archivo, paso a paso
 
-**Qué es:** un solo lote de 6 cambios para sacar el gasto que no rinde, hacer que cada anuncio lleve a su
-formulario y sumar volumen. Después se **deja todo quieto 3 semanas** para poder medir. Nada se publica hasta que
-vos apretás *Publicar* en el Editor, y el Editor te muestra cada cambio antes.
+**Archivo para importar:** `LOTE1-importar-en-Editor.csv` (60 filas). **Qué es:** un solo lote de cambios para sacar el gasto que no
+rinde, darle presupuesto real a la campaña 1 y mejorar los anuncios. Después se **deja todo quieto 3 semanas** para poder medir.
+Nada se publica hasta que vos apretás *Publicar* en el Editor, y el Editor te muestra cada cambio antes.
 
-**Importante:** el Editor muestra los cambios pendientes, pero yo no pude probar la importación dentro de tu
-Editor. Los archivos tienen exactamente el formato de tu export (mismas 260 columnas, UTF-16, tabuladores) y los
-validé contra él, pero revisá la lista de cambios antes de publicar.
+**Importante:** el archivo tiene exactamente el formato de tu export (mismas 260 columnas, UTF-16, tabuladores) y lo validé contra él,
+pero **no pude probar la importación dentro de tu Editor**. Revisá la lista de cambios antes de publicar.
 
-## Los 6 cambios y dónde se hace cada uno
+## Qué cambia (todo en el archivo, salvo el borrador)
 
-| # | Cambio | Cómo | Archivo |
-|---|---|---|---|
-| 1 | Pausar la campaña 11 (WhatsApp) | Importar | **A** |
-| 2 | Borrar el borrador "Campaign #1" de búsqueda (existe solo en el Editor, no en la cuenta) | A mano (Paso 3) | — |
-| 3 | Cargar 10 negativas en la campaña 1 y 10 en la 2 | Importar | **A** |
-| 4 | Anuncios de las campañas 1 y 2: **títulos nuevos** (sin los genéricos) y cada uno a su formulario (`/form/vender/` y `/form/valor-prop/`) | Importar | **C** |
-| 5 | Pausar las 16 palabras amplias de la campaña 1 (el Grupo 1 **sigue pausado**, como lo dejaste) | Importar | **B** |
-| 6 | Pausar la campaña 4 Compradores | Importar | **B** |
+| # | Cambio | Dónde |
+|---|---|---|
+| 1 | **Campaña 1: presupuesto de 1.000 a 3.000 por día** | Archivo |
+| 2 | 10 negativas de concordancia de frase en las 4 campañas activas (38 en total: la campaña 11 ya tenía 2) | Archivo |
+| 3 | Pausar las 16 palabras amplias de la campaña 1 | Archivo |
+| 4 | 5 anuncios de las campañas 1 y 2: títulos nuevos (sin los genéricos) y cada uno a su formulario | Archivo |
+| 5 | Borrar el borrador "Campaign #1" de búsqueda | A mano (Paso 3) |
 
-- **Archivo A** (`A-lote1-sin-dudas.csv`): pausa la campaña 11 y agrega 20 negativas (21 filas). No bloquean ninguna de
-  las 50 palabras que van a quedar activas.
-- **Archivo B** (`B-lote1-decisiones.csv`): pausa 16 palabras amplias y pausa la campaña 4 (17 filas). Son decisiones
-  tuyas: si no querés alguna, mirá "Si no querés algo" más abajo. **El Grupo 1 no se toca: queda pausado.**
+**Lo que NO cambia:** las campañas **11 y 4 siguen activas** (decisión tuya), el **Grupo 1 sigue pausado**, no se elimina ninguna
+campaña ni grupo de la cuenta, y no se toca ningún otro presupuesto, puja ni zona.
 
-- **Archivo C** (`C-lote1-textos-anuncios.csv`): 5 anuncios editados con títulos nuevos y la URL de su formulario.
+**Las 10 negativas:** alquiler, alquilar, terreno, terrenos, sin inmobiliaria, en cuotas, abandonadas, empresas que compran,
+mercado libre, buscainmuebles. Las revisé contra las palabras activas de cada campaña: no bloquean ninguna.
 
 **Títulos nuevos de cada anuncio** (reemplazan a los 6 genéricos: «Atención personal», «CABA y Zona Norte», «Conocé cómo trabajo»,
 «CS Real Estate en Red Suma», «Hablemos por WhatsApp», «Contame qué necesitás»):
@@ -38,25 +35,20 @@ validé contra él, pero revisá la lista de cambios antes de publicar.
 | Campaña 2 · Tasación y valuación | «Valuación inmobiliaria» · «Valor de mercado de tu casa» · «Valuación hecha por un agente» · «Comparables vendidos cerca» · «Valor real de tu propiedad» · «Informe de valor con datos» · «Agente de Red Suma en CABA» |
 
 En el último anuncio también se sacó «tasar» del primer título (ahora «Valuación inmobiliaria») y «tasación» de la primera
-descripción, porque no pueden verse en lo que lee el cliente. Todos los textos nuevos tienen hasta 30 caracteres en los títulos
-y hasta 90 en las descripciones. Las descripciones y la línea legal no cambian (salvo la del anuncio de valuación).
-
-Las 10 negativas (concordancia de frase): alquiler, alquilar, terreno, terrenos, sin inmobiliaria, en cuotas,
-abandonadas, empresas que compran, mercado libre, buscainmuebles.
+descripción, porque no pueden verse en lo que lee el cliente. Las demás descripciones y la línea legal no cambian.
+URL de los anuncios: campaña 1 → `https://csrealestate.com.ar/form/vender/` · campaña 2 → `https://csrealestate.com.ar/form/valor-prop/`.
 
 ---
 
 ## PASO 1 — Descargar lo último de la cuenta
 Abrí **Google Ads Editor**, entrá a **CS Real Estate (921-755-2199)** y tocá **Obtener cambios recientes**.
-**Por qué:** el export que usé es del 12/10; así te asegurás de trabajar sobre lo que hay hoy en la cuenta.
+**Por qué:** el export que usé es del 12/10; así trabajás sobre lo que hay hoy en la cuenta.
 
-## PASO 2 — Importar los archivos
+## PASO 2 — Importar el archivo
 1. Menú **Cuenta → Importar → Desde archivo…** (en inglés: *Account → Import → From file…*).
-2. Elegí `A-lote1-sin-dudas.csv` → **Procesar** → **Finalizar y revisar cambios**.
-3. Revisá: tiene que decir **1 campaña editada** y **20 palabras clave negativas nuevas**. Tocá **Conservar**.
-4. Repetí con `B-lote1-decisiones.csv`. Tiene que decir **16 palabras clave editadas y 1 campaña editada**.
-5. Repetí con `C-lote1-textos-anuncios.csv`. Tiene que decir **5 anuncios editados**. Si el Editor los muestra como anuncios *nuevos* y deja
-   los viejos, pausá los 5 viejos antes de publicar (si no, correrían los dos).
+2. Elegí `LOTE1-importar-en-Editor.csv` → **Procesar** → **Finalizar y revisar cambios**.
+3. Revisá que diga: **1 campaña editada**, **38 palabras clave negativas nuevas**, **16 palabras clave editadas** y **5 anuncios editados**. Tocá **Conservar**.
+4. Si el Editor muestra los 5 anuncios como *nuevos* y deja los viejos, pausá los 5 viejos antes de publicar (si no, correrían los dos).
 
 Si los botones se llaman un poco distinto en tu versión, buscá los equivalentes (procesar, revisar, conservar).
 
@@ -65,48 +57,38 @@ Si los botones se llaman un poco distinto en tu versión, buscá los equivalente
    - **La pausada de Rendimiento máximo (PMax), presupuesto 3.000:** *no se toca.*
    - **La de Búsqueda, presupuesto 0.00, marcada como nueva y sin publicar:** esa es el borrador.
 2. Seleccioná el borrador → tecla **Supr** (o botón derecho → *Eliminar*) → confirmá.
-**Cómo sabés que es el borrador:** no figura en tu informe de rendimiento de la cuenta, que sí lista la PMax y las otras
-campañas con ceros. Es un borrador del Editor que nunca se publicó, así que borrarlo no toca la cuenta y no deja ninguna marca de "quitada".
-**Este lote no elimina ninguna campaña ni grupo de la cuenta:** solo pausa, y pausar se puede deshacer cuando quieras.
+**Cómo sabés que es el borrador:** no figura en tu informe de rendimiento de la cuenta, que sí lista la PMax y las otras campañas con ceros.
+Borrarlo no toca la cuenta y no deja ninguna marca de "quitada". **Este lote no elimina ninguna campaña ni grupo de la cuenta.**
 
-## PASO 4 — Solo si hace falta: cambiar a mano a qué página va cada anuncio
-El archivo C ya cambia la URL de los 5 anuncios. Hacé esto **solo si el Editor no las actualizó**.
-1. En el árbol, tocá la campaña **#Search_1_vendedores** → pestaña **Anuncios** → seleccioná todos (Ctrl+A).
-2. En el panel de la derecha, en **URL final**, poné `https://csrealestate.com.ar/form/vender/` y aplicá.
-3. Repetí con **#Search_2_valor_propiedad** y `https://csrealestate.com.ar/form/valor-prop/`.
-
-- Los parámetros de seguimiento (`utm_…`) están a nivel de campaña y se mantienen.
-- Los anuncios pueden quedar "en revisión" unas horas: es normal.
-- Si seleccionás todos los anuncios de la campaña, entra también el del Grupo 1 (pausado): no pasa nada.
-- La campaña 4 queda pausada, así que no se toca.
-
-## PASO 5 — Revisar y publicar
+## PASO 4 — Revisar y publicar
 1. Mirá el panel de cambios del Editor. Tiene que haber **solo** lo de la tabla de arriba (más el borrado del borrador).
 2. Tocá **Publicar** y confirmá.
 
-## PASO 6 — Chequear al día siguiente (en Google Ads, en el navegador)
-- Campañas 11 y 4: **Pausadas**. Las campañas 1 y 2: **Habilitadas**.
+## PASO 5 — Chequear al día siguiente (en Google Ads, en el navegador)
+- **Campaña 1:** presupuesto **3.000**. Campañas 11 y 4: siguen **habilitadas**.
 - Campaña 1 → Grupos de anuncios: **Grupo de anuncios 1** sigue **pausado**.
-- Campañas 1 y 2 → Palabras clave → **Negativas**: las 10 nuevas en cada una.
-- Anuncios de las campañas 1 y 2: títulos nuevos (ya no figuran «Atención personal», «CABA y Zona Norte», etc.) y URL final nueva.
+- Campañas 1, 2, 4 y 11 → Palabras clave → **Negativas**: las 10 nuevas (8 en la 11).
+- Anuncios de las campañas 1 y 2: títulos nuevos y URL final nueva. Pueden figurar "en revisión" unas horas.
 - La columna **Eficacia del anuncio** puede tardar un día en actualizarse. Anotá cómo quedó cada anuncio y pasámelo.
 
-## PASO 7 — No tocar nada durante 3 semanas
+## PASO 6 — No tocar nada durante 3 semanas
 No cambies presupuestos, pujas, palabras ni anuncios. Cada cambio reinicia el aprendizaje y no podés medir nada.
 **Qué sí hacés:** contestar rápido las consultas y anotarlas en el CRM con su temperatura.
-**A las 3 semanas:** en la tabla de campañas, columnas *Todas las conversiones*, segmentado por *Acción de
-conversión*, mirá cuántos `hot_lead` y cuánto costó cada uno por campaña. Ahí decidimos qué sigue.
+**A las 3 semanas:** en la tabla de campañas, columnas *Todas las conversiones*, segmentado por *Acción de conversión*, mirá cuántos
+`hot_lead` y cuánto costó cada uno por campaña. Ahí decidimos qué sigue.
 
 ---
 
-## Si no querés algo
-- **No querés pausar Compradores (campaña 4):** después de importar el archivo B, en el Editor seleccioná la campaña 4 y cambiá su
-  estado a *Habilitada* antes de publicar. Y a sus anuncios ponele `https://csrealestate.com.ar/form/comprar/`.
-- **No querés pausar las amplias:** seleccionalas (filtrá por concordancia amplia en la campaña 1) y cambiá a *Habilitada*.
+## Si algo no te cierra, a mano
+- **El presupuesto no cambió:** campaña 1 → Configuración → Presupuesto → 3.000.
+- **La URL de los anuncios no cambió:** campaña 1 → pestaña Anuncios → seleccionar todos (Ctrl+A) → panel derecho, *URL final* →
+  `https://csrealestate.com.ar/form/vender/`. Igual en la campaña 2 con `https://csrealestate.com.ar/form/valor-prop/`.
+- **No querés pausar las amplias:** filtrá por concordancia amplia en la campaña 1 y cambialas a *Habilitada*.
 
-## Cómo volver atrás (si algo sale mal)
-En el Editor, antes de publicar: *Deshacer* los cambios o descartarlos desde el panel. Después de publicar, a mano:
-reactivar las campañas 11 y 4, quitar las negativas nuevas, reactivar las 16 palabras amplias y volver las URL a `https://csrealestate.com.ar/`.
+## Cómo volver atrás
+Antes de publicar: *Deshacer* o descartar desde el panel de cambios. Después de publicar, a mano: presupuesto de la campaña 1 de vuelta
+a 1.000, quitar las negativas nuevas, reactivar las 16 palabras amplias y volver las URL a `https://csrealestate.com.ar/`.
 
-## Lo que este lote NO toca
-Presupuestos, pujas, estrategias de oferta, zonas, extensiones, el Grupo 1 (queda pausado), la PMax pausada ni las campañas que ya están pausadas (3, 5 a 10 y 12).
+## Notas sobre las campañas 11 y 4 (siguen activas)
+La **11** repite palabras de las campañas 1, 2 y 4 y optimiza a un clic de WhatsApp que los formularios nuevos no cuentan a propósito: en el
+mes tuvo 0 conversiones con 21.464 gastados. La **4** tiene muy pocas búsquedas. Se mantienen como pediste; a las 3 semanas se miran con datos.

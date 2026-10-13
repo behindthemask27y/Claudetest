@@ -52,16 +52,18 @@ registro del sitio 13 consultas reales en ese período: coherente.
 6. Los costos de las 4 campañas activas no permiten concluir cuál es "mejor" (5 y 11 conversiones, ninguna con cliente).
 
 ## Lote 1 (preparado el 13/10, pendiente de importar y publicar)
-Carpeta `lote1_google_ads/` del repo: `LEEME-lote1-google-ads.md` (paso a paso), `A-lote1-sin-dudas.csv`, `B-lote1-decisiones.csv` y `C-lote1-textos-anuncios.csv` (títulos nuevos + URL de cada anuncio).
-1. Pausar campaña 11. 2. Borrar el borrador "Campaign #1" de Búsqueda (a mano). 3. Agregar 10 negativas de frase a las campañas 1 y 2:
-alquiler, alquilar, terreno, terrenos, sin inmobiliaria, en cuotas, abandonadas, empresas que compran, mercado libre, buscainmuebles
-(validadas: no bloquean ninguna de las 50 palabras activas tras el lote). 4. Anuncios: títulos nuevos y URL final de su formulario (campaña 1 → `/form/vender/`,
-campaña 2 → `/form/valor-prop/`), en el archivo C. 5. Pausar las 16 palabras amplias de la campaña 1. **El Grupo 1 NO se reactiva** (decisión de Cris el 13/10: "no sirve para nada"; queda pausado).
-6. Pausar la campaña 4 (si Cris confirma que el foco son propietarios).
-Cris pidió avanzar con el lote.
+Carpeta `lote1_google_ads/`: `LEEME-lote1-google-ads.md` (paso a paso) y **un solo archivo** `LOTE1-importar-en-Editor.csv` (60 filas).
+1. **Campaña 1: presupuesto de 1.000 a 3.000 por día** (aprobado por Cris el 13/10; cuando tuvo más presupuesto gastó ~3.200 por día y dio sus 5 consultas del mes).
+2. 10 negativas de frase en las 4 campañas activas (38 en total; la 11 ya tenía 2): alquiler, alquilar, terreno, terrenos, sin inmobiliaria, en cuotas,
+   abandonadas, empresas que compran, mercado libre, buscainmuebles (revisadas: no bloquean ninguna palabra activa).
+3. Pausar las 16 palabras amplias de la campaña 1.
+4. 5 anuncios (campañas 1 y 2): títulos nuevos y URL final de su formulario (campaña 1 → `/form/vender/`, campaña 2 → `/form/valor-prop/`).
+5. Borrar el borrador "Campaign #1" de Búsqueda (a mano, en el Editor).
+**Decisiones de Cris (13/10):** las campañas **11 y 4 siguen ACTIVAS** (yo había recomendado pausarlas: la 11 repite palabras y tuvo 0 conversiones);
+el **Grupo 1 queda pausado**; no se elimina nada de la cuenta. Total de Google tras el lote: 1 (3.000) + 2 (3.000) + 4 (1.000) + 11 (1.500) = 8.500 por día.
 
 ## Eficacia del anuncio (ad strength)
-Cris quiere "Excelente" en todos los RSA. Es una calificación de los textos (variedad, palabras clave en los títulos), **no** una métrica de resultados, y el Lote 1 no la modifica. En el export figura "Pending" (no evaluado). Los mismos títulos genéricos ("Atención personal", "CABA y Zona Norte", "Conocé cómo trabajo", "CS Real Estate en Red Suma", "Hablemos por WhatsApp", "Contame qué necesitás") se repiten en casi todos los anuncios. **Hecho el 13/10:** archivo `C-lote1-textos-anuncios.csv` (5 anuncios activos de las campañas 1 y 2): se reemplazaron los 6 títulos genéricos por títulos específicos de cada grupo, y se sacó "tasar" y "tasación" de los textos visibles del anuncio de valuación (violaban la regla). Pendiente: que Cris lo importe y pase el nivel de eficacia que muestre Google Ads; si algún anuncio no llega a "Excelente", ajustar. Excelente no es garantía de más consultas.
+Cris quiere "Excelente" en todos los RSA. Es una calificación de los textos (variedad, palabras clave en los títulos), **no** una métrica de resultados, y el Lote 1 no la modifica. En el export figura "Pending" (no evaluado). Los mismos títulos genéricos ("Atención personal", "CABA y Zona Norte", "Conocé cómo trabajo", "CS Real Estate en Red Suma", "Hablemos por WhatsApp", "Contame qué necesitás") se repiten en casi todos los anuncios. **Hecho el 13/10:** en el archivo del Lote 1 (5 anuncios activos de las campañas 1 y 2): se reemplazaron los 6 títulos genéricos por títulos específicos de cada grupo, y se sacó "tasar" y "tasación" de los textos visibles del anuncio de valuación (violaban la regla). Pendiente: que Cris lo importe y pase el nivel de eficacia que muestre Google Ads; si algún anuncio no llega a "Excelente", ajustar. Excelente no es garantía de más consultas.
 
 ## Qué NO se hace por ahora (decidido)
 - **No se reactiva el Grupo 1** de la campaña 1 (Cris, 13/10). Queda pausado.

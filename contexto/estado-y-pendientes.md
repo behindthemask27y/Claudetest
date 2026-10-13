@@ -16,6 +16,7 @@ Documento resumen para Cris (Claude Docs, con el mapa y las tablas): https://cla
 - En Google Ads `hot_lead` es **secundaria** (categoría Contacto, sin valor, recuento "una", 90 días, basada en datos). `generate_lead` sigue siendo la única principal. No se ponen las dos como principales (contaría doble).
 - Ruta de medición: GTM → GA4 → Google Ads. La etiqueta directa de Google Ads en GTM sigue pausada.
 - **Objetivo inmediato (Cris, 13/10): 1 consulta por día** (a futuro 2 a 3). Presupuesto de referencia: **12.000 a 14.000 por día en captación**; hoy son 9.000 (Google 4.000 tras el Lote 1 + Meta Propietarios 5.000; el local de Nazca es aparte, 5.000). No subirlo antes de las 3 semanas del Lote 1. Si se sube, va a Meta Propietarios: Google está limitado por volumen, no por presupuesto. Estimación con ~11.000 a 14.000 por consulta de cualquier calidad (las calificadas serán menos).
+- Campañas **11 y 4 siguen activas** (Cris, 13/10; se recomendó pausarlas). Campaña 1 sube de 1.000 a 3.000 por día (aprobado). Se mira todo a las 3 semanas del lote.
 - **Grupo 1** de la campaña 1: queda **pausado** (Cris, 13/10: "no sirve para nada"). **Nunca se eliminan** campañas ni grupos de la cuenta: se pausan (eliminar es permanente y deja la etiqueta "quitada").
 - Terrenos: no por ahora (las negativas "terreno" y "terrenos" quedan). Concordancia amplia: no por ahora. Presupuesto: no subirlo hasta conocer el costo por consulta caliente.
 - Los cambios de Google Ads se hacen con CSV para el Editor que importa Cris; se publican recién cuando él aprueba.
@@ -38,14 +39,14 @@ Documento resumen para Cris (Claude Docs, con el mapa y las tablas): https://cla
 ## Pendiente — de Cris
 0. Decirle a Claude cuánto puede gastar por mes en total (Google + Meta) y mirar las columnas de cuota de impresiones perdida de la campaña 1.
 0b. Después de publicar el Lote 1: pasarle a Claude el nivel de "Eficacia del anuncio" que muestra cada uno de los 5 anuncios.
-1. **Lote 1 de Google Ads**: seguir `lote1_google_ads/LEEME-lote1-google-ads.md` (importar A y B, borrar el borrador, cambiar URL de los anuncios, revisar y publicar). Después, 3 semanas sin tocar.
+1. **Lote 1 de Google Ads**: seguir `lote1_google_ads/LEEME-lote1-google-ads.md` (importar `LOTE1-importar-en-Editor.csv`, borrar el borrador, revisar y publicar). Después, 3 semanas sin tocar.
 2. Contestar cada consulta en minutos y anotarla en el CRM (`crm/CRM_Inmobiliario.xlsx`) con origen, temperatura y etapa. En Meta, no borrar: marcar la etapa.
 3. Meta: buscar el origen de los 219 eventos de servidor (Events Manager → *Historial* y *Configuración*) y revisar el checklist de `contexto/meta-ads.md`.
 4. Pasarle a Claude, más adelante, las consultas con puntaje.
 5. Anotar en el `CLAUDE.md` **del sitio** lo de `hot_lead` (ver `contexto/medicion-y-sitio.md`, sección de historia).
 
 ## Pendiente — de Claude
-- **Eficacia del anuncio:** hecho el 13/10, archivo C del Lote 1 (títulos nuevos en los 5 anuncios activos; se sacó "tasar/tasación" de un anuncio). Falta que Cris lo importe y pase el nivel que muestre Google Ads; si alguno no llega a "Excelente", ajustar. No garantiza más consultas.
+- **Eficacia del anuncio:** hecho el 13/10, dentro del archivo del Lote 1 (títulos nuevos en los 5 anuncios activos; se sacó "tasar/tasación" de un anuncio). Falta que Cris lo importe y pase el nivel que muestre Google Ads; si alguno no llega a "Excelente", ajustar. No garantiza más consultas.
 - **Presupuesto:** Cris pidió el mejor rendimiento posible "con un presupuesto acorde a lo que puedo gastar". **Falta saber cuánto puede gastar por mes en total.** Con ese número se reparte entre Google y Meta (Google no tiene demanda para mucho más; el extra va a Meta Propietarios).
 - **Cartel "Limitada por el volumen de búsquedas" (campaña 1, 1.000 por día):** explicado a Cris; falta que mire las columnas "Cuota de impresiones perdida (presupuesto)" y "(clasificación)" de los últimos 14 días para confirmar si es presupuesto o volumen. Regla: si pierde mucho por presupuesto, pasar a la campaña 1 parte de lo liberado por las campañas 11 y 4; si no, ignorar el cartel.
 - Cuando Cris publique el Lote 1: anotar la fecha acá y recordar la revisión a las 3 semanas.
