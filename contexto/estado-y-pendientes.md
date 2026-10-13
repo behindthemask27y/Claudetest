@@ -15,6 +15,7 @@ Documento resumen para Cris (Claude Docs, con el mapa y las tablas): https://cla
 - **Evento `hot_lead`** (no valores por consulta 100/30/5 por ahora): se dispara cuando el mail dice CALIENTE (5 o 6 puntos), en los 5 formularios, una vez por consulta, después de `generate_lead`.
 - En Google Ads `hot_lead` es **secundaria** (categoría Contacto, sin valor, recuento "una", 90 días, basada en datos). `generate_lead` sigue siendo la única principal. No se ponen las dos como principales (contaría doble).
 - Ruta de medición: GTM → GA4 → Google Ads. La etiqueta directa de Google Ads en GTM sigue pausada.
+- **Objetivo inmediato (Cris, 13/10): 1 consulta por día** (a futuro 2 a 3). Presupuesto de referencia: **12.000 a 14.000 por día en captación**; hoy son 9.000 (Google 4.000 tras el Lote 1 + Meta Propietarios 5.000; el local de Nazca es aparte, 5.000). No subirlo antes de las 3 semanas del Lote 1. Si se sube, va a Meta Propietarios: Google está limitado por volumen, no por presupuesto. Estimación con ~11.000 a 14.000 por consulta de cualquier calidad (las calificadas serán menos).
 - **Grupo 1** de la campaña 1: queda **pausado** (Cris, 13/10: "no sirve para nada"). **Nunca se eliminan** campañas ni grupos de la cuenta: se pausan (eliminar es permanente y deja la etiqueta "quitada").
 - Terrenos: no por ahora (las negativas "terreno" y "terrenos" quedan). Concordancia amplia: no por ahora. Presupuesto: no subirlo hasta conocer el costo por consulta caliente.
 - Los cambios de Google Ads se hacen con CSV para el Editor que importa Cris; se publican recién cuando él aprueba.
@@ -35,6 +36,7 @@ Documento resumen para Cris (Claude Docs, con el mapa y las tablas): https://cla
 - 14/10: que `hot_lead` aparezca en GA4 (*Eventos clave*) y que Google Ads lo reconozca (puede tardar hasta un día).
 
 ## Pendiente — de Cris
+0. Pasarle a Claude una captura de la pestaña Anuncios con la columna "Eficacia del anuncio" (o decirle cuáles no son "Excelente").
 1. **Lote 1 de Google Ads**: seguir `lote1_google_ads/LEEME-lote1-google-ads.md` (importar A y B, borrar el borrador, cambiar URL de los anuncios, revisar y publicar). Después, 3 semanas sin tocar.
 2. Contestar cada consulta en minutos y anotarla en el CRM (`crm/CRM_Inmobiliario.xlsx`) con origen, temperatura y etapa. En Meta, no borrar: marcar la etapa.
 3. Meta: buscar el origen de los 219 eventos de servidor (Events Manager → *Historial* y *Configuración*) y revisar el checklist de `contexto/meta-ads.md`.
@@ -42,6 +44,7 @@ Documento resumen para Cris (Claude Docs, con el mapa y las tablas): https://cla
 5. Anotar en el `CLAUDE.md` **del sitio** lo de `hot_lead` (ver `contexto/medicion-y-sitio.md`, sección de historia).
 
 ## Pendiente — de Claude
+- **Eficacia del anuncio (ad strength):** Cris quiere "Excelente" en todos los anuncios. El Lote 1 NO la cambia (depende de los textos). Falta ver el nivel actual (captura de la pestaña Anuncios con la columna "Eficacia del anuncio") y preparar textos nuevos (los mismos 5 títulos genéricos se repiten en casi todos los anuncios). Conviene sumarlos al MISMO lote, antes de las 3 semanas de espera.
 - Cuando Cris publique el Lote 1: anotar la fecha acá y recordar la revisión a las 3 semanas.
 - Con las primeras consultas puntuadas: validar la regla (¿las calientes contestan?) y, si hace falta, ajustar `$PUNTOS`.
 - A las 3 semanas del lote: costo por `hot_lead` por campaña → decidir entre optimizar por valor o `hot_lead` principal.

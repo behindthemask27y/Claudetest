@@ -60,6 +60,9 @@ campaña 2 → `/form/valor-prop/` (a mano). 5. Pausar las 16 palabras amplias d
 6. Pausar la campaña 4 (si Cris confirma que el foco son propietarios).
 Cris pidió avanzar con el lote.
 
+## Eficacia del anuncio (ad strength)
+Cris quiere "Excelente" en todos los RSA. Es una calificación de los textos (variedad, palabras clave en los títulos), **no** una métrica de resultados, y el Lote 1 no la modifica. En el export figura "Pending" (no evaluado). Los mismos títulos genéricos ("Atención personal", "CABA y Zona Norte", "Conocé cómo trabajo", "CS Real Estate en Red Suma", "Hablemos por WhatsApp", "Contame qué necesitás") se repiten en casi todos los anuncios. Pendiente: ver el nivel actual y preparar textos nuevos dentro de las reglas (sin "tasación", CABA, línea legal) para sumarlos al mismo lote.
+
 ## Qué NO se hace por ahora (decidido)
 - **No se reactiva el Grupo 1** de la campaña 1 (Cris, 13/10). Queda pausado.
 - **No se eliminan campañas ni grupos de la cuenta: se pausan.** Eliminar es permanente (queda como "quitada" y no se puede reactivar). Única excepción: el borrador del Editor que nunca se publicó.
