@@ -52,16 +52,16 @@ registro del sitio 13 consultas reales en ese período: coherente.
 6. Los costos de las 4 campañas activas no permiten concluir cuál es "mejor" (5 y 11 conversiones, ninguna con cliente).
 
 ## Lote 1 (preparado el 13/10, pendiente de importar y publicar)
-Carpeta `lote1_google_ads/` del repo: `LEEME-lote1-google-ads.md` (paso a paso), `A-lote1-sin-dudas.csv`, `B-lote1-decisiones.csv`.
+Carpeta `lote1_google_ads/` del repo: `LEEME-lote1-google-ads.md` (paso a paso), `A-lote1-sin-dudas.csv`, `B-lote1-decisiones.csv` y `C-lote1-textos-anuncios.csv` (títulos nuevos + URL de cada anuncio).
 1. Pausar campaña 11. 2. Borrar el borrador "Campaign #1" de Búsqueda (a mano). 3. Agregar 10 negativas de frase a las campañas 1 y 2:
 alquiler, alquilar, terreno, terrenos, sin inmobiliaria, en cuotas, abandonadas, empresas que compran, mercado libre, buscainmuebles
-(validadas: no bloquean ninguna de las 50 palabras activas tras el lote). 4. URL final: campaña 1 → `/form/vender/`,
-campaña 2 → `/form/valor-prop/` (a mano). 5. Pausar las 16 palabras amplias de la campaña 1. **El Grupo 1 NO se reactiva** (decisión de Cris el 13/10: "no sirve para nada"; queda pausado).
+(validadas: no bloquean ninguna de las 50 palabras activas tras el lote). 4. Anuncios: títulos nuevos y URL final de su formulario (campaña 1 → `/form/vender/`,
+campaña 2 → `/form/valor-prop/`), en el archivo C. 5. Pausar las 16 palabras amplias de la campaña 1. **El Grupo 1 NO se reactiva** (decisión de Cris el 13/10: "no sirve para nada"; queda pausado).
 6. Pausar la campaña 4 (si Cris confirma que el foco son propietarios).
 Cris pidió avanzar con el lote.
 
 ## Eficacia del anuncio (ad strength)
-Cris quiere "Excelente" en todos los RSA. Es una calificación de los textos (variedad, palabras clave en los títulos), **no** una métrica de resultados, y el Lote 1 no la modifica. En el export figura "Pending" (no evaluado). Los mismos títulos genéricos ("Atención personal", "CABA y Zona Norte", "Conocé cómo trabajo", "CS Real Estate en Red Suma", "Hablemos por WhatsApp", "Contame qué necesitás") se repiten en casi todos los anuncios. Pendiente: ver el nivel actual y preparar textos nuevos dentro de las reglas (sin "tasación", CABA, línea legal) para sumarlos al mismo lote.
+Cris quiere "Excelente" en todos los RSA. Es una calificación de los textos (variedad, palabras clave en los títulos), **no** una métrica de resultados, y el Lote 1 no la modifica. En el export figura "Pending" (no evaluado). Los mismos títulos genéricos ("Atención personal", "CABA y Zona Norte", "Conocé cómo trabajo", "CS Real Estate en Red Suma", "Hablemos por WhatsApp", "Contame qué necesitás") se repiten en casi todos los anuncios. **Hecho el 13/10:** archivo `C-lote1-textos-anuncios.csv` (5 anuncios activos de las campañas 1 y 2): se reemplazaron los 6 títulos genéricos por títulos específicos de cada grupo, y se sacó "tasar" y "tasación" de los textos visibles del anuncio de valuación (violaban la regla). Pendiente: que Cris lo importe y pase el nivel de eficacia que muestre Google Ads; si algún anuncio no llega a "Excelente", ajustar. Excelente no es garantía de más consultas.
 
 ## Qué NO se hace por ahora (decidido)
 - **No se reactiva el Grupo 1** de la campaña 1 (Cris, 13/10). Queda pausado.

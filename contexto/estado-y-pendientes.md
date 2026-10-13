@@ -36,7 +36,8 @@ Documento resumen para Cris (Claude Docs, con el mapa y las tablas): https://cla
 - 14/10: que `hot_lead` aparezca en GA4 (*Eventos clave*) y que Google Ads lo reconozca (puede tardar hasta un día).
 
 ## Pendiente — de Cris
-0. Pasarle a Claude una captura de la pestaña Anuncios con la columna "Eficacia del anuncio" (o decirle cuáles no son "Excelente").
+0. Decirle a Claude cuánto puede gastar por mes en total (Google + Meta) y mirar las columnas de cuota de impresiones perdida de la campaña 1.
+0b. Después de publicar el Lote 1: pasarle a Claude el nivel de "Eficacia del anuncio" que muestra cada uno de los 5 anuncios.
 1. **Lote 1 de Google Ads**: seguir `lote1_google_ads/LEEME-lote1-google-ads.md` (importar A y B, borrar el borrador, cambiar URL de los anuncios, revisar y publicar). Después, 3 semanas sin tocar.
 2. Contestar cada consulta en minutos y anotarla en el CRM (`crm/CRM_Inmobiliario.xlsx`) con origen, temperatura y etapa. En Meta, no borrar: marcar la etapa.
 3. Meta: buscar el origen de los 219 eventos de servidor (Events Manager → *Historial* y *Configuración*) y revisar el checklist de `contexto/meta-ads.md`.
@@ -44,7 +45,9 @@ Documento resumen para Cris (Claude Docs, con el mapa y las tablas): https://cla
 5. Anotar en el `CLAUDE.md` **del sitio** lo de `hot_lead` (ver `contexto/medicion-y-sitio.md`, sección de historia).
 
 ## Pendiente — de Claude
-- **Eficacia del anuncio (ad strength):** Cris quiere "Excelente" en todos los anuncios. El Lote 1 NO la cambia (depende de los textos). Falta ver el nivel actual (captura de la pestaña Anuncios con la columna "Eficacia del anuncio") y preparar textos nuevos (los mismos 5 títulos genéricos se repiten en casi todos los anuncios). Conviene sumarlos al MISMO lote, antes de las 3 semanas de espera.
+- **Eficacia del anuncio:** hecho el 13/10, archivo C del Lote 1 (títulos nuevos en los 5 anuncios activos; se sacó "tasar/tasación" de un anuncio). Falta que Cris lo importe y pase el nivel que muestre Google Ads; si alguno no llega a "Excelente", ajustar. No garantiza más consultas.
+- **Presupuesto:** Cris pidió el mejor rendimiento posible "con un presupuesto acorde a lo que puedo gastar". **Falta saber cuánto puede gastar por mes en total.** Con ese número se reparte entre Google y Meta (Google no tiene demanda para mucho más; el extra va a Meta Propietarios).
+- **Cartel "Limitada por el volumen de búsquedas" (campaña 1, 1.000 por día):** explicado a Cris; falta que mire las columnas "Cuota de impresiones perdida (presupuesto)" y "(clasificación)" de los últimos 14 días para confirmar si es presupuesto o volumen. Regla: si pierde mucho por presupuesto, pasar a la campaña 1 parte de lo liberado por las campañas 11 y 4; si no, ignorar el cartel.
 - Cuando Cris publique el Lote 1: anotar la fecha acá y recordar la revisión a las 3 semanas.
 - Con las primeras consultas puntuadas: validar la regla (¿las calientes contestan?) y, si hace falta, ajustar `$PUNTOS`.
 - A las 3 semanas del lote: costo por `hot_lead` por campaña → decidir entre optimizar por valor o `hot_lead` principal.

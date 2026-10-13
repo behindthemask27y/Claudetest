@@ -15,7 +15,7 @@ validé contra él, pero revisá la lista de cambios antes de publicar.
 | 1 | Pausar la campaña 11 (WhatsApp) | Importar | **A** |
 | 2 | Borrar el borrador "Campaign #1" de búsqueda (existe solo en el Editor, no en la cuenta) | A mano (Paso 3) | — |
 | 3 | Cargar 10 negativas en la campaña 1 y 10 en la 2 | Importar | **A** |
-| 4 | Anuncios de la campaña 1 a `/form/vender/` y de la 2 a `/form/valor-prop/` | A mano (Paso 4) | — |
+| 4 | Anuncios de las campañas 1 y 2: **títulos nuevos** (sin los genéricos) y cada uno a su formulario (`/form/vender/` y `/form/valor-prop/`) | Importar | **C** |
 | 5 | Pausar las 16 palabras amplias de la campaña 1 (el Grupo 1 **sigue pausado**, como lo dejaste) | Importar | **B** |
 | 6 | Pausar la campaña 4 Compradores | Importar | **B** |
 
@@ -23,6 +23,23 @@ validé contra él, pero revisá la lista de cambios antes de publicar.
   las 50 palabras que van a quedar activas.
 - **Archivo B** (`B-lote1-decisiones.csv`): pausa 16 palabras amplias y pausa la campaña 4 (17 filas). Son decisiones
   tuyas: si no querés alguna, mirá "Si no querés algo" más abajo. **El Grupo 1 no se toca: queda pausado.**
+
+- **Archivo C** (`C-lote1-textos-anuncios.csv`): 5 anuncios editados con títulos nuevos y la URL de su formulario.
+
+**Títulos nuevos de cada anuncio** (reemplazan a los 6 genéricos: «Atención personal», «CABA y Zona Norte», «Conocé cómo trabajo»,
+«CS Real Estate en Red Suma», «Hablemos por WhatsApp», «Contame qué necesitás»):
+
+| Anuncio | Títulos nuevos |
+| --- | --- |
+| Campaña 1 · Vender propiedad | «Estrategia antes de publicar» · «Precio basado en ventas reales» · «Te acompaño hasta la firma» · «Agente de Red Suma en CABA» · «Vender casa en Zona Norte» · «Publicación en portales» |
+| Campaña 1 · Agente para vender | «Agente inmobiliario en CABA» · «Inmobiliaria para vender depto» · «Soy Cristian, de Red Suma» · «Lo que se vendió cerca tuyo» · «Vendé tu casa o departamento» · «Asesoramiento para vender» |
+| Campaña 1 · Propiedad no se vende | «¿Por qué no se vende tu casa?» · «Revisión de tu publicación» · «Cambiá la estrategia de venta» · «Precio, fotos y difusión» · «Si llevás meses publicando» · «Una segunda mirada a tu venta» |
+| Campaña 2 · Cuánto vale | «Valor basado en comparables» · «Cuánto vale mi casa en CABA» · «Análisis hecho por un agente» · «Propiedades vendidas cerca» · «Sabé el valor antes de vender» · «No es un simulador online» |
+| Campaña 2 · Tasación y valuación | «Valuación inmobiliaria» · «Valor de mercado de tu casa» · «Valuación hecha por un agente» · «Comparables vendidos cerca» · «Valor real de tu propiedad» · «Informe de valor con datos» · «Agente de Red Suma en CABA» |
+
+En el último anuncio también se sacó «tasar» del primer título (ahora «Valuación inmobiliaria») y «tasación» de la primera
+descripción, porque no pueden verse en lo que lee el cliente. Todos los textos nuevos tienen hasta 30 caracteres en los títulos
+y hasta 90 en las descripciones. Las descripciones y la línea legal no cambian (salvo la del anuncio de valuación).
 
 Las 10 negativas (concordancia de frase): alquiler, alquilar, terreno, terrenos, sin inmobiliaria, en cuotas,
 abandonadas, empresas que compran, mercado libre, buscainmuebles.
@@ -38,6 +55,8 @@ Abrí **Google Ads Editor**, entrá a **CS Real Estate (921-755-2199)** y tocá 
 2. Elegí `A-lote1-sin-dudas.csv` → **Procesar** → **Finalizar y revisar cambios**.
 3. Revisá: tiene que decir **1 campaña editada** y **20 palabras clave negativas nuevas**. Tocá **Conservar**.
 4. Repetí con `B-lote1-decisiones.csv`. Tiene que decir **16 palabras clave editadas y 1 campaña editada**.
+5. Repetí con `C-lote1-textos-anuncios.csv`. Tiene que decir **5 anuncios editados**. Si el Editor los muestra como anuncios *nuevos* y deja
+   los viejos, pausá los 5 viejos antes de publicar (si no, correrían los dos).
 
 Si los botones se llaman un poco distinto en tu versión, buscá los equivalentes (procesar, revisar, conservar).
 
@@ -50,7 +69,8 @@ Si los botones se llaman un poco distinto en tu versión, buscá los equivalente
 campañas con ceros. Es un borrador del Editor que nunca se publicó, así que borrarlo no toca la cuenta y no deja ninguna marca de "quitada".
 **Este lote no elimina ninguna campaña ni grupo de la cuenta:** solo pausa, y pausar se puede deshacer cuando quieras.
 
-## PASO 4 — Cambiar a qué página va cada anuncio (a mano)
+## PASO 4 — Solo si hace falta: cambiar a mano a qué página va cada anuncio
+El archivo C ya cambia la URL de los 5 anuncios. Hacé esto **solo si el Editor no las actualizó**.
 1. En el árbol, tocá la campaña **#Search_1_vendedores** → pestaña **Anuncios** → seleccioná todos (Ctrl+A).
 2. En el panel de la derecha, en **URL final**, poné `https://csrealestate.com.ar/form/vender/` y aplicá.
 3. Repetí con **#Search_2_valor_propiedad** y `https://csrealestate.com.ar/form/valor-prop/`.
@@ -68,7 +88,8 @@ campañas con ceros. Es un borrador del Editor que nunca se publicó, así que b
 - Campañas 11 y 4: **Pausadas**. Las campañas 1 y 2: **Habilitadas**.
 - Campaña 1 → Grupos de anuncios: **Grupo de anuncios 1** sigue **pausado**.
 - Campañas 1 y 2 → Palabras clave → **Negativas**: las 10 nuevas en cada una.
-- Anuncios de las campañas 1 y 2: URL final nueva.
+- Anuncios de las campañas 1 y 2: títulos nuevos (ya no figuran «Atención personal», «CABA y Zona Norte», etc.) y URL final nueva.
+- La columna **Eficacia del anuncio** puede tardar un día en actualizarse. Anotá cómo quedó cada anuncio y pasámelo.
 
 ## PASO 7 — No tocar nada durante 3 semanas
 No cambies presupuestos, pujas, palabras ni anuncios. Cada cambio reinicia el aprendizaje y no podés medir nada.
