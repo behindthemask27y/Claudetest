@@ -1,6 +1,6 @@
-# Estado y pendientes de Marketing — 13/10/2026
+# Estado y pendientes de Marketing — 16/10/2026
 
-> **Copia para el repo.** El original vive en la compu de Cris (`NEGOCIO/Marketing/Estado-y-pendientes.md`). Versión de esta copia: 2026-10-13. Si en una sesión de la nube se cambia algo acá, avisale a Cris qué archivo cambió para que lo pase al original; si no, la próxima vez que suba la copia se pisa.
+> **Copia para el repo.** El original vive en la compu de Cris (`NEGOCIO/Marketing/Estado-y-pendientes.md`). Versión de esta copia: 2026-10-16 (editada en una sesión de la nube). Si en una sesión de la nube se cambia algo acá, avisale a Cris qué archivo cambió para que lo pase al original; si no, la próxima vez que suba la copia se pisa.
 
 
 **Qué es:** dónde estamos con Google Ads, Meta y la medición del sitio: qué se decidió, qué se hizo y qué falta.
@@ -15,6 +15,15 @@ Documento resumen para Cris (Claude Docs, con el mapa y las tablas): https://cla
 4. Medición: `generate_lead` verificado de punta a punta (GA4 12 vs registro 13 en octubre). Nuevo evento `hot_lead` para consultas CALIENTE, ya en el sitio y en GTM.
 5. La temperatura (caliente/tibia/fría) existe desde el 12/10: todavía no hay consultas reales con puntaje.
 6. Regla de oro: **no se cambia nada sin OK de Cris, y después de un lote se esperan 3 semanas.**
+
+## Novedades del 16/10 (lo de Cris es "según Cris"; lo de Google es lo que muestra el export del Editor)
+- **Meta Propietarios trajo el primer cliente** (según Cris): una propiedad en San Justo; la semana que viene firma la autorización y la exclusiva. Google: ningún cliente todavía. Es un solo caso: todavía no es una conclusión.
+- **Lote 1 quedó a medias** (export del Editor del 16/10). Figuran hechos: borrador de Búsqueda borrado, las 10 negativas en Vendedores y Valor propiedad, anuncios de esas dos campañas yendo a sus formularios y las palabras amplias de Vendedores pausadas. **No** figuran: pausar la campaña 11 y la 4, ni reactivar el Grupo de anuncios 1 (sigue pausado y su anuncio va a la home). Ojo: es lo que tiene el Editor; si algo se importó y no se publicó, la cuenta real puede ser distinta. Fecha de lo aplicado: Cris no la recuerda.
+- **Presupuestos más altos de lo anotado:** el export muestra #Search_1_vendedores y #Search_4_compradores en 3.000 por día (figuraban en 1.000). Tope diario de las 4 activas = 10.500, no 6.500. Falta saber si los subió Cris o si fue una recomendación automática de Google.
+- **Decisión de Cris (16/10): presupuesto fijo y no tocarlo más.** Google a 3.000 por día en total. Borrador en `lote2_google_ads/` (Vendedores 2.000, Valor propiedad 1.000, pausar Compradores y WhatsApp): **sin importar ni publicar**. Falta su OK sobre pausar Compradores (antes había dicho que no se pausaba). Al publicarlo: 3 semanas sin tocar Google.
+- **Meta:** Cris también quiere un tope fijo; falta el número por día.
+- **Local Nazca (según Cris):** radio de Meta de 4 a 6 km (fecha sin confirmar); unas 5 consultas en una semana, ~5.000 por conversión; piden el precio y desaparecen; los destacados del portal no trajeron nada. En Google, la campaña para quienes buscan local es `#Search_8_locales_busqueda` (pausada, palabras generales, sin página propia del local), no la 7. Por ahora no se reactiva.
+- **Sitio:** las propiedades no tienen link propio cada una (según Cris). Para compartir y para anuncios por ahora sirven los links de portales o de Red Suma; una página por propiedad en el sitio quedaría como tarea aparte (el código del sitio no está en este repo).
 
 ## Decisiones tomadas (no volver a preguntar)
 - **Evento `hot_lead`** (no valores por consulta 100/30/5 por ahora): se dispara cuando el mail dice CALIENTE (5 o 6 puntos), en los 5 formularios, una vez por consulta, después de `generate_lead`.

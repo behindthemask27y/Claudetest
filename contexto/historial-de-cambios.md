@@ -8,6 +8,8 @@
 
 | Fecha | Plataforma | Qué se hizo | Campañas | Carpeta |
 |---|---|---|---|---|
+| 2026-10-16 | Google Ads | Segunda tanda **PREPARADA, sin importar ni publicar** (la publica Cris): bajar a 3.000 por día en total (Vendedores 2.000, Valor propiedad 1.000, pausar Compradores y WhatsApp). El export del Editor del 16/10 muestra el Lote 1 a medias y Vendedores y Compradores en 3.000 por día (figuraban en 1.000). | #Search_1_vendedores, #Search_2_valor_propiedad, #Search_4_compradores, #Search_11_whatsapp_general | `lote2_google_ads/` |
+| 2026-10-16 | Meta Ads | Según Cris: el radio del anuncio del local de Nazca pasó de 4 a 6 km (fecha sin confirmar). | Alquiler - Local Nazca 4501 | — |
 | 2026-10-13 | Workshop y GitHub | Nuevo `CLAUDE.md` de la raíz del Workshop (mapa por temas, reglas sin duplicar, glosario); agentes apagados para ahorrar tokens; limpieza de 228 MB; estos archivos del repo subidos por Cris como copia del original de su compu. No cambió nada en cuentas. | — | (compu de Cris) |
 | 2026-10-13 | Todo el Workshop | Reorganización: todo lo del negocio quedó en `NEGOCIO/` por sectores y lo personal en `PERSONAL/`; contextos de Google y Meta fusionados con los del zip de contextos; archivos pesados o viejos a `Archivo/`. No cambió nada en cuentas. | — | (compu de Cris) |
 | 2026-10-13 | Google Ads | Primera tanda de cambios **PREPARADA, sin importar ni publicar** (la publica Cris): pausar WhatsApp, borrar el borrador "Campaign #1" de Búsqueda, 10 negativas en Vendedores y Valor propiedad, anuncios a sus formularios, reactivar el Grupo 1 y pausar las palabras amplias, pausar Compradores. | #Search_1_vendedores, #Search_2_valor_propiedad, #Search_4_compradores, #Search_11_whatsapp_general | `lote1_google_ads/` |
