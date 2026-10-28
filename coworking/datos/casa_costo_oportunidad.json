@@ -1,0 +1,25 @@
+{
+ "titulo": "Casas 300-600 m2 en venta y alquiler - costo de oportunidad de la casa propia (450 m2)",
+ "fecha_corte": "2026-10-27",
+ "estado": "PENDIENTE - sin avisos relevados todavia",
+ "aclaracion": "Precios de publicacion, no de cierre. Barrios: Villa del Parque, Villa Devoto, Villa Santa Rita, Agronomia.",
+ "casas_venta": [],
+ "casas_alquiler": [],
+ "resumen": {
+  "nota": "Precios de publicacion, no de cierre. Muestras pequenas.",
+  "n_venta": 0,
+  "n_alquiler": 0,
+  "venta_usd_por_m2": {
+   "n": 0,
+   "mediana": null
+  },
+  "venta_precio_usd": {
+   "n": 0,
+   "mediana": null
+  },
+  "alquiler_mensual_ars_equivalente": {
+   "n": 0,
+   "mediana": null
+  }
+ }
+}

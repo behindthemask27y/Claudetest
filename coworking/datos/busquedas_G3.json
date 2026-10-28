@@ -1,0 +1,142 @@
+[
+ {
+  "barrio": "Belgrano",
+  "consultas": [
+   "coworking Belgrano",
+   "cowork Belgrano membresía",
+   "oficinas compartidas Belgrano",
+   "Belgrano espacio de trabajo compartido freelancers",
+   "coworking Belgrano instagram",
+   "coworking Belgrano CABA"
+  ],
+  "fuentes_exploradas": [
+   "Google (vía buscador web, tope de búsquedas alcanzado)",
+   "Pluria (listado por barrio)",
+   "Hotdesk",
+   "Croissant",
+   "Freaking Nomads",
+   "OpenStreetMap (Overpass)",
+   "sitios oficiales de operadores",
+   "USIG"
+  ],
+  "candidatos_detectados": 9,
+  "verificadas_principal": 2,
+  "pendientes": 7,
+  "rondas_extra_sin_novedades": 0,
+  "notas": "Cobertura parcial: no se pudo hacer la 2ª ronda por haberse agotado el tope compartido de búsquedas web. No se accedió a Google Maps, Coworker, WeWork, Regus ni Spaces (bloqueados o JavaScript). Pendiente confirmar sedes de WeWork/Regus/Spaces/Urban Station/AreaTres en el barrio."
+ },
+ {
+  "barrio": "Núñez",
+  "consultas": [
+   "coworking Núñez",
+   "cowork Núñez membresía",
+   "oficinas compartidas Núñez",
+   "Núñez espacio de trabajo compartido freelancers",
+   "coworking Núñez instagram",
+   "coworking Núñez CABA"
+  ],
+  "fuentes_exploradas": [
+   "Google (vía buscador web, tope de búsquedas alcanzado)",
+   "Pluria (listado por barrio)",
+   "Hotdesk",
+   "Croissant",
+   "Freaking Nomads",
+   "OpenStreetMap (Overpass)",
+   "sitios oficiales de operadores",
+   "USIG"
+  ],
+  "candidatos_detectados": 4,
+  "verificadas_principal": 1,
+  "pendientes": 3,
+  "rondas_extra_sin_novedades": 0,
+  "notas": "Corredor Libertador con varias sedes de cadenas y oficinas flexibles (HIT, Belephant, Working&Co, La Maquinita, NEU). Forbes (29/05/2026) lo describe como nuevo hub de oficinas. Cobertura parcial por tope de búsquedas."
+ },
+ {
+  "barrio": "Saavedra",
+  "consultas": [
+   "coworking Saavedra",
+   "cowork Saavedra membresía",
+   "oficinas compartidas Saavedra",
+   "Saavedra espacio de trabajo compartido freelancers",
+   "coworking Saavedra instagram",
+   "coworking Saavedra CABA"
+  ],
+  "fuentes_exploradas": [
+   "Google (vía buscador web, tope de búsquedas alcanzado)",
+   "Pluria (listado por barrio)",
+   "Hotdesk",
+   "Croissant",
+   "Freaking Nomads",
+   "OpenStreetMap (Overpass)",
+   "sitios oficiales de operadores",
+   "USIG"
+  ],
+  "candidatos_detectados": 2,
+  "verificadas_principal": 0,
+  "pendientes": 1,
+  "rondas_extra_sin_novedades": 0,
+  "notas": "Solo se halló un work café (Espacio García, Pluria). Una guía inmobiliaria (abril 2026) afirma que en Saavedra no hay coworkings grandes. Resultado negativo con alcance limitado: falta confirmación con Google Maps/Instagram."
+ },
+ {
+  "barrio": "Coghlan",
+  "consultas": [
+   "coworking Coghlan",
+   "cowork Coghlan membresía",
+   "oficinas compartidas Coghlan",
+   "Coghlan espacio de trabajo compartido freelancers",
+   "coworking Coghlan instagram",
+   "coworking Coghlan CABA"
+  ],
+  "fuentes_exploradas": [
+   "Google (vía buscador web, tope de búsquedas alcanzado)",
+   "Pluria (listado por barrio)",
+   "Hotdesk",
+   "Croissant",
+   "Freaking Nomads",
+   "OpenStreetMap (Overpass)",
+   "sitios oficiales de operadores",
+   "USIG"
+  ],
+  "candidatos_detectados": 0,
+  "verificadas_principal": 0,
+  "pendientes": 0,
+  "rondas_extra_sin_novedades": 0,
+  "notas": "Sin resultados de coworking; las búsquedas devolvieron solo avisos inmobiliarios. Resultado negativo con alcance limitado."
+ },
+ {
+  "barrio": "Villa Urquiza",
+  "consultas": [
+   "coworking Villa Urquiza",
+   "cowork Villa Urquiza membresía",
+   "oficinas compartidas Villa Urquiza",
+   "Villa Urquiza espacio de trabajo compartido freelancers",
+   "coworking Villa Urquiza instagram",
+   "coworking Villa Urquiza CABA"
+  ],
+  "fuentes_exploradas": [
+   "Google (vía buscador web, tope de búsquedas alcanzado)",
+   "Pluria (listado por barrio)",
+   "Hotdesk",
+   "Croissant",
+   "Freaking Nomads",
+   "OpenStreetMap (Overpass)",
+   "sitios oficiales de operadores",
+   "USIG"
+  ],
+  "candidatos_detectados": 2,
+  "verificadas_principal": 1,
+  "pendientes": 1,
+  "rondas_extra_sin_novedades": 0,
+  "notas": "Hallados elburó (Sucre 4688, principal) y Coworking Urquiza (Díaz Colodrero 3272, pendiente). Pluria no tiene ofertas en el barrio. Una búsqueda adicional encontró solo avisos de oficinas; falta rastrear Instagram/Google Maps."
+ },
+ {
+  "barrio": "Fuera de los 5 barrios (por USIG)",
+  "consultas": [],
+  "fuentes_exploradas": [],
+  "candidatos_detectados": 5,
+  "verificadas_principal": 0,
+  "pendientes": 0,
+  "rondas_extra_sin_novedades": 0,
+  "notas": "Sedes cuya dirección cae en otro barrio según USIG: Hashtag Coworking Núñez (sin barrio), Full Work Alcorta (sin barrio), Ronda Coworking Belgrano (Colegiales), Office Club (dirección a verificar) (sin barrio), Join (nodo de OpenStreetMap) (sin barrio)"
+ }
+]

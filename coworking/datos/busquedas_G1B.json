@@ -1,0 +1,181 @@
+[
+ {
+  "barrio": "Monte Castro",
+  "consultas": [
+   "coworking Monte Castro",
+   "cowork Monte Castro",
+   "co working Monte Castro",
+   "oficinas compartidas Monte Castro",
+   "espacio de trabajo compartido Monte Castro",
+   "oficinas compartidas Monte Castro Villa Real Av. Lope de Vega",
+   "centro de negocios Monte Castro"
+  ],
+  "fuentes_exploradas": [
+   "Google Maps (navegador headless, listados con coordenadas)",
+   "Google (búsqueda web)",
+   "Bing",
+   "OpenStreetMap Overpass (amenity=coworking_space)",
+   "USIG (geocodificación y barrio)",
+   "desky.la (guía enero 2026)",
+   "Pluria (directorio)"
+  ],
+  "candidatos_detectados": 2,
+  "verificadas_principal": 0,
+  "pendientes": 2,
+  "rondas_extra_sin_novedades": 0,
+  "notas": "Casa de Danny (Estudio) y Depostore: fichas de Maps sin evidencia de membresía; ninguna web de coworking propia encontrada. Búsquedas en Google/Bing no devuelven nada del barrio. Censo en curso (parcial)."
+ },
+ {
+  "barrio": "Villa Pueyrredón",
+  "consultas": [
+   "coworking Villa Pueyrredón",
+   "cowork Villa Pueyrredón",
+   "co working Villa Pueyrredón",
+   "oficinas compartidas Villa Pueyrredón",
+   "espacio de trabajo compartido Villa Pueyrredón",
+   "coworking Av. Gral. Mosconi"
+  ],
+  "fuentes_exploradas": [
+   "Google Maps (navegador headless, listados con coordenadas)",
+   "Google (búsqueda web)",
+   "Bing",
+   "OpenStreetMap Overpass (amenity=coworking_space)",
+   "USIG (geocodificación y barrio)",
+   "desky.la (guía enero 2026)",
+   "Pluria (directorio)"
+  ],
+  "candidatos_detectados": 2,
+  "verificadas_principal": 0,
+  "pendientes": 2,
+  "rondas_extra_sin_novedades": 0,
+  "notas": "Laetitia Espacio de Música y Fundación FALDAD son fichas de Maps categorizadas como coworking pero parecen otros rubros. Los coworkings de la zona norte que salen (Coworking Urquiza, Siberia, Monroe 4820, Inspira, elburó) son de Villa Urquiza/Saavedra y quedan para otro grupo. Censo en curso (parcial)."
+ },
+ {
+  "barrio": "Villa Real",
+  "consultas": [
+   "coworking Villa Real",
+   "cowork Villa Real",
+   "co working Villa Real",
+   "oficinas compartidas Villa Real",
+   "espacio de trabajo compartido Villa Real",
+   "coworking Av. Juan B. Justo Villa Real",
+   "alquiler de escritorio Villa Real"
+  ],
+  "fuentes_exploradas": [
+   "Google Maps (navegador headless, listados con coordenadas)",
+   "Google (búsqueda web)",
+   "Bing",
+   "OpenStreetMap Overpass (amenity=coworking_space)",
+   "USIG (geocodificación y barrio)",
+   "desky.la (guía enero 2026)",
+   "Pluria (directorio)"
+  ],
+  "candidatos_detectados": 1,
+  "verificadas_principal": 0,
+  "pendientes": 1,
+  "rondas_extra_sin_novedades": 0,
+  "notas": "Sin fichas dentro del barrio. Ambrela (Av. Lope de Vega 3131) cae en Villa Devoto por USIG, pegado a Villa Real. Censo en curso (parcial)."
+ },
+ {
+  "barrio": "Versalles",
+  "consultas": [
+   "coworking Versalles",
+   "cowork Versalles",
+   "co working Versalles",
+   "oficinas compartidas Versalles",
+   "espacio de trabajo compartido Versalles",
+   "coworking Versalles Av. Juan B. Justo"
+  ],
+  "fuentes_exploradas": [
+   "Google Maps (navegador headless, listados con coordenadas)",
+   "Google (búsqueda web)",
+   "Bing",
+   "OpenStreetMap Overpass (amenity=coworking_space)",
+   "USIG (geocodificación y barrio)",
+   "desky.la (guía enero 2026)",
+   "Pluria (directorio)"
+  ],
+  "candidatos_detectados": 1,
+  "verificadas_principal": 0,
+  "pendientes": 1,
+  "rondas_extra_sin_novedades": 0,
+  "notas": "Espacio Bruselas CoWork (Bruselas 1067) es la ficha más sólida del grupo. Censo en curso (parcial)."
+ },
+ {
+  "barrio": "Vélez Sarsfield",
+  "consultas": [
+   "coworking Vélez Sarsfield",
+   "cowork Vélez Sarsfield",
+   "co working Vélez Sarsfield",
+   "oficinas compartidas Vélez Sarsfield",
+   "espacio de trabajo compartido Vélez Sarsfield",
+   "alquiler de escritorio Vélez Sarsfield"
+  ],
+  "fuentes_exploradas": [
+   "Google Maps (navegador headless, listados con coordenadas)",
+   "Google (búsqueda web)",
+   "Bing",
+   "OpenStreetMap Overpass (amenity=coworking_space)",
+   "USIG (geocodificación y barrio)",
+   "desky.la (guía enero 2026)",
+   "Pluria (directorio)"
+  ],
+  "candidatos_detectados": 1,
+  "verificadas_principal": 0,
+  "pendientes": 1,
+  "rondas_extra_sin_novedades": 0,
+  "notas": "Solo Co.Espacio (Av. Carrasco 375). Censo en curso (parcial)."
+ },
+ {
+  "barrio": "Villa Luro",
+  "consultas": [
+   "coworking Villa Luro",
+   "cowork Villa Luro",
+   "co working Villa Luro",
+   "oficinas compartidas Villa Luro",
+   "espacio de trabajo compartido Villa Luro",
+   "oficina por día escritorio Villa Luro",
+   "coworking Av. Rivadavia Villa Luro"
+  ],
+  "fuentes_exploradas": [
+   "Google Maps (navegador headless, listados con coordenadas)",
+   "Google (búsqueda web)",
+   "Bing",
+   "OpenStreetMap Overpass (amenity=coworking_space)",
+   "USIG (geocodificación y barrio)",
+   "desky.la (guía enero 2026)",
+   "Pluria (directorio)"
+  ],
+  "candidatos_detectados": 2,
+  "verificadas_principal": 0,
+  "pendientes": 1,
+  "rondas_extra_sin_novedades": 0,
+  "notas": "FOCO Espacio (Mozart 250) pendiente de verificar; Espacio Villa Luro (Patrón 6017, oficinas virtuales) figura cerrado permanentemente. Un listado de Zonaprop menciona un local en Av. Rivadavia 10561 'ideal cowork' pero es una venta, no un operador. Censo en curso (parcial)."
+ },
+ {
+  "barrio": "Liniers",
+  "consultas": [
+   "coworking Liniers",
+   "cowork Liniers",
+   "co working Liniers",
+   "oficinas compartidas Liniers",
+   "espacio de trabajo compartido Liniers",
+   "oficinas compartidas Liniers",
+   "cowork Liniers"
+  ],
+  "fuentes_exploradas": [
+   "Google Maps (navegador headless, listados con coordenadas)",
+   "Google (búsqueda web)",
+   "Bing",
+   "OpenStreetMap Overpass (amenity=coworking_space)",
+   "USIG (geocodificación y barrio)",
+   "desky.la (guía enero 2026)",
+   "Pluria (directorio)"
+  ],
+  "candidatos_detectados": 1,
+  "verificadas_principal": 0,
+  "pendientes": 1,
+  "rondas_extra_sin_novedades": 0,
+  "notas": "Solo Consultorios Espacio Salud (Av. Rivadavia 10903). Coordenadas de una ficha 'COWORKING' (Independencia 1370) caen fuera de CABA. Censo en curso (parcial)."
+ }
+]

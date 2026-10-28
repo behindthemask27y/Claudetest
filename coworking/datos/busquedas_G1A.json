@@ -1,0 +1,140 @@
+[
+ {
+  "barrio": "Villa del Parque",
+  "consultas": [
+   "coworking Villa del Parque Buenos Aires",
+   "oficinas compartidas Villa del Parque CABA escritorio alquiler",
+   "coworking Villa del Parque Cuenca OR Nazca OR Álvarez Jonte OR Gaona",
+   "Google Maps (listados) centrados en Santo Tomé 2987 y en otros 5 puntos del barrio, zoom 15-16: coworking, cowork, co working, oficinas compartidas, alquiler de escritorios, escritorios compartidos, espacio de trabajo (compartido), workspace, estudio compartido, oficinas por hora, oficina por día, alquiler de oficinas, centro de negocios, consultorios compartidos, salas de reunión, centro de profesionales",
+   "Fichas de Maps de Consultorios Villa del Parque (Tinogasta 3275), MODOS (Nogoyá 2467) y Fogartaller (Cuenca 3235)"
+  ],
+  "fuentes_exploradas": [
+   "Google (búsqueda web)",
+   "Google Maps (listados y fichas)",
+   "Instagram (lectura de perfiles por WebFetch)",
+   "USIG (geocodificación)",
+   "coworker.com y MercadoLibre (bloqueados: HTTP 403)"
+  ],
+  "candidatos_detectados": 1,
+  "verificadas_principal": 0,
+  "pendientes": 0,
+  "rondas_extra_sin_novedades": 3,
+  "notas": "No encontré ningún coworking con membresía mensual dentro de Villa del Parque. Lo único del barrio es Consultorios Villa del Parque (Tinogasta 3275, a 0,9 km del proyecto), clasificado como secundaria. Los consultorios sueltos (Terrada 3330, Vilardebó 2815, Cuenca 3446), MODOS (salud mental) y Fogartaller (cerámica) no son coworking. Los listados de Maps centrados en el barrio devuelven los mismos espacios de Villa Devoto, La Paternal, Agronomía y Villa Santa Rita; tres rondas con otros centros y términos no sumaron sedes nuevas. Limitación: sin Instagram-only discovery porque el buscador web alcanzó su tope de consultas; la ausencia de coworking en Maps no prueba que no existan espacios que se promocionan solo por redes."
+ },
+ {
+  "barrio": "Villa Devoto",
+  "consultas": [
+   "coworking Villa Devoto Buenos Aires membresía",
+   "coworking Devoto instagram espacio de trabajo compartido Villa Devoto",
+   "Google Maps: coworking Villa Devoto y listados centrados en -34.5985,-58.5150 (zoom 15-16)"
+  ],
+  "fuentes_exploradas": [
+   "Google (búsqueda web)",
+   "Google Maps",
+   "Instagram (WebFetch)",
+   "ambrela.com.ar",
+   "USIG"
+  ],
+  "candidatos_detectados": 7,
+  "verificadas_principal": 1,
+  "pendientes": 5,
+  "rondas_extra_sin_novedades": 3,
+  "notas": "Ambrela (Av. Lope de Vega 3131) es el único coworking con planes mensuales publicados en la zona de mi grupo. Pendientes: Casa Lamarca (talleres y festejos), Espacio Yndalo (centro psicológico), Devoto Coworking (sin dirección; su web es una reserva de consultorio), Arcillero Cowork (cerámica) y valmar911 (centro de negocios sin datos). Espacio Mondello descartado: la ficha es una tienda de belleza. La búsqueda web solo mostró coworking como amenity de edificios residenciales (no cuenta)."
+ },
+ {
+  "barrio": "Agronomía",
+  "consultas": [
+   "coworking Agronomía Buenos Aires",
+   "Google Maps: coworking Agronomía y listados centrados en -34.5935,-58.4895 (zoom 15-16)"
+  ],
+  "fuentes_exploradas": [
+   "Google (búsqueda web)",
+   "Google Maps",
+   "USIG"
+  ],
+  "candidatos_detectados": 1,
+  "verificadas_principal": 0,
+  "pendientes": 1,
+  "rondas_extra_sin_novedades": 2,
+  "notas": "Solo Didacticos Evalandia (probable comercio de material didáctico, sin evidencia de coworking). Los resultados web son Regus/Spaces de otras zonas."
+ },
+ {
+  "barrio": "La Paternal",
+  "consultas": [
+   "coworking La Paternal Buenos Aires",
+   "Google Maps: coworking La Paternal y listados centrados en -34.5976,-58.4680 (zoom 15-16)"
+  ],
+  "fuentes_exploradas": [
+   "Google (búsqueda web)",
+   "Google Maps",
+   "espaciosestrella.com",
+   "web de Espacio Añasco",
+   "USIG"
+  ],
+  "candidatos_detectados": 5,
+  "verificadas_principal": 0,
+  "pendientes": 2,
+  "rondas_extra_sin_novedades": 2,
+  "notas": "Espacios Estrella / Mishka Oficinas (hotel industrial con oficinas) y Espacio Añasco (centro cultural con salas) quedan como secundaria. Halo Estudio Compartido está cerrado permanentemente. Pendientes sin datos: El Rabanito Loco y Depo Tonel (fichas vacías)."
+ },
+ {
+  "barrio": "Villa Santa Rita",
+  "consultas": [
+   "Google Maps: coworking Villa Santa Rita y listados centrados en -34.6025,-58.5000 (zoom 15-16)"
+  ],
+  "fuentes_exploradas": [
+   "Google Maps",
+   "Facebook (título de página)",
+   "USIG"
+  ],
+  "candidatos_detectados": 2,
+  "verificadas_principal": 0,
+  "pendientes": 1,
+  "rondas_extra_sin_novedades": 2,
+  "notas": "Mati (ficha vacía) pendiente; Alquiler Consultorio (Av. Gral. César Díaz 3185) clasificado como secundaria."
+ },
+ {
+  "barrio": "Villa General Mitre",
+  "consultas": [
+   "Google Maps: coworking Villa General Mitre y listados centrados en -34.6055,-58.4755 (zoom 15-16)"
+  ],
+  "fuentes_exploradas": [
+   "Google Maps"
+  ],
+  "candidatos_detectados": 0,
+  "verificadas_principal": 0,
+  "pendientes": 0,
+  "rondas_extra_sin_novedades": 2,
+  "notas": "Sin hallazgos dentro del barrio; en los listados aparecen Usina Coworking (Castillo 1366), Joy CoWork (Dorrego 864), Huerta Coworking y Laborando en barrios vecinos que corresponden a otro grupo."
+ },
+ {
+  "barrio": "Floresta",
+  "consultas": [
+   "coworking Floresta CABA oficinas compartidas",
+   "Google Maps: coworking Floresta y listados centrados en -34.6277,-58.4824 (zoom 15-16)"
+  ],
+  "fuentes_exploradas": [
+   "Google (búsqueda web)",
+   "Google Maps"
+  ],
+  "candidatos_detectados": 0,
+  "verificadas_principal": 0,
+  "pendientes": 0,
+  "rondas_extra_sin_novedades": 2,
+  "notas": "Sin hallazgos dentro del barrio. Cercanos fuera de mi grupo (derivar al grupo que corresponda): Co.Espacio (Av. Carrasco 375, Vélez Sarsfield), Modus Fashion CoWorking (Av. Nazca 388, Flores), Onelife Multiespacio (Méndez de Andes 1819, Flores), FOCO Espacio (Mozart 250, Villa Luro), Casa de Danny (Av. Lope de Vega 1885, Monte Castro), Espacio Bruselas CoWork (Bruselas 1067, Versalles)."
+ },
+ {
+  "barrio": "Borde GBA (Villa Lynch, Sáenz Peña, Santos Lugares, Villa Ballester, Caseros)",
+  "consultas": [
+   "Google Maps: coworking, cowork, oficinas compartidas, espacio de trabajo, centrados en Ciudadela, Caseros, Sáenz Peña, Santos Lugares, Martín Coronado, Villa Ballester, San Martín, Villa Raffo y Villa Lynch (zoom 14-15)"
+  ],
+  "fuentes_exploradas": [
+   "Google Maps"
+  ],
+  "candidatos_detectados": 4,
+  "verificadas_principal": 0,
+  "pendientes": 0,
+  "rondas_extra_sin_novedades": 1,
+  "notas": "Registradas como excluidas (fuera de CABA): PiboFlex (Villa Lynch), Isik Espacio (Sáenz Peña), Centro de Desarrollo Emprendedor (Santos Lugares), Espacios Arquita (Villa Ballester). Espacio Kimana (Caseros) es consultorio de psicoterapia, no coworking. Más lejos (7 a 9 km, Ramos Mejía, partido de La Matanza) hay un conglomerado de coworkings sobre Mariano Moreno y Av. Rivadavia (DOERS, Espacio Bindi, LA OFI, Klover Cowork, La Bohemia, Espacio Acompasar): no los registré por no ser pegados a la zona. Villa Raffo, Martín Coronado y Ciudadela no devolvieron coworking propio."
+ }
+]

@@ -2,8 +2,8 @@
 
 > **Copia para el repo.** El original vive en la compu de Cris (Workshop, carpetas `NEGOCIO/Marketing/` y `NEGOCIO/Comunicacion/`; plantilla en `NEGOCIO/Marketing/Repo-GitHub/CLAUDE-repo.md`). Versión de esta copia: 2026-10-28. Si en una sesión de la nube se cambia algo acá, avisale a Cris qué archivo cambió para que lo pase al original; si no, la próxima vez que suba la copia se pisa.
 
-**Al empezar cualquier sesión, leé `contexto/estado-y-pendientes.md`.** Ahí está dónde estamos, qué se decidió y qué falta.
-No le vuelvas a preguntar a Cris lo que ya figura ahí. Última actualización de este índice: 2026-10-28.
+**Si la tarea es de Marketing, al empezar leé `contexto/estado-y-pendientes.md`.** Ahí está dónde estamos, qué se decidió y qué falta.
+No le vuelvas a preguntar a Cris lo que ya figura ahí. **Si la tarea es el estudio de coworking, leé solo `coworking/LEEME.md`** (reglas de costo y estado de los datos); no hace falta nada de Marketing. Última actualización de este índice: 2026-10-28.
 
 ## Quién y qué
 Cris (Cristian Stedtfeld) es agente inmobiliario en Red Suma (corredor responsable: VL REALTOR S.R.L.), CABA y Zona Norte.
@@ -42,10 +42,12 @@ Meta: cuenta "IG Real Estate" `act=2105334063528925`, business `1439717201317750
 | `contexto/voz-y-copy.md` | Reglas de texto de Cris: voz, palabras, mensajes y anuncios. Leer antes de escribir cualquier copy. |
 | `contexto/historial-de-cambios.md` | Una fila por cambio hecho (fecha, plataforma, qué, campañas). |
 | `hot_lead/` | Paquete del evento `hot_lead` (archivos del sitio, guía, diff). |
+| `coworking/` | Estudio de un coworking en la casa propia de Cris (Santo Tomé 2987) para presentar a un inversor: datos relevados, costos y modelo en Excel. **Acá manda la copia de la nube** desde que se subió (28/10/2026). Empezar por `coworking/LEEME.md`. Sin subagentes. |
 | `lote1_google_ads/` | Guía paso a paso y CSV para importar en el Editor (primera tanda, 13/10). |
 | `crm/CRM_Inmobiliario.xlsx` | Planilla de ejemplo. El CRM real de Cris todavía no está vinculado con Claude (no confundir con el CRM de Red Suma, admin.redsuma.com.ar, que se usa solo para el ACM). |
 | `prompts/` | Prompts de otras sesiones para la home y los formularios del sitio. |
 
 ## Al cerrar una tarea
-Actualizá `contexto/estado-y-pendientes.md` (qué se hizo, fecha, qué sigue) y el contexto de la plataforma que cambió. Sumá una fila en `contexto/historial-de-cambios.md` y avisale a Cris qué archivos de `contexto/` cambiaron para que los pase al original de su compu.
+En Marketing: actualizá `contexto/estado-y-pendientes.md` (qué se hizo, fecha, qué sigue) y el contexto de la plataforma que cambió. Sumá una fila en `contexto/historial-de-cambios.md` y avisale a Cris qué archivos de `contexto/` cambiaron para que los pase al original de su compu.
 El documento resumen para Cris está en Claude Docs (enlace en `estado-y-pendientes.md`).
+En coworking: dejá el estado al día en `coworking/LEEME.md` (qué hay, qué falta, qué sigue) y avisale a Cris qué archivos de `coworking/` cambiaron para que los pase a su compu.

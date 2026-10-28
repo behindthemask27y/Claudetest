@@ -1,0 +1,126 @@
+[
+ {
+  "barrio": "HIT Cowork",
+  "consultas": [
+   "HIT Cowork Buenos Aires sedes",
+   "HIT Cowork sedes Buenos Aires HIT Libertador HIT Palermo HIT Belgrano precios membresía",
+   "\"HIT&Go\" HIT Cowork membresía coworking individual precio",
+   "HIT Cowork Buenos Aires (Google Maps)"
+  ],
+  "fuentes_exploradas": [
+   "Web oficial hitcowork.com (home, sedes, On Demand, oficinas por día, oficina virtual, privadas, FAQ)",
+   "Google Maps (búsqueda web)",
+   "Ecosistema Startup",
+   "El Economista",
+   "iProfesional",
+   "Infonegocios",
+   "USIG"
+  ],
+  "candidatos_detectados": 13,
+  "verificadas_principal": 0,
+  "pendientes": 11,
+  "rondas_extra_sin_novedades": 1,
+  "notas": "11 sedes en CABA (Polo, Bouchard, Pampa, Arguibel, Cañitas, CEL, Libertador, Tecno, Ugarte, Maipú, Migueletes), todas orientadas a oficinas para empresas; ninguna con precio público. On Demand es pago por uso sin membresía; el plan 'para individuos' de la home no tiene precio ni página. HIT Vilo (GBA) excluida; HIT 18 Núñez en construcción (fines de 2027). Sedes de Chile y Perú fuera de alcance."
+ },
+ {
+  "barrio": "HUERTA Coworking",
+  "consultas": [
+   "Huerta Coworking Buenos Aires sedes",
+   "HUERTA Coworking Puerto Retiro Quartier Plaza inauguración nueva sede",
+   "Huerta coworking Tucumán 439 microcentro cerró"
+  ],
+  "fuentes_exploradas": [
+   "Web oficial huertacoworking.com (6 planes, 3 sedes, salas y eventos, día de prueba)",
+   "Pluria",
+   "Croissant",
+   "coworker.com (vía búsqueda)",
+   "USIG"
+  ],
+  "candidatos_detectados": 4,
+  "verificadas_principal": 3,
+  "pendientes": 1,
+  "rondas_extra_sin_novedades": 1,
+  "notas": "3 sedes activas en la web oficial (Dorrego, Humboldt, Puerto Retiro). Microcentro Tucumán 439 figura en directorios pero no en la web: queda como excluida/sin confirmar."
+ },
+ {
+  "barrio": "IWG (Regus, Spaces, HQ, Signature)",
+  "consultas": [
+   "Regus Buenos Aires coworking precio por mes escritorio compartido sede",
+   "Spaces coworking Buenos Aires IWG Spaces Catalinas OR Bellini OR Pacífico OR Madero",
+   "IWG Regus Spaces All Access Argentina Buenos Aires plan días por mes precio USD",
+   "HQ Buenos Aires Obelisco Rivadavia 954 IWG opening December 2026 coworking",
+   "Regus Spaces HQ coworking Buenos Aires CABA (Google Maps)"
+  ],
+  "fuentes_exploradas": [
+   "Web oficial regus.com y spacesworks.com (páginas de ciudad, de centro y del Coworking Access Plan)",
+   "Checkout público de membresía de Regus (matriz de precios, sin iniciar sesión ni completar datos)",
+   "Google Maps (búsqueda web)",
+   "workin.space",
+   "USIG"
+  ],
+  "candidatos_detectados": 8,
+  "verificadas_principal": 3,
+  "pendientes": 0,
+  "rondas_extra_sin_novedades": 1,
+  "notas": "Regus bloquea clientes sin navegador (protección anti-bot): se leyó solo con el navegador del panel, sin eludir nada. CABA: American Express (Maipú 1210), Laminar II Catalinas (Butty 240) y Spaces República (Tucumán 1); HQ Obelisco (Rivadavia 954) abre el 1/12/2026 según agregador. GBA excluidas: Alrío, Olivos, San Isidro. No se encontró ninguna sede Signature en CABA. Precios del Coworking Access Plan publicados (USD/mes, nivel Argentina)."
+ },
+ {
+  "barrio": "La Maquinita Co",
+  "consultas": [
+   "La Maquinita Co coworking sedes Buenos Aires precios membresía",
+   "La Maquinita Co coworking Buenos Aires (Google Maps)",
+   "La Maquinita Co Working&Co fusión adquisición coworking"
+  ],
+  "fuentes_exploradas": [
+   "Web oficial lamaquinita.co (páginas de sede y de soluciones)",
+   "Google Maps (búsqueda web)",
+   "Pluria",
+   "USIG"
+  ],
+  "candidatos_detectados": 8,
+  "verificadas_principal": 3,
+  "pendientes": 0,
+  "rondas_extra_sin_novedades": 1,
+  "notas": "CABA: Niceto Vega 4736, Godoy Cruz 1550 y Microcentro (Lavalle 333) activas; Núñez (Cabildo 3546) 'Próximamente'; Innovation Lab (Niceto Vega 4866) secundaria. Libertador (Vicente López) y Nuevo Quilmes excluidas por GBA. Rosario y Nueva Córdoba fuera del alcance. Precios no publicados (requiere cotización)."
+ },
+ {
+  "barrio": "Working&Co (MA Media S.A.)",
+  "consultas": [
+   "Working&Co coworking Buenos Aires sedes Soler Loyola Artilleros Virrey del Pino precios",
+   "Working&Co coworking Google Maps",
+   "Working&Co coworking membresía personal precio pases mensuales"
+  ],
+  "fuentes_exploradas": [
+   "Web oficial workingand.co (Wix, una sola página)",
+   "Spacebring (login requerido)",
+   "Google Maps (búsqueda web)",
+   "Pluria",
+   "USIG"
+  ],
+  "candidatos_detectados": 8,
+  "verificadas_principal": 4,
+  "pendientes": 3,
+  "rondas_extra_sin_novedades": 1,
+  "notas": "7 sedes operativas según Google Maps (Loyola, Soler, El Salvador, Virrey del Pino, Niceto Vega 4601, Cabrera, Artilleros) + Gorriti anunciada. Sin precios públicos. Cabrera y Artilleros con evidencia débil (1-2 reseñas)."
+ },
+ {
+  "barrio": "WeWork",
+  "consultas": [
+   "WeWork Buenos Aires ubicaciones sedes 2026",
+   "coworking cerró sede Buenos Aires 2025 cierre WeWork",
+   "WeWork Buenos Aires Google Maps",
+   "WeWork Torre Bellini Esmeralda 950 Buenos Aires"
+  ],
+  "fuentes_exploradas": [
+   "Web oficial wework.com (listado de Buenos Aires, páginas de edificio, All Access)",
+   "Google Maps (búsqueda web)",
+   "El Cronista/Infonegocios (2020)",
+   "USIG"
+  ],
+  "candidatos_detectados": 6,
+  "verificadas_principal": 2,
+  "pendientes": 0,
+  "rondas_extra_sin_novedades": 1,
+  "notas": "2 sedes activas en CABA (Corrientes 800 y Butty 275). Libertador 1000 y Blas Parera 3551 son GBA (Vicente López/Olivos). Torre Bellini cerrada (2020). Blas Parera 51 (Florida) cerrada. Precios All Access en USD publicados (mensual y anual); escritorio dedicado y oficina privada a pedido."
+ }
+]
