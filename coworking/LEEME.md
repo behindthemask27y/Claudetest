@@ -24,23 +24,22 @@
 - `entorno_y_normativa.md` — 4 secciones (parcela y zonificación, habilitación, accesibilidad y transporte, entorno comercial). Revisar si zonificación y habilitación quedaron cerradas: son lo más importante.
 - No se hicieron: G2 y G4-G6 (resto de CABA), Instagram (Cris puede iniciar sesión él en el navegador integrado; solo mirar) y fotos.
 
-## Paso 1 hecho (28/10/2026, en la nube): consolidado + Excel + veredicto
-Qué dijo Cris el 28/10 y ya está en el modelo: **no alquila la casa** (costo de oportunidad = "no aplica"); **personal = una recepción** (limpieza y mantenimiento van en líneas aparte); la inversión es **remodelación liviana + equipamiento** (mesas, sillas, escritorios, cabinas insonorizadas, paneles); **no sabe cuánto sale la obra**; luz/gas/agua y plano "no importan". Los precios salen **solo de comparables chicos** (Ambrela); las cadenas (HUERTA, Regus, WeWork) quedaron en la hoja `Referencia_cadenas` y el modelo no las usa.
+## Paso 1 hecho (28/10/2026, en la nube): competencia + Excel + rentabilidad
+Qué dijo Cris el 28/10 y ya está en el modelo: **no alquila la casa**; **personal = una recepción** (limpieza y mantenimiento en líneas aparte); **obra de USD 20.000 a 50.000 todo incluido** (Base 35.000; es su número, no cotización); **cabinas: estimativo** (USD 1.500 a 2.500, sin fuente, le importa poco); equipos probablemente de China (el modelo usa precios de Argentina, conservadores); luz/gas/agua y plano "no importan". **Lo que Cris quiere: comparar con la competencia (qué cobra, qué planes, qué ofrece) para calcular el margen y vender la idea a un inversor. No pedirle más datos ni gastar créditos en búsquedas de más.**
 
-**Resultado (hoja `Lectura`, la primera del Excel).** Es una cota optimista: la obra está en 0 y lo que no tiene dato entra en 0 o en un piso.
+**Competencia** (hoja `Competencia` del Excel, desde el censo, sin búsquedas nuevas). Chicos: **Ambrela** (Devoto, verificado): 2 días/sem ARS 89.000, 3 días/sem 103.000, fijo 118.000. **elburó** (Villa Urquiza, probable): Flex desde 115.000, fijo 257.000 a 300.000. Grande: **HUERTA** (Palermo, 1.450 m²): 4 días 135.000 + IVA, 8 días 219.000, 12 días 250.000, ilimitado 270.000, fijo 320.000. Regus y WeWork en USD. Los precios del modelo salen solo de Ambrela; las cadenas son referencia.
 
-| Escenario | Resultado por mes, todo lleno (USD) | Con el 80 % lleno | Obra máxima que se recupera en 5 años |
+**Rentabilidad** (hoja `Lectura`; inversión inicial 52.000 / 75.000 / 109.000 USD en Favorable / Base / Conservador):
+
+| Base, con el 80 % de los puestos | Precio de Ambrela | +15 % | +30 % (como elburó) |
 |---|---|---|---|
-| Conservador | −1.704 | −1.984 | 0 |
-| Base | +1.029 | +486 | 10.335 (todo lleno) · 0 (80 %) |
-| Favorable | +3.718 | +2.859 | 89.129 (80 %) |
+| Resultado por mes (USD) | +383 | +907 | +1.432 |
+| Margen operativo | 9 % | 20 % | 27 % |
 
-- Base: el equipamiento ya cargado suma 45.749 USD (sin cabinas ni paneles, sin precio). Con el 80 % lleno solo se recuperan unos 32.000 en 5 años. **Cubre sus costos si llena, pero casi no deja para pagar la obra.**
-- Base necesita 46 miembros flex (62 % del tope de 74). Con las altas supuestas (2 a 3 por mes, sin dato) llega a unos 35 y pierde unos 500 USD por mes en el mes 36. **Todo depende de la demanda, que no está medida: la prueba es una preventa.**
-- Aunque los únicos costos fijos fueran recepción, limpieza y mantenimiento, el Base deja unos 2.000 USD por mes con todo lleno.
-- Comparables chicos: Ambrela (Devoto, verificado) y elburó (Villa Urquiza, **probable**, unos 22 puestos). Precios y qué incluye cada plan: `datos/sedes_G1A.json` (G1A-01), `datos/sedes_G3.json` (G3-01), `datos/sedes_CAD.json` (CAD-14, HUERTA).
-- Los **datos que faltan** están en `Datos_faltantes` (15 ítems). Los clave: presupuesto de la obra, precio de cabinas y paneles, demanda local, y confirmar los precios de Ambrela y elburó.
-- El Excel se **recalculó con LibreOffice en la nube: 4.452 fórmulas, 0 errores**. No se abrió en Excel de escritorio: falta comprobarlo allá.
+- Base necesita 49 miembros flex (66 % del tope de 74). Con las altas supuestas (sin dato de demanda) llega a unos 35 y pierde unos 600 USD por mes en el mes 36: la prueba es una preventa.
+- Conservador no da. Favorable (pocos costos, precios +5 %) da margen de 48 % y recupera en 1,6 años: es la cota alta.
+- Es una **cota optimista**: luz/gas/agua en un piso, contador en 0, paneles sin línea.
+- El Excel se **recalculó con LibreOffice en la nube: 4.479 fórmulas, 0 errores**. No se abrió en Excel de escritorio: falta comprobarlo allá.
 - **Paso 2 (informe y presentación) NO empezado**: esperar el OK de Cris.
 
 ## `scripts/`

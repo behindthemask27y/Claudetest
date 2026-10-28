@@ -709,11 +709,11 @@
    "label": "Adecuación por m² (pintura, pisos, iluminación, baños, terminaciones)",
    "unit": "USD/m²",
    "vals": [
-    0,
-    0,
-    0
+    128.2,
+    89.7,
+    51.3
    ],
-   "fuente": "SIN DATO: Cris no sabe cuánto sale la remodelación (28/10/2026) y dice que no es mucho. Cargado en 0; la hoja Lectura calcula cuánta obra puede pagar el negocio.",
+   "fuente": "CRIS (28/10/2026): la remodelación sale entre USD 20.000 y 50.000, todo incluido (patio, baño, electricidad, honorarios). Conservador 50.000, Base 35.000 (punto medio), Favorable 20.000. Es su número, no una cotización.",
    "tipo": "estimación",
    "fmt": "USD"
   },
@@ -735,11 +735,11 @@
    "label": "Techado de patio por m²",
    "unit": "USD/m²",
    "vals": [
-    64.1,
-    47.4,
-    30.8
+    0,
+    0,
+    0
    ],
-   "fuente": "Techado con policarbonato, material y mano de obra, ARS 48.000 a 100.000 por m² (costos_referencia #36). Sin estructura nueva, piso ni instalaciones. Techar puede estar prohibido (entorno_y_normativa.md, 1.3).",
+   "fuente": "INCLUIDO EN LA OBRA de Cris (USD 20.000 a 50.000, todo incluido).",
    "tipo": "estimación",
    "fmt": "USD"
   },
@@ -752,7 +752,7 @@
     0,
     0
    ],
-   "fuente": "SIN DATO: costos_referencia #44 'no disponible'. Cargado en 0.",
+   "fuente": "INCLUIDO EN LA OBRA de Cris (USD 20.000 a 50.000, todo incluido).",
    "tipo": "estimación",
    "fmt": "USD"
   },
@@ -761,11 +761,11 @@
    "label": "Baño accesible",
    "unit": "USD",
    "vals": [
-    5769.2,
-    4487.2,
-    3205.1
+    0,
+    0,
+    0
    ],
-   "fuente": "PROXY: reforma de baño 'media', ARS 5.000.000 a 9.000.000 (costos_referencia #80). No hay precio de baño accesible; el rango es de otro tipo de obra.",
+   "fuente": "INCLUIDO EN LA OBRA de Cris (USD 20.000 a 50.000, todo incluido).",
    "tipo": "estimación",
    "fmt": "USD"
   },
@@ -774,11 +774,11 @@
    "label": "Instalación eléctrica y red de datos",
    "unit": "USD",
    "vals": [
-    7219.2,
-    5437.2,
-    3655.1
+    0,
+    0,
+    0
    ],
-   "fuente": "Solo mano de obra: tablero ARS 333.000 a 602.000 + puesta a tierra 169.000 a 260.000 + 100 bocas a 52.000 a 104.000 (costos_referencia #37-38). Las 100 bocas son SUPUESTO (2 por puesto + áreas comunes). Materiales y cableado: SIN DATO.",
+   "fuente": "INCLUIDO EN LA OBRA de Cris (USD 20.000 a 50.000, todo incluido).",
    "tipo": "estimación",
    "fmt": "USD"
   },
@@ -852,11 +852,11 @@
    "label": "Cabina acústica por unidad",
    "unit": "USD",
    "vals": [
-    0,
-    0,
-    0
+    2500,
+    2000,
+    1500
    ],
-   "fuente": "SIN DATO: costos_referencia #75, no hay precio argentino de cabina acústica. Cargado en 0.",
+   "fuente": "ESTIMATIVO pedido por Cris (28/10/2026), sin fuente: a Cris le importa poco el precio. Cabinas insonorizadas, probablemente importadas.",
    "tipo": "dato",
    "fmt": "USD"
   },
@@ -890,8 +890,8 @@
    "key": "honorarios_pct",
    "label": "Honorarios profesionales (sobre la obra)",
    "unit": "%",
-   "vals": 0.14,
-   "fuente": "CPAU: honorario sugerido 14 % del monto de obra para obras de hasta unos ARS 320 millones (costos_referencia #59). Sugerido, no obligatorio.",
+   "vals": 0,
+   "fuente": "INCLUIDO EN LA OBRA de Cris (USD 20.000 a 50.000, todo incluido).",
    "tipo": "estimación",
    "fmt": "%"
   },

@@ -87,6 +87,26 @@
  "comparables_chicos_probables_o_inciertos_aparte": [
   {
    "zona": "A · Cercana (Com. 9, 10, 11, 12, 15)",
+   "concepto": "Flex 'desde' (2 a 5 días por semana)",
+   "planes_unicos": 1,
+   "marcas": [
+    "elburó"
+   ],
+   "minimo_ars_con_iva": 115000,
+   "mediana_ars_con_iva": 115000,
+   "maximo_ars_con_iva": 115000,
+   "estado_precio": [
+    "publicado_sin_vigencia"
+   ],
+   "moneda_publicada": [
+    "ARS"
+   ],
+   "iva_publicado": [
+    "sin aclarar"
+   ]
+  },
+  {
+   "zona": "A · Cercana (Com. 9, 10, 11, 12, 15)",
    "concepto": "Puesto fijo (por mes)",
    "planes_unicos": 2,
    "marcas": [
