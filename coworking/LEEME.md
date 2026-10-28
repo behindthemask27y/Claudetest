@@ -25,19 +25,23 @@
 - No se hicieron: G2 y G4-G6 (resto de CABA), Instagram (Cris puede iniciar sesión él en el navegador integrado; solo mirar) y fotos.
 
 ## Paso 1 hecho (28/10/2026, en la nube): consolidado + Excel + veredicto
-**Resultado: con los precios de la zona, NO DA.** Detalle en `modelo_coworking_santo_tome_2987.xlsx`, hoja `Lectura` (primera). Es una **cota optimista**: lo que no tiene dato entra en 0 o en un piso, así que lo real es peor o igual.
+Qué dijo Cris el 28/10 y ya está en el modelo: **no alquila la casa** (costo de oportunidad = "no aplica"); **personal = una recepción** (limpieza y mantenimiento van en líneas aparte); la inversión es **remodelación liviana + equipamiento** (mesas, sillas, escritorios, cabinas insonorizadas, paneles); **no sabe cuánto sale la obra**; luz/gas/agua y plano "no importan". Los precios salen **solo de comparables chicos** (Ambrela); las cadenas (HUERTA, Regus, WeWork) quedaron en la hoja `Referencia_cadenas` y el modelo no las usa.
 
-| Escenario | Lleno al 100 % de los puestos (USD/mes) | Inversión (USD) | Veredicto |
+**Resultado (hoja `Lectura`, la primera del Excel).** Es una cota optimista: la obra está en 0 y lo que no tiene dato entra en 0 o en un piso.
+
+| Escenario | Resultado por mes, todo lleno (USD) | Con el 80 % lleno | Obra máxima que se recupera en 5 años |
 |---|---|---|---|
-| Conservador | −3.604 | 275.790 | NO DA |
-| Base | −618 | 197.525 | NO DA |
-| Favorable | +2.054 | 135.685 | Cubre costos, pero recupera en 5,5 años (con todo lleno) |
+| Conservador | −1.704 | −1.984 | 0 |
+| Base | +1.029 | +486 | 10.335 (todo lleno) · 0 (80 %) |
+| Favorable | +3.718 | +2.859 | 89.129 (80 %) |
 
-- Para equilibrar con el 80 % de los puestos hace falta cobrar 1,34 veces los precios de Ambrela (plan de 12 días ≈ ARS 138.000 con IVA, contra 103.000 de Ambrela). Sin personal pago (lo atiende el dueño), Base daría +1.122 USD/mes, pero tardaría casi 15 años en recuperar la inversión.
-- **El precio cuelga de una sola ficha verificada en la zona (Ambrela, sin fecha, IVA ni moneda confirmados).** Las cadenas verificadas (HUERTA, Regus, WeWork) están en Palermo y Retiro y cobran 2 a 3 veces más. elburó (Villa Urquiza, **probable**) sugiere unos 30 % más que Ambrela en planes flex; está en `Mercado_no_verificado`, fuera del modelo.
-- Los **datos que faltan** están en la hoja `Datos_faltantes` (16 ítems). Los clave: alquiler de la casa, facturas de luz/gas/agua, contador, plano de la casa y demanda local (las altas son supuestos).
-- El Excel se **recalculó con LibreOffice en la nube: 4.440 fórmulas, 0 errores**. No se abrió en Excel de escritorio: falta comprobarlo allá.
-- **Paso 2 (informe y presentación) NO empezado**: el estudio no da, y la regla es frenar y esperar el OK de Cris.
+- Base: el equipamiento ya cargado suma 45.749 USD (sin cabinas ni paneles, sin precio). Con el 80 % lleno solo se recuperan unos 32.000 en 5 años. **Cubre sus costos si llena, pero casi no deja para pagar la obra.**
+- Base necesita 46 miembros flex (62 % del tope de 74). Con las altas supuestas (2 a 3 por mes, sin dato) llega a unos 35 y pierde unos 500 USD por mes en el mes 36. **Todo depende de la demanda, que no está medida: la prueba es una preventa.**
+- Aunque los únicos costos fijos fueran recepción, limpieza y mantenimiento, el Base deja unos 2.000 USD por mes con todo lleno.
+- Comparables chicos: Ambrela (Devoto, verificado) y elburó (Villa Urquiza, **probable**, unos 22 puestos). Precios y qué incluye cada plan: `datos/sedes_G1A.json` (G1A-01), `datos/sedes_G3.json` (G3-01), `datos/sedes_CAD.json` (CAD-14, HUERTA).
+- Los **datos que faltan** están en `Datos_faltantes` (15 ítems). Los clave: presupuesto de la obra, precio de cabinas y paneles, demanda local, y confirmar los precios de Ambrela y elburó.
+- El Excel se **recalculó con LibreOffice en la nube: 4.452 fórmulas, 0 errores**. No se abrió en Excel de escritorio: falta comprobarlo allá.
+- **Paso 2 (informe y presentación) NO empezado**: esperar el OK de Cris.
 
 ## `scripts/`
 - `consolidar_y_armar.py` (nuevo, 28/10): junta los JSON de `datos/`, calcula medianas por zona (verificadas aparte de probables/inciertas), llena `supuestos_base.supuestos(p)` con cada número atado a su fuente (y verifica que cada cifra copiada exista en el JSON), arma el Excel y lo recalcula con LibreOffice. Se corre con `python3 -I coworking/scripts/consolidar_y_armar.py`. Escribe `datos/resumen_mercado.json`, `datos/supuestos.json` y el `.xlsx`.

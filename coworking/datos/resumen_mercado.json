@@ -2,7 +2,7 @@
  "fecha_corte": "27/10/2026",
  "tc_ars_por_usd": 1560,
  "nota": "ARS con IVA. Unidad = plan único por (marca, nombre, precio, moneda). Verificadas = estado verificado + categoría principal.",
- "verificadas": [
+ "comparables_chicos_verificados": [
   {
    "zona": "A · Cercana (Com. 9, 10, 11, 12, 15)",
    "concepto": "12-13 días por mes",
@@ -82,7 +82,31 @@
    "iva_publicado": [
     "sin aclarar"
    ]
-  },
+  }
+ ],
+ "comparables_chicos_probables_o_inciertos_aparte": [
+  {
+   "zona": "A · Cercana (Com. 9, 10, 11, 12, 15)",
+   "concepto": "Puesto fijo (por mes)",
+   "planes_unicos": 2,
+   "marcas": [
+    "elburó"
+   ],
+   "minimo_ars_con_iva": 257000,
+   "mediana_ars_con_iva": 278500,
+   "maximo_ars_con_iva": 300000,
+   "estado_precio": [
+    "publicado_sin_vigencia"
+   ],
+   "moneda_publicada": [
+    "ARS"
+   ],
+   "iva_publicado": [
+    "sin aclarar"
+   ]
+  }
+ ],
+ "cadenas_verificadas_solo_referencia": [
   {
    "zona": "C · Centro y Palermo (Com. 1, 14 y otras)",
    "concepto": "12-13 días por mes",
@@ -253,128 +277,6 @@
    ],
    "iva_publicado": [
     "excluido",
-    "sin aclarar"
-   ]
-  }
- ],
- "probables_o_inciertas_aparte": [
-  {
-   "zona": "A · Cercana (Com. 9, 10, 11, 12, 15)",
-   "concepto": "Puesto fijo (por mes)",
-   "planes_unicos": 2,
-   "marcas": [
-    "elburó"
-   ],
-   "minimo_ars_con_iva": 257000,
-   "mediana_ars_con_iva": 278500,
-   "maximo_ars_con_iva": 300000,
-   "estado_precio": [
-    "publicado_sin_vigencia"
-   ],
-   "moneda_publicada": [
-    "ARS"
-   ],
-   "iva_publicado": [
-    "sin aclarar"
-   ]
-  },
-  {
-   "zona": "C · Centro y Palermo (Com. 1, 14 y otras)",
-   "concepto": "4-5 días por mes",
-   "planes_unicos": 6,
-   "marcas": [
-    "Spaces (IWG)"
-   ],
-   "minimo_ars_con_iva": 101400,
-   "mediana_ars_con_iva": 124800,
-   "maximo_ars_con_iva": 154440,
-   "estado_precio": [
-    "vigente_comprobado"
-   ],
-   "moneda_publicada": [
-    "USD"
-   ],
-   "iva_publicado": [
-    "sin aclarar"
-   ]
-  },
-  {
-   "zona": "C · Centro y Palermo (Com. 1, 14 y otras)",
-   "concepto": "8-10 días por mes",
-   "planes_unicos": 6,
-   "marcas": [
-    "Spaces (IWG)"
-   ],
-   "minimo_ars_con_iva": 154440,
-   "mediana_ars_con_iva": 193440,
-   "maximo_ars_con_iva": 248040,
-   "estado_precio": [
-    "vigente_comprobado"
-   ],
-   "moneda_publicada": [
-    "USD"
-   ],
-   "iva_publicado": [
-    "sin aclarar"
-   ]
-  },
-  {
-   "zona": "C · Centro y Palermo (Com. 1, 14 y otras)",
-   "concepto": "Ilimitado flex (por mes)",
-   "planes_unicos": 6,
-   "marcas": [
-    "Spaces (IWG)"
-   ],
-   "minimo_ars_con_iva": 248040,
-   "mediana_ars_con_iva": 310440,
-   "maximo_ars_con_iva": 372840,
-   "estado_precio": [
-    "vigente_comprobado"
-   ],
-   "moneda_publicada": [
-    "USD"
-   ],
-   "iva_publicado": [
-    "sin aclarar"
-   ]
-  },
-  {
-   "zona": "C · Centro y Palermo (Com. 1, 14 y otras)",
-   "concepto": "Pase diario",
-   "planes_unicos": 1,
-   "marcas": [
-    "Spaces (IWG)"
-   ],
-   "minimo_ars_con_iva": 85800,
-   "mediana_ars_con_iva": 85800,
-   "maximo_ars_con_iva": 85800,
-   "estado_precio": [
-    "vigente_comprobado"
-   ],
-   "moneda_publicada": [
-    "USD"
-   ],
-   "iva_publicado": [
-    "sin aclarar"
-   ]
-  },
-  {
-   "zona": "C · Centro y Palermo (Com. 1, 14 y otras)",
-   "concepto": "Sala (por hora)",
-   "planes_unicos": 1,
-   "marcas": [
-    "Spaces (IWG)"
-   ],
-   "minimo_ars_con_iva": 60840,
-   "mediana_ars_con_iva": 60840,
-   "maximo_ars_con_iva": 60840,
-   "estado_precio": [
-    "vigente_comprobado"
-   ],
-   "moneda_publicada": [
-    "USD"
-   ],
-   "iva_publicado": [
     "sin aclarar"
    ]
   }

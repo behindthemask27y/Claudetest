@@ -59,7 +59,8 @@ def supuestos(p):
     it("iibb_pct", "Ingresos Brutos CABA", "% de ventas sin IVA", p["iibb_pct"], p["iibb_fuente"], "dato", "%")
     it("idc_pct", "Impuesto a los débitos y créditos bancarios (aprox.)", "% de lo cobrado", 0.012, "Ley 25.413: 0,6 % sobre créditos + 0,6 % sobre débitos; aproximado sobre lo cobrado.", "dato", "%")
     sec("COSTOS FIJOS (USD por mes)")
-    it("personal_fte", "Personal de recepción y comunidad (jornadas completas)", "personas", [1.5, 1.5, 1.5], "Lunes a viernes 8 a 20 h: una jornada completa + media.", "supuesto")
+    it("personal_fte", "Personal de recepción (jornadas completas)", "personas", p.get("personal_fte", [1.5, 1.5, 1.5]),
+       p.get("personal_fte_fuente", "Lunes a viernes 8 a 20 h: una jornada completa + media."), "supuesto")
     it("costo_fte_usd", "Costo laboral por persona (sueldo + cargas)", "USD/mes", p["costo_fte_usd"], p["costo_fte_fuente"], "dato")
     it("limpieza_usd", "Limpieza", "USD/mes", p["limpieza_usd"], p["limpieza_fuente"], "estimación", "USD")
     it("internet_usd", "Internet principal + respaldo", "USD/mes", p["internet_usd"], p["internet_fuente"], "dato", "USD")

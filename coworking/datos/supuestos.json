@@ -69,7 +69,7 @@
     36,
     42
    ],
-   "fuente": "SUPUESTO sin plano ni dato en el repo: 7,5 a 11 m² totales por puesto (incluye baños, cocina, salas, circulación y escalera). El coeficiente de ocupación del Código (Art. 3.4.7.2) no se pudo verificar (entorno_y_normativa.md, 2.3).",
+   "fuente": "SUPUESTO sin plano (Cris: no importa): 7,5 a 11 m² totales por puesto (incluye baños, cocina, salas, circulación y escalera). Referencia: HUERTA Dorrego tiene 198 puestos en 1.450 m² = 7,3 m² por puesto (CAD-14). El coeficiente de ocupación del Código (Art. 3.4.7.2) no se pudo verificar.",
    "tipo": "a validar",
    "fmt": "n"
   },
@@ -82,7 +82,7 @@
     6,
     8
    ],
-   "fuente": "SUPUESTO sin plano ni dato en el repo: 7,5 a 11 m² totales por puesto (incluye baños, cocina, salas, circulación y escalera). El coeficiente de ocupación del Código (Art. 3.4.7.2) no se pudo verificar (entorno_y_normativa.md, 2.3).",
+   "fuente": "SUPUESTO sin plano (Cris: no importa): 7,5 a 11 m² totales por puesto (incluye baños, cocina, salas, circulación y escalera). Referencia: HUERTA Dorrego tiene 198 puestos en 1.450 m² = 7,3 m² por puesto (CAD-14). El coeficiente de ocupación del Código (Art. 3.4.7.2) no se pudo verificar.",
    "tipo": "a validar",
    "fmt": "n"
   },
@@ -95,7 +95,7 @@
     2,
     3
    ],
-   "fuente": "SUPUESTO sin plano ni dato en el repo: 7,5 a 11 m² totales por puesto (incluye baños, cocina, salas, circulación y escalera). El coeficiente de ocupación del Código (Art. 3.4.7.2) no se pudo verificar (entorno_y_normativa.md, 2.3).",
+   "fuente": "SUPUESTO sin plano (Cris: no importa): 7,5 a 11 m² totales por puesto (incluye baños, cocina, salas, circulación y escalera). Referencia: HUERTA Dorrego tiene 198 puestos en 1.450 m² = 7,3 m² por puesto (CAD-14). El coeficiente de ocupación del Código (Art. 3.4.7.2) no se pudo verificar.",
    "tipo": "a validar",
    "fmt": "n"
   },
@@ -189,8 +189,8 @@
    "key": "precio_p1",
    "label": "Precio plan 1",
    "unit": "ARS/mes",
-   "vals": 54900.0,
-   "fuente": "DERIVADO, no publicado: Ambrela no vende plan de 4 días. Precio del plan 2 días/sem (89.000) × proporción 4D/8D de HUERTA (135.000/219.000).",
+   "vals": 0,
+   "fuente": "NO SE USA (mezcla 0 %): Ambrela, el único comparable chico verificado, no vende plan de 4 días.",
    "tipo": "mercado",
    "fmt": "ARS"
   },
@@ -216,8 +216,8 @@
    "key": "precio_p4",
    "label": "Precio plan 4",
    "unit": "ARS/mes",
-   "vals": 111200.0,
-   "fuente": "DERIVADO, no publicado: Ambrela no vende ilimitado flex. Precio 3 días/sem (103.000) × proporción FLEX/12D de HUERTA (270.000/250.000); queda bajo el puesto fijo de Ambrela (118.000).",
+   "vals": 0,
+   "fuente": "NO SE USA (mezcla 0 %): Ambrela no vende ilimitado flex; quien quiere todos los días toma el puesto fijo.",
    "tipo": "mercado",
    "fmt": "ARS"
   },
@@ -225,8 +225,8 @@
    "key": "mix_p1",
    "label": "Peso del plan 1 en los miembros flex",
    "unit": "%",
-   "vals": 0.1,
-   "fuente": "SUPUESTO sin dato: en la zona solo Ambrela publica planes (2 y 3 días por semana y puesto fijo). Medir en la preventa.",
+   "vals": 0.0,
+   "fuente": "SUPUESTO sin dato: solo se usan los dos planes flex que publica Ambrela (2 y 3 días por semana). Medir en la preventa.",
    "tipo": "a validar",
    "fmt": "%"
   },
@@ -234,8 +234,8 @@
    "key": "mix_p2",
    "label": "Peso del plan 2 en los miembros flex",
    "unit": "%",
-   "vals": 0.35,
-   "fuente": "SUPUESTO sin dato: en la zona solo Ambrela publica planes (2 y 3 días por semana y puesto fijo). Medir en la preventa.",
+   "vals": 0.55,
+   "fuente": "SUPUESTO sin dato: solo se usan los dos planes flex que publica Ambrela (2 y 3 días por semana). Medir en la preventa.",
    "tipo": "a validar",
    "fmt": "%"
   },
@@ -243,8 +243,8 @@
    "key": "mix_p3",
    "label": "Peso del plan 3 en los miembros flex",
    "unit": "%",
-   "vals": 0.3,
-   "fuente": "SUPUESTO sin dato: en la zona solo Ambrela publica planes (2 y 3 días por semana y puesto fijo). Medir en la preventa.",
+   "vals": 0.45,
+   "fuente": "SUPUESTO sin dato: solo se usan los dos planes flex que publica Ambrela (2 y 3 días por semana). Medir en la preventa.",
    "tipo": "a validar",
    "fmt": "%"
   },
@@ -252,8 +252,8 @@
    "key": "mix_p4",
    "label": "Peso del plan 4 en los miembros flex",
    "unit": "%",
-   "vals": 0.25,
-   "fuente": "SUPUESTO sin dato: en la zona solo Ambrela publica planes (2 y 3 días por semana y puesto fijo). Medir en la preventa.",
+   "vals": 0.0,
+   "fuente": "SUPUESTO sin dato: solo se usan los dos planes flex que publica Ambrela (2 y 3 días por semana). Medir en la preventa.",
    "tipo": "a validar",
    "fmt": "%"
   },
@@ -279,8 +279,8 @@
    "key": "precio_pase",
    "label": "Pase diario",
    "unit": "ARS/día",
-   "vals": 13700.0,
-   "fuente": "DERIVADO: precio por día del plan de 4 días (sin recargo). Ninguna ficha de la zona publica pase diario (Regus Retiro: USD 49 a 55).",
+   "vals": 10300.0,
+   "fuente": "DERIVADO: precio por día del plan de 2 días por semana de Ambrela, sin recargo. Ambrela no publica pase diario.",
    "tipo": "mercado",
    "fmt": "ARS"
   },
@@ -534,14 +534,14 @@
   },
   {
    "key": "personal_fte",
-   "label": "Personal de recepción y comunidad (jornadas completas)",
+   "label": "Personal de recepción (jornadas completas)",
    "unit": "personas",
    "vals": [
-    1.5,
-    1.5,
-    1.5
+    1,
+    1,
+    1
    ],
-   "fuente": "Lunes a viernes 8 a 20 h: una jornada completa + media.",
+   "fuente": "Cris (28/10/2026): una recepción; limpieza y mantenimiento van aparte (líneas propias). Una jornada completa cubre unas 8 h por día: de 9 a 18 h, como Ambrela (8:30 a 18).",
    "tipo": "supuesto",
    "fmt": "n"
   },
@@ -709,11 +709,11 @@
    "label": "Adecuación por m² (pintura, pisos, iluminación, baños, terminaciones)",
    "unit": "USD/m²",
    "vals": [
-    406.4,
-    304.8,
-    203.2
+    0,
+    0,
+    0
    ],
-   "fuente": "ANCLADO en el costo de construir nuevo en CABA, ARS 1.584.840 por m² (julio 2026, costos_referencia #0). El 40 % / 30 % / 20 % para una refacción de casa usada es SUPUESTO mío: validar con presupuesto de arquitecto.",
+   "fuente": "SIN DATO: Cris no sabe cuánto sale la remodelación (28/10/2026) y dice que no es mucho. Cargado en 0; la hoja Lectura calcula cuánta obra puede pagar el negocio.",
    "tipo": "estimación",
    "fmt": "USD"
   },
@@ -946,7 +946,7 @@
     0,
     0
    ],
-   "fuente": "SIN DATO: datos/casa_costo_oportunidad.json está pendiente (0 avisos). Cargado en 0; el Resumen muestra cuánto resultado operativo queda para pagar ese alquiler.",
+   "fuente": "NO APLICA: Cris no alquila la casa (28/10/2026), así que no hay costo de oportunidad que contar.",
    "tipo": "mercado",
    "fmt": "USD"
   },

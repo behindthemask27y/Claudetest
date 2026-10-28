@@ -46,7 +46,6 @@ for g in ("G1A", "G1B", "G3", "CAD"):
 
 OFICINAS = cargar("alquiler_oficinas.json")
 REF = cargar("costos_referencia.json")
-CASA = cargar("casa_costo_oportunidad.json")
 TC = OFICINAS["resumen"]["tc_referencia_ars_por_usd"]
 
 
@@ -158,8 +157,13 @@ def no_verificada(s):       # probable o incierta, sin contar las excluidas (cer
     return s["estado"] in ("probable", "incierto") and s["categoria"] != "excluida"
 
 
-STATS_VERIF = estadisticas(verificada)
-STATS_NOVERIF = estadisticas(no_verificada)
+def chico(s):               # espacio independiente o de barrio: el tipo de comparable de una casa (no pisos enteros de cadenas)
+    return s["tipo_operador"] in ("independiente", "otro")
+
+
+STATS_VERIF = estadisticas(lambda s: verificada(s) and chico(s))          # alimenta el modelo
+STATS_NOVERIF = estadisticas(lambda s: no_verificada(s) and chico(s))     # aparte, no alimenta el modelo
+STATS_CADENAS = estadisticas(lambda s: verificada(s) and not chico(s))    # cadenas y centros de negocios: solo referencia
 
 CENSO = {}
 for s in SEDES:
@@ -192,11 +196,6 @@ amb2 = plan("G1A-01", "Start Point 2 Días")["precio"]       # 89.000
 amb3 = plan("G1A-01", "Start Point 3 Días")["precio"]       # 103.000
 amb_fijo = plan("G1A-01", "Fix point")["precio"]            # 118.000
 amb_sala = plan("G1A-01", "Sala de reunión")["precio"]      # 13.000
-hu = {n: plan("CAD-14", n)["precio"] for n in ("PLAN 4D", "PLAN 8D", "PLAN 12D", "PLAN FLEX")}
-r_4d = hu["PLAN 4D"] / hu["PLAN 8D"]            # 0,616: cuánto cuesta el plan de 4 días respecto del de 8 en HUERTA
-r_flex = hu["PLAN FLEX"] / hu["PLAN 12D"]       # 1,08: el ilimitado respecto del de 12 días en HUERTA
-p1 = round(amb2 * r_4d, -2)
-p4 = round(amb3 * r_flex, -2)
 t15 = OFICINAS["resumen"]["tramos"]["15-30"]
 ofi_alq = t15["alquiler_ARS"]["mediana"]
 ofi_exp = t15["expensas_ARS"]["mediana"]
@@ -260,21 +259,21 @@ P = {
     "ri_fuente": "Monotributo no alcanza: tope de 200 m² para locaciones/servicios (LEEME); se asume Responsable Inscripto. A confirmar con contador.",
     # capacidad
     "puestos_flex": [30, 36, 42], "puestos_fijos": [4, 6, 8], "oficinas_priv": [2, 2, 3],
-    "cap_fuente": ("SUPUESTO sin plano ni dato en el repo: 7,5 a 11 m² totales por puesto (incluye baños, cocina, salas, circulación y escalera). "
-                   "El coeficiente de ocupación del Código (Art. 3.4.7.2) no se pudo verificar (entorno_y_normativa.md, 2.3)."),
+    "cap_fuente": ("SUPUESTO sin plano (Cris: no importa): 7,5 a 11 m² totales por puesto (incluye baños, cocina, salas, circulación y escalera). "
+                   "Referencia: HUERTA Dorrego tiene 198 puestos en 1.450 m² = 7,3 m² por puesto (CAD-14). El coeficiente de ocupación del Código (Art. 3.4.7.2) no se pudo verificar."),
     # precios (ARS con IVA)
-    "precio_p1": p1, "precio_p1_fuente": f"DERIVADO, no publicado: Ambrela no vende plan de 4 días. Precio del plan 2 días/sem ({ar(amb2)}) × proporción 4D/8D de HUERTA ({ar(hu['PLAN 4D'])}/{ar(hu['PLAN 8D'])}).",
+    "precio_p1": 0, "precio_p1_fuente": "NO SE USA (mezcla 0 %): Ambrela, el único comparable chico verificado, no vende plan de 4 días.",
     "precio_p2": amb2, "precio_p2_fuente": FUENTE_AMB + " Plan 'Start Point 2 Días' (≈ 8-9 días por mes).",
     "precio_p3": amb3, "precio_p3_fuente": FUENTE_AMB + " Plan 'Start Point 3 Días' (≈ 13 días por mes).",
-    "precio_p4": p4, "precio_p4_fuente": f"DERIVADO, no publicado: Ambrela no vende ilimitado flex. Precio 3 días/sem ({ar(amb3)}) × proporción FLEX/12D de HUERTA ({ar(hu['PLAN FLEX'])}/{ar(hu['PLAN 12D'])}); queda bajo el puesto fijo de Ambrela ({ar(amb_fijo)}).",
-    "mix_p1": 0.10, "mix_p2": 0.35, "mix_p3": 0.30, "mix_p4": 0.25,
-    "mix_fuente": "SUPUESTO sin dato: en la zona solo Ambrela publica planes (2 y 3 días por semana y puesto fijo). Medir en la preventa.",
+    "precio_p4": 0, "precio_p4_fuente": "NO SE USA (mezcla 0 %): Ambrela no vende ilimitado flex; quien quiere todos los días toma el puesto fijo.",
+    "mix_p1": 0.0, "mix_p2": 0.55, "mix_p3": 0.45, "mix_p4": 0.0,
+    "mix_fuente": "SUPUESTO sin dato: solo se usan los dos planes flex que publica Ambrela (2 y 3 días por semana). Medir en la preventa.",
     "precio_fijo": amb_fijo, "precio_fijo_fuente": FUENTE_AMB + " Plan 'Fix point'.",
     "precio_oficina": ofi_alq,
     "precio_oficina_fuente": (f"INDIRECTO: ninguna ficha publica precio de oficina privada de coworking (todas 'a consultar'). Se usa la mediana del alquiler de oficinas de 15 a 30 m² "
                                f"({t15['alquiler_ARS']['n']} avisos, ARS {ar(ofi_alq)}; expensas mediana {ar(ofi_exp)} no incluidas), datos/alquiler_oficinas.json. Muestra chica."),
-    "precio_pase": round(p1 / 4, -2),
-    "precio_pase_fuente": "DERIVADO: precio por día del plan de 4 días (sin recargo). Ninguna ficha de la zona publica pase diario (Regus Retiro: USD 49 a 55).",
+    "precio_pase": round(amb2 / (2 * 4.33), -2),
+    "precio_pase_fuente": "DERIVADO: precio por día del plan de 2 días por semana de Ambrela, sin recargo. Ambrela no publica pase diario.",
     "precio_sala_h": amb_sala, "precio_sala_fuente": FUENTE_AMB + " 'Sala de reunión', por hora.",
     # demanda
     "altas_f1": [2, 3, 5], "altas_f2": [2, 3, 4], "altas_f3": [1, 2, 3],
@@ -304,8 +303,8 @@ P = {
     "admin_fuente": "SIN DATO: ningún archivo tiene honorarios de contador para un Responsable Inscripto. Cargado en 0.",
     "marketing_fuente": "SUPUESTO de diseño. Referencia: CPC mediano Meta Ads en Argentina USD 0,63 (julio 2026, costos_referencia #63) → USD 400 a 500 por mes ≈ 640 a 800 clics.",
     # inversión
-    "usd_m2_obra": [usd(1584840.25 * 0.40), usd(1584840.25 * 0.30), usd(1584840.25 * 0.20)],
-    "usd_m2_obra_fuente": "ANCLADO en el costo de construir nuevo en CABA, ARS 1.584.840 por m² (julio 2026, costos_referencia #0). El 40 % / 30 % / 20 % para una refacción de casa usada es SUPUESTO mío: validar con presupuesto de arquitecto.",
+    "usd_m2_obra": [0, 0, 0],
+    "usd_m2_obra_fuente": "SIN DATO: Cris no sabe cuánto sale la remodelación (28/10/2026) y dice que no es mucho. Cargado en 0; la hoja Lectura calcula cuánta obra puede pagar el negocio.",
     "usd_m2_patio": [usd(100000), usd(74000), usd(48000)],
     "usd_m2_patio_fuente": "Techado con policarbonato, material y mano de obra, ARS 48.000 a 100.000 por m² (costos_referencia #36). Sin estructura nueva, piso ni instalaciones. Techar puede estar prohibido (entorno_y_normativa.md, 1.3).",
     "pileta_usd": [0, 0, 0],
@@ -336,9 +335,10 @@ P = {
     "habilitacion_fuente": "Tasa de habilitación (blog) + gestor 15-25 % + certificados + seguro RC anual + planos y firma profesional + 6 matafuegos de ARS 80.000 (costos_referencia #78, #79, #61). Rangos de un blog, no fuente oficial. Regularización de planos y plan de evacuación: SIN DATO.",
     # costo de oportunidad
     "alquiler_casa_usd": [0, 0, 0],
-    "alquiler_casa_fuente": "SIN DATO: datos/casa_costo_oportunidad.json está pendiente (0 avisos). Cargado en 0; el Resumen muestra cuánto resultado operativo queda para pagar ese alquiler.",
+    "alquiler_casa_fuente": "NO APLICA: Cris no alquila la casa (28/10/2026), así que no hay costo de oportunidad que contar.",
+    "personal_fte": [1, 1, 1],
+    "personal_fte_fuente": "Cris (28/10/2026): una recepción; limpieza y mantenimiento van aparte (líneas propias). Una jornada completa cubre unas 8 h por día: de 9 a 18 h, como Ambrela (8:30 a 18).",
 }
-assert not CASA["casas_alquiler"] and not CASA["casas_venta"], "casa_costo_oportunidad.json ya tiene datos: usarlos en alquiler_casa_usd"
 
 ITEMS = supuestos(P)
 SUP = {"fecha_corte": FECHA_CORTE, "items": ITEMS}
@@ -387,20 +387,19 @@ def hoja_censo(wb):
 
 
 FALTANTES = [
-    ("Valor de alquiler (y de venta) de la casa de 450 m²", "Es el costo de oportunidad: lo que se deja de cobrar. Sin él no se puede decir si conviene más alquilar la casa.", "alquiler_casa_usd = 0. El Resumen y la hoja Lectura muestran cuánto resultado operativo queda para pagarlo.", "Cris (o avisos de casas de 300 a 600 m² en Villa del Parque, Devoto, Santa Rita y Agronomía)"),
-    ("Facturas de luz, gas y agua de la casa (12 meses) o consumo estimado", "Hoy solo hay tarifas, no consumo. Con 40 a 60 personas y aire acondicionado puede ser un costo grande.", "servicios_usd = solo cargos fijos (USD 27 por mes).", "Cris (facturas) o un profesional de instalaciones"),
-    ("Honorarios de contador (Responsable Inscripto)", "Es un costo fijo seguro.", "admin_usd = 0.", "Cris / contador"),
-    ("Plano de la casa y m² reales por piso", "Define cuántos puestos entran, el techado del patio y la superficie de la unidad de uso (500 m² cambia el trámite).", "Capacidad supuesta: 7,5 a 11 m² por puesto; patio de 60 m² supuesto.", "Cris (planos) / arquitecto"),
+    ("Presupuesto de la remodelación de la casa", "Cris no sabe cuánto sale y dice que no es mucho. Es el dato que más mueve la inversión.", "usd_m2_obra = 0. La hoja Lectura calcula la obra máxima que el negocio puede pagar.", "Cris / arquitecto o maestro mayor de obras"),
+    ("Precio de cabinas insonorizadas y de paneles acústicos", "Cris las va a comprar. No hay precio argentino en las fuentes; los paneles ni tienen línea en el modelo.", "cabina_usd = 0; paneles sin línea.", "Proveedores (o búsqueda web si Cris da el OK)"),
     ("Demanda local: cuántos interesados hay en el barrio", "Todo el ritmo de altas es supuesto. No hay un solo dato de usuarios potenciales ni de disposición a pagar.", "Altas por mes supuestas (1 a 5).", "Cris (preventa o lista de espera)"),
+    ("Vigencia, fecha, IVA y moneda de los precios de Ambrela", "Es el único comparable chico verificado y su ficha dice 'sin fecha', sin IVA aclarado y sin moneda explícita. Todo el precio del modelo cuelga de ahí.", "Se toman como ARS con IVA incluido.", "Mirar la web de Ambrela / consultar"),
+    ("Confirmar elburó (Villa Urquiza, ficha probable): Flex desde 115.000 y puesto fijo 257.000 a 300.000", "Es el comparable más parecido a una casa de barrio (unos 22 puestos). Si se confirma, sube el techo de precios de la zona.", "Fuera del modelo; figura en la hoja Chicos_no_verificados.", "Mirar la web de elburó / consultar"),
+    ("Honorarios de contador (Responsable Inscripto)", "Es un costo fijo seguro.", "admin_usd = 0.", "Cris / contador"),
+    ("Consumo de luz, gas y agua de la casa", "Cris dijo que no importa. Hoy solo hay tarifas; con 40 a 60 personas y aire acondicionado el costo real es mayor que el piso cargado.", "servicios_usd = solo cargos fijos (USD 27 por mes).", "Facturas de la casa, si Cris cambia de idea"),
     ("Precio de relleno de pileta", "No hay precio en las fuentes.", "pileta_usd = 0.", "Presupuesto de albañilería"),
-    ("Precio de cabinas acústicas", "No hay precio argentino.", "cabina_usd = 0.", "Proveedor"),
     ("Precio de baño accesible", "El rango usado es de reforma de baño común.", "Proxy: reforma 'media' de ARS 5 a 9 millones.", "Presupuesto"),
     ("Mesa de reuniones, sillas de sala, espresso comercial, vajilla, switch PoE y cableado", "Equipamiento sin precio.", "No incluidos.", "Proveedores"),
     ("Cotización de internet empresarial simétrica", "Hoy hay precios de planes residenciales.", "Fibra de combo + respaldo Starlink.", "Operadores"),
     ("Certificado urbanístico y de uso conforme; regularización de planos (catastro 2008 no muestra subsuelo ni planta alta)", "El Código dice que el uso está permitido, pero no hay certificado. Puede haber multas y obra de regularización.", "No cuantificado.", "Gestor / arquitecto (entorno_y_normativa.md, 2.6)"),
     ("Si techar el patio se puede; estacionamiento exigible (2 módulos); accesibilidad en una casa de 3 niveles", "Pueden sumar obra o frenar el proyecto.", "No cuantificado; el techado de 60 m² está incluido como si se pudiera.", "Arquitecto / DGIUR"),
-    ("Vigencia, fecha, IVA y moneda de los precios de Ambrela", "Es el único comparable verificado de la zona y su ficha dice 'sin fecha', sin IVA aclarado y sin moneda explícita. Todo el precio del modelo cuelga de ahí.", "Se toman como ARS con IVA incluido.", "Mirar la web de Ambrela / consultar"),
-    ("Confirmar elburó (Villa Urquiza, ficha probable): Flex desde 115.000 y puesto fijo 257.000 a 300.000", "Si es real, el techo de precios de la zona es más alto que el de Ambrela. Hoy no se puede usar.", "Fuera del modelo; figura en Mercado_no_verificado.", "Mirar la web de elburó / consultar"),
     ("Resto de CABA (grupos G2, G4 a G6), Instagram y fotos", "No se relevaron. Faltan también las cadenas Urban Station y AreaTres, según el LEEME.", "No incluidos; no cambian la zona cercana.", "Siguiente tramo, si Cris lo pide"),
     ("Secciones 5 a 9 de entorno_y_normativa.md (escala de Comuna, estado de las leyes)", "El archivo anuncia secciones que nunca se escribieron.", "—", "Siguiente tramo"),
 ]
@@ -428,15 +427,18 @@ ULT = MX.L(3 + MX.NMES)       # última columna del modelo mensual (mes 36)
 
 
 def hoja_lectura(wb, R, filas):
-    """Hoja 'Lectura': ¿da o no da? Todo con fórmulas sobre Equilibrio, Resumen y Supuestos."""
+    """Hoja 'Lectura': ¿da o no da? Todo con fórmulas sobre Equilibrio, Resumen, Modelo y Supuestos."""
     ws = wb.create_sheet("Lectura", 0)
     ws["A1"] = "¿El negocio da o no da? Lectura con los números a la vista"
     ws["A1"].font = MX.F_T
-    ws["A2"] = ("Cota optimista: los costos sin dato (alquiler de la casa, luz, gas y agua, contador, pileta, cabinas) están en 0 o en un piso. "
-                "Precios: lista de la zona cercana (Ambrela). USD constantes sin IVA.")
+    ws["A2"] = ("Casa propia que no se alquila. Personal: una recepción; limpieza y mantenimiento en líneas aparte. Precios: solo comparables chicos (Ambrela). "
+                "La remodelación está en 0 porque Cris no sabe cuánto sale: abajo se calcula cuánta obra puede pagar el negocio. USD constantes sin IVA. "
+                "Los costos sin dato están en 0 o en un piso: es una cota optimista.")
     ws["A2"].font = MX.F_S
-    MX._hdr(ws, 4, ["Indicador", "Conservador", "Base", "Favorable", "Cómo se lee"], [66, 16, 16, 16, 90])
-    EQ, SC = ("B", "C", "D"), ("D", "E", "F")
+    MX._hdr(ws, 4, ["Indicador", "Conservador", "Base", "Favorable", "Cómo se lee"], [70, 16, 16, 16, 100])
+    EQ, SC, CO = ("B", "C", "D"), ("D", "E", "F"), ("B", "C", "D")
+    fila = {}
+    r = [5]
 
     def s(k, c):
         return f"Supuestos!${c}${R[k]}"
@@ -446,41 +448,73 @@ def hoja_lectura(wb, R, filas):
 
     def k_eq(e, c, occ):
         cap, pn, cvar, otras, fijos = (f"Equilibrio!{e}{n}" for n in (12, 5, 7, 10, 9))
-        consumo = f"({cvar}-{pn}*{pv(c)})"
-        return f"({fijos}+{occ}*{cap}*{consumo})/({occ}*{cap}*{pn}*(1-{pv(c)})+{otras})"
+        return f"({fijos}+{occ}*{cap}*({cvar}-{pn}*{pv(c)}))/({occ}*{cap}*{pn}*(1-{pv(c)})+{otras})"
 
-    indicadores = [
-        ("Precio neto promedio por miembro flex (USD por mes, sin IVA)", lambda e, c, col: f"=Equilibrio!{e}5", MX.USD2, "Mezcla de planes con el precio de la zona, menos descuento, sin IVA."),
-        ("Miembros flex necesarios para cubrir los costos", lambda e, c, col: f"=Equilibrio!{e}11", '0.0', "En régimen (mes 36)."),
-        ("Tope de miembros flex que entran en los puestos", lambda e, c, col: f"=Equilibrio!{e}12", '0.0', "Puestos simultáneos, con el pico de martes a jueves."),
-        ("El equilibrio necesita este % del tope", lambda e, c, col: f"=Equilibrio!{e}13", MX.PCT, "Más de 100 %: no alcanza ni con todos los puestos llenos."),
-        ("Resultado operativo mensual con todos los puestos llenos (mejor caso)", lambda e, c, col: f"=Equilibrio!{e}12*Equilibrio!{e}8+Equilibrio!{e}10-Equilibrio!{e}9", MX.USD, "Si es negativo, el negocio pierde plata aunque se llene."),
-        ("Resultado operativo mensual en el mes 36 (con las altas supuestas)", lambda e, c, col: f"=Resumen!{col}11", MX.USD, "Antes de Ganancias y sin alquilar la casa."),
-        ("Inversión inicial (sin capital de trabajo)", lambda e, c, col: f"=Resumen!{col}5", MX.USD, "Obra, equipamiento, honorarios, trámites y contingencias."),
-        ("Años para recuperar la inversión con todos los puestos llenos", lambda e, c, col: f"=IF({col}9>0,{col}11/({col}9*12),\"no la recupera\")", '0.0', "Inversión / (mejor caso × 12)."),
-        ("Precio necesario para equilibrar con el 80 % del tope (veces el precio del escenario)", lambda e, c, col: f"={k_eq(e, c, 0.8)}", '0.00', "1,00 = los precios de hoy; 2,00 = el doble."),
-        ("Plan de 12 días por mes necesario para equilibrar al 80 % (ARS con IVA)", lambda e, c, col: f"={col}13*{s('precio_p3', c)}*{s('precio_mult', c)}", '#,##0', "Comparar con Ambrela 3 días/sem (103.000) y HUERTA 12 días (302.500 con IVA), ver hoja Mercado_verificado."),
-        ("Mejor caso si el dueño atiende y no hay personal pago (USD por mes)", lambda e, c, col: f"={col}9+Modelo_{NOMBRES[col]}!{ULT}{filas['f_pers']}*(1+{s('otros_pct', c)})", MX.USD, "Suma el sueldo y las cargas que se ahorran (con el % de imprevistos). El tiempo del dueño no está valorado."),
-        ("Años para recuperar la inversión en ese caso", lambda e, c, col: f"=IF({col}15>0,{col}11/({col}15*12),\"no la recupera\")", '0.0', "Inversión / (resultado × 12), con todos los puestos llenos."),
-    ]
-    r = 5
-    for lab, f, fmt, nota in indicadores:
-        ws.cell(row=r, column=1, value=lab).font = MX.F_TX
-        for j in range(3):
-            col = "BCD"[j]
-            c = ws.cell(row=r, column=2 + j, value=f(EQ[j], SC[j], col))
-            c.number_format, c.font = fmt, MX.F_B
-        ws.cell(row=r, column=5, value=nota).font = MX.F_S
-        r += 1
-    ws.cell(row=r, column=1, value="VEREDICTO (cota optimista)").font = MX.F_B
+    def mes36(n, clave):
+        return f"Modelo_{n}!{ULT}{filas[clave]}"
+
+    def add(clave, lab, f, fmt, nota, bold=True, entrada=None):
+        fila[clave] = r[0]
+        ws.cell(row=r[0], column=1, value=lab).font = MX.F_TX
+        if entrada is not None:
+            c = ws.cell(row=r[0], column=2, value=entrada)
+            c.font, c.fill, c.number_format = MX.F_IN, MX.FILL_IN, fmt
+        else:
+            for j in range(3):
+                c = ws.cell(row=r[0], column=2 + j, value=f(EQ[j], SC[j], CO[j], NOMBRES[CO[j]]))
+                c.number_format, c.font = fmt, MX.F_B if bold else MX.F_TX
+        ws.cell(row=r[0], column=5, value=nota).font = MX.F_S
+        r[0] += 1
+
+    def lleno(e, occ):
+        return f"{occ}*Equilibrio!{e}12*Equilibrio!{e}8+Equilibrio!{e}10-Equilibrio!{e}9"
+
+    add("precio", "Precio neto promedio por miembro flex (USD por mes, sin IVA)", lambda e, c, col, n: f"=Equilibrio!{e}5", MX.USD2,
+        "Mezcla de los dos planes flex de Ambrela (2 y 3 días por semana), menos descuento, sin IVA.")
+    add("nec", "Miembros flex necesarios para cubrir los costos", lambda e, c, col, n: f"=Equilibrio!{e}11", '0.0', "En régimen (mes 36).")
+    add("tope", "Tope de miembros flex que entran en los puestos", lambda e, c, col, n: f"=Equilibrio!{e}12", '0.0', "Puestos simultáneos, con el pico de martes a jueves.")
+    add("pct", "El equilibrio necesita este % del tope", lambda e, c, col, n: f"=Equilibrio!{e}13", MX.PCT, "Más de 100 %: no alcanza ni con todos los puestos llenos.")
+    add("lleno", "Resultado operativo mensual con todos los puestos llenos", lambda e, c, col, n: f"={lleno(e, 1)}", MX.USD, "Con la obra en 0 (el mantenimiento sube con la obra: ver más abajo). Si es negativo, el negocio pierde plata aunque se llene.")
+    add("lleno80", "Resultado operativo mensual con el 80 % de los puestos", lambda e, c, col, n: f"={lleno(e, 0.8)}", MX.USD, "Con la obra en 0. Un coworking rara vez pasa del 80 % de ocupación.")
+    add("mes36", "Resultado operativo mensual en el mes 36 (con las altas supuestas)", lambda e, c, col, n: f"=Resumen!{col}11", MX.USD, "Antes de Ganancias.")
+    add("minimo", "Resultado con todo lleno si los únicos costos fijos fueran recepción, limpieza y mantenimiento",
+        lambda e, c, col, n: f"=Equilibrio!{e}12*Equilibrio!{e}8+Equilibrio!{e}10-({mes36(n, 'f_pers')}+{mes36(n, 'f_limp')}+{mes36(n, 'f_mant')})", MX.USD,
+        "El caso más corto posible: sin seguros, internet, software, publicidad, comunidad ni imprevistos.")
+    add("k80", "Precio necesario para equilibrar con el 80 % del tope (veces el precio del escenario)", lambda e, c, col, n: f"={k_eq(e, c, 0.8)}", '0.00', "1,00 = los precios de hoy; 2,00 = el doble.")
+    add("plan12", "Plan de 12 días por mes necesario para equilibrar al 80 % (ARS con IVA)", lambda e, c, col, n: f"={col}{fila['k80']}*{s('precio_p3', c)}*{s('precio_mult', c)}", '#,##0',
+        "Comparar con Ambrela 3 días/sem (103.000), elburó Flex 'desde' (115.000, probable) y HUERTA 12 días (302.500 con IVA, cadena de 1.450 m²: hoja Referencia_cadenas).")
+    r[0] += 1
+    ws.cell(row=r[0], column=1, value="CUÁNTA OBRA PUEDE PAGAR EL NEGOCIO").font = MX.F_B
+    r[0] += 1
+    add("anios", "Años en que se quiere recuperar la inversión (se puede cambiar)", None, '0', "Mismo plazo para los tres escenarios.", entrada=5)
+    an = f"$B${fila['anios']}"
+
+    def inv_max(c, n, e, occ):
+        res = lleno(e, occ)
+        mant = f"{mes36(n, 'f_mant')}*(1+{s('otros_pct', c)})"
+        return f"12*{an}*({res}+{mant})/(1+{an}*{s('mant_pct_anual', c)}*(1+{s('otros_pct', c)}))"
+
+    add("inv", "Inversión ya cargada (equipamiento, trámites y contingencias; la obra está en 0)", lambda e, c, col, n: f"=Resumen!{col}5", MX.USD, "Con las cabinas en 0 y sin paneles: sube cuando haya precios.")
+    add("invmax100", "Inversión total máxima que se recupera en ese plazo, con todo lleno", lambda e, c, col, n: f"={inv_max(c, n, e, 1)}", MX.USD,
+        "Incluye que el mantenimiento sube con la inversión (% anual de Supuestos).")
+    add("invmax80", "Inversión total máxima que se recupera en ese plazo, con el 80 % de los puestos", lambda e, c, col, n: f"={inv_max(c, n, e, 0.8)}", MX.USD, "")
+    hon, cont = lambda c: s('honorarios_pct', c), lambda c: s('contingencia_pct', c)   # noqa: E731
+    add("obra100", "OBRA MÁXIMA que se recupera, con todo lleno", lambda e, c, col, n: f"=MAX(0,({col}{fila['invmax100']}-{col}{fila['inv']})/((1+{hon(c)})*(1+{cont(c)})))", MX.USD,
+        "Incluye honorarios y contingencias que acompañan a la obra. Cero = ni sin obra se recupera la inversión.")
+    add("obra80", "OBRA MÁXIMA que se recupera, con el 80 % de los puestos", lambda e, c, col, n: f"=MAX(0,({col}{fila['invmax80']}-{col}{fila['inv']})/((1+{hon(c)})*(1+{cont(c)})))", MX.USD, "")
+    add("obram2", "  Eso equivale a (USD por m² sobre los m² a intervenir)", lambda e, c, col, n: f"={col}{fila['obra80']}/{s('m2_obra', c)}", MX.USD, "Con el 80 % de los puestos. Comparar con el presupuesto real de la obra.", bold=False)
+    r[0] += 1
+    fila["ver"] = r[0]
+    ws.cell(row=r[0], column=1, value="VEREDICTO (cota optimista)").font = MX.F_B
     for j in range(3):
-        col = "BCD"[j]
-        c = ws.cell(row=r, column=2 + j, value=f'=IF({col}9<0,"NO DA",IF({col}8>0.8,"AJUSTADO",IF({col}12>5,"SOLO OPERATIVO","DA")))')
+        col = CO[j]
+        c = ws.cell(row=r[0], column=2 + j,
+                    value=f'=IF({col}{fila["lleno"]}<0,"NO DA",IF({col}{fila["lleno80"]}<0,"AJUSTADO",IF({col}{fila["obra80"]}<=0,"NO PAGA LA INVERSIÓN","DA")))')
         c.font, c.fill = MX.F_B, MX.FILL_KEY
-    ws.cell(row=r, column=5, value=("NO DA = aun lleno no cubre los costos · AJUSTADO = necesita más del 80 % del tope · "
-                                    "SOLO OPERATIVO = cubre los costos pero la inversión tarda más de 5 años en volver · DA = cubre y recupera en 5 años o menos.")).font = MX.F_S
-    ws.cell(row=r + 2, column=1, value=("Aparte, NO verificado y fuera del modelo: elburó (Villa Urquiza, ficha probable) publica Flex 'desde' ARS 115.000 y puesto fijo ARS 257.000 a 300.000, "
-                                        "sin fecha ni IVA (datos/sedes_G3.json, G3-01). Si se confirmara, sugiere precios cerca de 30 % más altos que Ambrela en planes flex.")).font = MX.F_S
+    ws.cell(row=r[0], column=5, value=("NO DA = aun lleno no cubre los costos · AJUSTADO = solo cubre con casi todo lleno · NO PAGA LA INVERSIÓN = cubre costos pero no alcanza "
+                                       "ni para el equipamiento en ese plazo · DA = deja margen para la obra máxima de arriba.")).font = MX.F_S
+    ws.cell(row=r[0] + 2, column=1, value=("Aparte, NO verificado y fuera del modelo: elburó (Villa Urquiza, ficha probable, unos 22 puestos) publica Flex 'desde' ARS 115.000 y puesto fijo "
+                                          "ARS 257.000 a 300.000, sin fecha ni IVA (datos/sedes_G3.json, G3-01).")).font = MX.F_S
     ws.freeze_panes = "B5"
 
 
@@ -492,6 +526,8 @@ def marcar_sin_dato(wb):
             for c in row:
                 c.fill = ROJO
             row[7].value = "SIN DATO"
+        elif isinstance(f, str) and f.startswith("NO APLICA"):
+            row[7].value = "NO APLICA"
 
 
 def recalcular():
@@ -526,7 +562,7 @@ def main():
     (DATOS / "resumen_mercado.json").write_text(json.dumps({
         "fecha_corte": FECHA_CORTE, "tc_ars_por_usd": TC,
         "nota": "ARS con IVA. Unidad = plan único por (marca, nombre, precio, moneda). Verificadas = estado verificado + categoría principal.",
-        "verificadas": STATS_VERIF, "probables_o_inciertas_aparte": STATS_NOVERIF,
+        "comparables_chicos_verificados": STATS_VERIF, "comparables_chicos_probables_o_inciertos_aparte": STATS_NOVERIF, "cadenas_verificadas_solo_referencia": STATS_CADENAS,
         "censo_por_zona_estado_categoria": [{"zona": z, "estado": e, "categoria": c, "fichas": n} for (z, e, c), n in sorted(CENSO.items())],
     }, ensure_ascii=False, indent=1), encoding="utf-8")
     (DATOS / "supuestos.json").write_text(json.dumps(SUP, ensure_ascii=False, indent=1), encoding="utf-8")
@@ -535,19 +571,23 @@ def main():
     wb.remove(wb.active)
     R, filas, fila_inv = MX.armar_modelo(wb, SUP)
     hoja_lectura(wb, R, filas)
-    hoja_mercado(wb, "Mercado_verificado",
-                 ("Precios del mercado: solo fichas VERIFICADAS (ARS por mes, con IVA)",
-                  "USD pasados a pesos con el TC de Supuestos; precios 'IVA excluido' llevados a con IVA. Una cadena con varias sedes cuenta una vez. No se usan precios históricos."),
+    hoja_mercado(wb, "Comparables_chicos",
+                 ("Precios de comparables CHICOS verificados (independientes y de barrio; ARS por mes, con IVA)",
+                  "Es lo que alimenta el modelo. Hoy es una sola ficha: Ambrela. USD pasados a pesos con el TC de Supuestos. No se usan precios históricos."),
                  STATS_VERIF)
-    hoja_mercado(wb, "Mercado_no_verificado",
-                 ("Precios de fichas PROBABLES o INCIERTAS: aparte, no alimentan el modelo",
-                  "Misma conversión que la hoja verificada. Sin confirmar que la sede exista, siga abierta o que el precio esté vigente."),
+    hoja_mercado(wb, "Chicos_no_verificados",
+                 ("Comparables chicos PROBABLES o INCIERTOS: aparte, no alimentan el modelo",
+                  "Misma conversión. Sin confirmar que la sede exista, siga abierta o que el precio esté vigente (ej.: elburó, Villa Urquiza)."),
                  STATS_NOVERIF)
+    hoja_mercado(wb, "Referencia_cadenas",
+                 ("Cadenas y centros de negocios VERIFICADOS: solo referencia, el modelo NO los usa",
+                  "Pisos enteros o locales grandes en Palermo y Retiro (HUERTA Dorrego: 1.450 m², 198 puestos). Una cadena con varias sedes cuenta una vez."),
+                 STATS_CADENAS)
     hoja_censo(wb)
     hoja_faltantes(wb)
     marcar_sin_dato(wb)
     orden = ["Lectura", "Resumen", "Supuestos", "Inversion", "Equilibrio", "Sensibilidad", "Modelo_Conservador", "Modelo_Base", "Modelo_Favorable",
-             "Mercado_verificado", "Mercado_no_verificado", "Censo", "Datos_faltantes"]
+             "Comparables_chicos", "Chicos_no_verificados", "Referencia_cadenas", "Censo", "Datos_faltantes"]
     wb._sheets = [wb[n] for n in orden]
     wb.calculation.fullCalcOnLoad = True
     wb.save(SALIDA)
