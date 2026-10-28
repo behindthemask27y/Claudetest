@@ -1,11 +1,10 @@
 # Google Ads — contexto
 
-> **Copia para el repo.** El original vive en la compu de Cris (`NEGOCIO/Marketing/Google-Ads/contexto-google-ads.md`). Versión de esta copia: 2026-10-13. Si en una sesión de la nube se cambia algo acá, avisale a Cris qué archivo cambió para que lo pase al original; si no, la próxima vez que suba la copia se pisa.
-
+> **Copia para el repo.** El original vive en la compu de Cris (`NEGOCIO/Marketing/Google-Ads/contexto-google-ads.md`). Versión de esta copia: 2026-10-28. Las rutas que empiezan con `NEGOCIO/`, `Archivo/` o `Programas Claude/` existen solo en su compu. Si en una sesión de la nube se cambia algo acá, avisale a Cris qué archivo cambió para que lo pase al original; si no, la próxima vez que suba la copia se pisa.
 
 **Qué es:** el manual para retomar la cuenta de Google Ads de Cris sin volver a preguntar lo ya definido.
 **Cuándo leerlo:** campañas, palabras clave, negativas, conversiones o CSV para el Editor. Va junto con `contexto/estado-y-pendientes.md` (qué falta y qué se decidió) y `contexto/medicion-y-sitio.md` (cómo se mide). Para textos: `contexto/voz-y-copy.md`.
-**Cuenta:** CS Real Estate, 921-755-2199 (`AW-18445706531` / `GT-WPT9PPBN`). La armó Cris con ChatGPT (su contexto original quedó en `Archivo/ (en la compu de Cris)`: no leer salvo que se pida).
+**Cuenta:** CS Real Estate, 921-755-2199 (`AW-18445706531` / `GT-WPT9PPBN`). La armó Cris con ChatGPT (su contexto original quedó en `NEGOCIO/Marketing/Archivo/`: no leer salvo que se pida).
 **Presupuesto activo:** 6.500 pesos por día (campañas 1, 2, 4 y 11).
 **Última actualización:** 2026-10-13 (fusiona la revisión del 9/10 con el estado del 12 y 13/10).
 
@@ -56,8 +55,11 @@ Sitelinks y llamadas a nivel de cuenta: home, los formularios, "Ver matrícula",
 10. Los costos de las 4 campañas activas no permiten concluir cuál es "mejor" (5 y 11 conversiones, ninguna con cliente).
 
 ## Primera tanda de cambios (13/10) — preparada, sin importar ni publicar
-Carpeta `lote1_google_ads/` con el paso a paso (`LEEME-lote1-google-ads.md`) y dos CSV (`A-lote1-sin-dudas.csv` se importa primero, `B-lote1-decisiones.csv` después). En el chat se la llama "Lote 1".
+Carpeta `NEGOCIO/Marketing/Google-Ads/2026-10-13 Google Ads - Vendedores, Valor propiedad, Compradores, WhatsApp/` con el paso a paso (`LEEME.md`) y dos CSV (el 1 se importa primero, el 2 después). En el chat se la llama "Lote 1".
 1. Pausar campaña 11. 2. Borrar el borrador "Campaign #1" de Búsqueda (a mano). 3. Agregar 10 negativas de frase a las campañas 1 y 2: alquiler, alquilar, terreno, terrenos, sin inmobiliaria, en cuotas, abandonadas, empresas que compran, mercado libre, buscainmuebles (validadas: no bloquean ninguna de las 148 palabras activas tras el lote). 4. URL final: campaña 1 → `/form/vender/`, campaña 2 → `/form/valor-prop/` (a mano). 5. Reactivar el Grupo 1 y pausar las 16 palabras amplias de la campaña 1. 6. Pausar la campaña 4 (si Cris confirma que el foco son propietarios). Los ítems 5 y 6 eran recomendaciones; Cris pidió avanzar con el lote.
+
+## Lote 3 (24/10) — simplificar, publicado por Cris (según Cris; quieto hasta el 14/11)
+A pedido de Cris («muy segmentadas»): #1 a 3.000 por día, grupo nuevo «Inmobiliaria y agente» (20 frases y un aviso), radio 10 km y #11 pausada. El Grupo 1 sigue pausado (sin evidencia: 1 semana y 0 conversiones). Cambia lo de abajo: los radios dejan de ser de 6 km; lo demás sigue igual. Avisos al 24/10: 14 de 25 Excellent, y los 3 de #1 ya lo son. Detalle y pasos en la carpeta `10-24 Google Ads - Simplificar - …/LEEME.md`. El cliente de San Justo entró por un formulario el 13/10 desde «inmobiliaria para comprar» (#11, que no cuenta formularios como principales).
 
 ## Qué NO se hace por ahora (decidido 13/10)
 - No subir presupuesto hasta conocer el costo por consulta caliente.

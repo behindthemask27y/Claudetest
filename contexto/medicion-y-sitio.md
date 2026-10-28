@@ -1,7 +1,6 @@
 # Medición y sitio — CS Real Estate
 
-> **Copia para el repo.** El original vive en la compu de Cris (`NEGOCIO/Marketing/Medicion-y-sitio/contexto-medicion-y-sitio.md`). Versión de esta copia: 2026-10-13. Si en una sesión de la nube se cambia algo acá, avisale a Cris qué archivo cambió para que lo pase al original; si no, la próxima vez que suba la copia se pisa.
-
+> **Copia para el repo.** El original vive en la compu de Cris (`NEGOCIO/Marketing/Medicion-y-sitio/contexto-medicion-y-sitio.md`). Versión de esta copia: 2026-10-28. Las rutas que empiezan con `NEGOCIO/`, `Archivo/` o `Programas Claude/` existen solo en su compu. Si en una sesión de la nube se cambia algo acá, avisale a Cris qué archivo cambió para que lo pase al original; si no, la próxima vez que suba la copia se pisa.
 
 **Qué es:** cómo se miden las consultas (sitio → GTM → GA4 → Google Ads y Meta) y qué no se puede romper.
 **Cuándo leerlo:** medición, conversiones, GTM, GA4, píxel, `hot_lead`, formularios del sitio, botones nuevos, cualquier cambio al sitio que reciba tráfico de anuncios. Va junto con `contexto/estado-y-pendientes.md`.
@@ -9,7 +8,7 @@
 
 ## Identificadores
 GTM `GTM-5JDWTPXN` · GA4 `G-4LDVRLTWFC` · Google Ads cuenta 921-755-2199 (`AW-18445706531`, `GT-WPT9PPBN`) · Meta: cuenta "IG Real Estate" `act=2105334063528925`, business `1439717201317750`, píxel `1586039593247372`.
-El código del sitio vive en la carpeta del sitio en la compu de Cris (`#CSREALESTATE.COM.AR`); su `CLAUDE.md` tiene el detalle completo de cada decisión.
+El código del sitio vive en `NEGOCIO/Sitio-web/` (hoy `#2 CSREALESTATE.COM.AR/`); su `CLAUDE.md` tiene el detalle completo de cada decisión.
 
 ## Piezas y cómo se conectan
 Sitio (home + 5 formularios) → `dataLayer` → **GTM** `GTM-5JDWTPXN` → **GA4** `G-4LDVRLTWFC` → **Google Ads**
@@ -61,13 +60,28 @@ los formularios (`boton_id: whatsapp-gracias`) **no** dispara `click_whatsapp` n
   el 12 y el 13/10, unos 24 por hora. El sitio y GTM no mandan eventos de servidor, así que la fuente no está
   identificada (¿prueba del Explorador de la API Graph? ¿integración?). Hasta aclararlo, no optimizar ni armar
   públicos con `Lead`. Dónde mirar: Events Manager → conjunto de datos → *Historial* y *Configuración*.
+- **Origen de una consulta de Meta (20/10):** el sitio guarda `gclid` y `utm_*` pero **no** `fbclid`. Para saber qué anuncio la trajo, el anuncio lleva `utm_source=meta&utm_medium=paid&utm_campaign={{campaign.name}}&utm_content={{ad.name}}` en "Parámetros de URL" (sin verificar que el mail los muestre). Los formularios instantáneos de Meta no pasan por el sitio: el origen se ve en Meta (Centro de clientes potenciales). En WhatsApp no viene en el mensaje: usar un mensaje ya escrito distinto por campaña.
+- **Anomalía de los 219 eventos `Lead` de servidor: aclarada el 20/10** con el Excel de eventos de Meta (22/9 al 20/10): `Lead` 40 del navegador y 233 de servidor. Desde el 2/10 cada `Lead` del navegador trae una copia de servidor (la "Puerta de entrada de la API de conversiones" está conectada: es lo esperado); el exceso es una ráfaga puntual: 12/10 con 183 de servidor contra 2 del navegador y 13/10 con 29 contra 5 (~210 sobrantes; origen no confirmado, coincide con los días en que se conectó la integración). Desde el 14/10 no hay sobrantes. Los 40 del navegador coinciden con los 44 `generate_lead` de GA4, así que `Lead` es confiable para optimizar desde ahora. `hot_lead`: 6 del navegador y 6 de servidor (el total de Meta, 12, cuenta las copias); `Contact`: 19 del navegador y 24 de servidor (9 sobrantes el 12/10). Falta confirmar en Diagnóstico que Meta deduplica las copias.
+
+## Eventos registrados (revisado el 20/10 contra el export de GTM v6 y el código del sitio; sin probar en vivo)
+El sitio manda un solo aviso de clic al `dataLayer`: `click_boton`, con `boton_id`, `boton_texto` y `destino`. GTM lo traduce según el `boton_id`:
+| `boton_id` | GA4 | Meta |
+|---|---|---|
+| `whatsapp`, `whatsapp-icono`, `consulta-propiedad`, `consulta-desarrollo` | `click_whatsapp` (4 etiquetas) | `Contact` (4) |
+| `ver-propiedades` | `ver_propiedades` | `ver_propiedades` |
+| `ver-desarrollos` | `ver_desarrollos` | `ver_desarrollos` |
+| `metodo` | `ver_mimetodo` | `ver_mimetodo` |
+| contiene `tasacion`, `vender`, `comprar`, `alquilar-mi-propiedad` o `buscar-alquiler` | `click_form` (5) | `click_form` (5) |
+| `email`, `email-icono`, `matricula`, `privacidad`, `whatsapp-gracias` | nada | nada |
+- Aparte: `generate_lead` (GA4) / `Lead` (Meta) al enviar un formulario; `hot_lead` (GA4 y Meta) si sale CALIENTE (viene en la versión 1.5, que el export v6 no trae); `PageView` de Meta en todas las páginas (etiqueta Base). GA4 **no** manda `page_view` (decisión de Cris, 12/10; confirmado el 20/10: el informe de páginas muestra 0 vistas, pero sí hay `session_start` y `first_visit`): para visitas se usan usuarios y sesiones. Meta suma el evento automático "Mi método" (clic con el texto del botón, lo nombra Meta, no el sitio) junto a `ver_mimetodo`. El `CLAUDE.md` del sitio todavía dice `click_ver_propiedades` para Meta: está viejo, el export v6 dice `ver_propiedades`.
+- **Links nuevos (18-19/10):** `propiedades/?p=<tipo>-<barrio>-<codigo>` abre el detalle directo y **no** manda `ver-propiedades` (no hubo clic; tocar una tarjeta sí lo manda). Su botón de WhatsApp manda `consulta-propiedad`. "Copiar link" y cerrar no mandan nada. Al abrir el detalle, la dirección pasa a `?p=…` y los `utm_*` desaparecen de la barra (GA4 ya los leyó al cargar); la página no guarda `gclid` ni `utm_*` (no tiene formulario). `desarrollos/ficha/?o=<obra>`: sus botones mandan `consulta-desarrollo`; tocar la tarjeta en la home manda `ver-desarrollos` y navega. Ninguna pieza nueva suma un `boton_id`.
 
 ## Historia que explica los datos
 - 22/9: se publican los formularios, pero quedó una versión vieja (sin atribución y con error en las opciones únicas).
 - 8/10 ~17:32: se corrige el deploy. Las consultas anteriores casi no tienen origen (`gclid`) y sus respuestas de
   opción única, como el plazo, no son confiables.
 - 12/10: formularios nuevos con rompehielos y temperatura en el mail.
-- 13/10: se arma `hot_lead` (carpeta `hot_lead/`; los 7 archivos ya están en el sitio en vivo).
+- 13/10: se arma `hot_lead` (carpeta `NEGOCIO/Marketing/Medicion-y-sitio/2026-10-13 Sitio - aviso de consulta caliente (hot_lead)/`; los 7 archivos ya están en el sitio en vivo).
 
 ## Cómo se despliega y se prueba
 - Deploy: subir un zip con las carpetas explícitas y rutas con `/` (el 8/10 fallaron los archivos dentro de carpetas

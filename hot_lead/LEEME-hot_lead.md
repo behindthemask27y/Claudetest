@@ -1,11 +1,10 @@
 # 2026-10-13 Sitio — aviso de consulta caliente (hot_lead) — guía paso a paso
 
-> **Copia para el repo.** El original vive en la compu de Cris (`NEGOCIO/Marketing/Medicion-y-sitio/2026-10-13 Sitio - aviso de consulta caliente (hot_lead)/LEEME.md`). Versión de esta copia: 2026-10-13. Si en una sesión de la nube se cambia algo acá, avisale a Cris qué archivo cambió para que lo pase al original; si no, la próxima vez que suba la copia se pisa.
+> **Copia para el repo.** El original vive en la compu de Cris (`NEGOCIO/Marketing/Medicion-y-sitio/2026-10-13 Sitio - aviso de consulta caliente (hot_lead)/LEEME.md`). Versión de esta copia: 2026-10-28. Las rutas que empiezan con `NEGOCIO/`, `Archivo/` o `Programas Claude/` existen solo en su compu. Si en una sesión de la nube se cambia algo acá, avisale a Cris qué archivo cambió para que lo pase al original; si no, la próxima vez que suba la copia se pisa.
 
-
-> **Estado (13/10/2026):** los 7 archivos ya están en el sitio en vivo (`motor.js?v=36269df0`). Según Cris: etiquetas y activador de GTM probados, evento clave creado en GA4 e importado en Google Ads como secundaria. Falta confirmar: que la versión de GTM esté publicada y que `hot_lead` aparezca en GA4 y Ads (ver `contexto/estado-y-pendientes.md`).
+> **Estado (13/10/2026):** los 7 archivos ya están en el sitio en vivo (`motor.js?v=36269df0`). Según Cris: etiquetas y activador de GTM probados, evento clave creado en GA4 e importado en Google Ads como secundaria. Falta confirmar: que la versión de GTM esté publicada y que `hot_lead` aparezca en GA4 y Ads (ver `../../Marketing - Donde estamos y que falta.md`).
 > **`hot_lead` = el aviso que manda el sitio a GTM, GA4, Google Ads y Meta cuando una consulta sale CALIENTE (5 o 6 puntos de 6).** Tibia y fría no lo disparan.
-> En esta carpeta: este LEEME y `cambios.diff` (diferencias de código, antes y después).
+> En esta carpeta: este LEEME y `cambios.diff` (diferencias de código, antes y después; así se llama en el repo). Los 7 archivos publicados están solo en la compu de Cris.
 
 ## Qué es y cuándo se dispara
 `hot_lead` es un evento nuevo que se dispara **solo cuando el mail de la consulta dice CALIENTE**, o sea, cuando el
