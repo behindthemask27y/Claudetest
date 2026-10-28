@@ -24,7 +24,23 @@
 - `entorno_y_normativa.md` — 4 secciones (parcela y zonificación, habilitación, accesibilidad y transporte, entorno comercial). Revisar si zonificación y habilitación quedaron cerradas: son lo más importante.
 - No se hicieron: G2 y G4-G6 (resto de CABA), Instagram (Cris puede iniciar sesión él en el navegador integrado; solo mirar) y fotos.
 
+## Paso 1 hecho (28/10/2026, en la nube): consolidado + Excel + veredicto
+**Resultado: con los precios de la zona, NO DA.** Detalle en `modelo_coworking_santo_tome_2987.xlsx`, hoja `Lectura` (primera). Es una **cota optimista**: lo que no tiene dato entra en 0 o en un piso, así que lo real es peor o igual.
+
+| Escenario | Lleno al 100 % de los puestos (USD/mes) | Inversión (USD) | Veredicto |
+|---|---|---|---|
+| Conservador | −3.604 | 275.790 | NO DA |
+| Base | −618 | 197.525 | NO DA |
+| Favorable | +2.054 | 135.685 | Cubre costos, pero recupera en 5,5 años (con todo lleno) |
+
+- Para equilibrar con el 80 % de los puestos hace falta cobrar 1,34 veces los precios de Ambrela (plan de 12 días ≈ ARS 138.000 con IVA, contra 103.000 de Ambrela). Sin personal pago (lo atiende el dueño), Base daría +1.122 USD/mes, pero tardaría casi 15 años en recuperar la inversión.
+- **El precio cuelga de una sola ficha verificada en la zona (Ambrela, sin fecha, IVA ni moneda confirmados).** Las cadenas verificadas (HUERTA, Regus, WeWork) están en Palermo y Retiro y cobran 2 a 3 veces más. elburó (Villa Urquiza, **probable**) sugiere unos 30 % más que Ambrela en planes flex; está en `Mercado_no_verificado`, fuera del modelo.
+- Los **datos que faltan** están en la hoja `Datos_faltantes` (16 ítems). Los clave: alquiler de la casa, facturas de luz/gas/agua, contador, plano de la casa y demanda local (las altas son supuestos).
+- El Excel se **recalculó con LibreOffice en la nube: 4.440 fórmulas, 0 errores**. No se abrió en Excel de escritorio: falta comprobarlo allá.
+- **Paso 2 (informe y presentación) NO empezado**: el estudio no da, y la regla es frenar y esperar el OK de Cris.
+
 ## `scripts/`
-- `modelo_xlsx.py` + `supuestos_base.py`: modelo a 36 meses, 3 escenarios, inversión, equilibrio y sensibilidad, todo con fórmulas. **Probado con valores de prueba: 0 errores** (recalculado con el Excel de la PC por COM, comando en línea; no usar `-ExecutionPolicy Bypass`). Falta el script que junte los JSON, calcule medianas por zona y llene `supuestos_base.supuestos(p)`.
-- `recalcular_excel.ps1`: mismo recálculo como script (no se pudo ejecutar como archivo; usar el comando en línea). Solo sirve en la PC.
+- `consolidar_y_armar.py` (nuevo, 28/10): junta los JSON de `datos/`, calcula medianas por zona (verificadas aparte de probables/inciertas), llena `supuestos_base.supuestos(p)` con cada número atado a su fuente (y verifica que cada cifra copiada exista en el JSON), arma el Excel y lo recalcula con LibreOffice. Se corre con `python3 -I coworking/scripts/consolidar_y_armar.py`. Escribe `datos/resumen_mercado.json`, `datos/supuestos.json` y el `.xlsx`.
+- `modelo_xlsx.py` + `supuestos_base.py`: modelo a 36 meses, 3 escenarios, inversión, equilibrio y sensibilidad, todo con fórmulas (sin cambios).
+- `recalcular_excel.ps1`: recálculo con el Excel de la PC por COM (comando en línea; no usar `-ExecutionPolicy Bypass`). Solo sirve en la PC.
 - python-pptx 1.0.2 instalado el 27/10 (OK de Cris). Excel y PowerPoint están en la PC (sirven para recalcular y exportar a PDF).
